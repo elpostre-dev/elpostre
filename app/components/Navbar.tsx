@@ -37,7 +37,7 @@ export default function NavBar() {
         <nav className="sticky top-0 bg-white z-20 shadow-lg">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <Image src="/logos/logo_dorado.png" height={40} width={120} alt="icon"></Image>
+                    <Image src="/logos/logo_dorado.png" height={60} width={120} alt="icon"></Image>
                 </Link>
                 <button
                     onClick={toggleMenu}
