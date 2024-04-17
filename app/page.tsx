@@ -4,7 +4,7 @@ import React from "react";
 import Autoplay from "embla-carousel-autoplay"
 import { type CarouselApi } from "@/components/ui/carousel"
 
-import NavBar from "./components/Navbar";
+import NavBar from "@/components/Navbar";
 import bgImage from "../public/home.jpg";
 
 import Link from "next/link";
