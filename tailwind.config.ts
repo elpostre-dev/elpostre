@@ -24,10 +24,12 @@ const config = {
         },
         mainAmarillo: {
           100: '#debb44',
+          200: '#FFFFF9',
         },
         mainRosa: {
-          100: '#fff4f9',
+          100: '#FFFBFD',
         },
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
