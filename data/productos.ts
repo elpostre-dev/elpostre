@@ -572,4 +572,638 @@ export const productos: Producto[] = [
         ],
         fotos: ["/Pasteles/ROSAS_CHOCOLATE.jpg", "/Pasteles/ROSAS_CHOCOLATE_2.jpg"]
     },
+    {
+        id: 25,
+        nombre: "Pastel de Fresas con Crema",
+        categoriaId: 1,
+        categoriaNombre: "Pasteles",
+        descripcion: "Prueba nuestro delicioso pastel de fresas con crema con un toque de chocolate. Pastel disponible únicamente bajo pedido.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 860.00,
+                personas: "De 15 a 18 personas"
+            },
+        ],
+        fotos: ["/Pasteles/FRESAS_CON_CREMA.jpg", "/Pasteles/FRESAS_CON_CREMA_2.jpg"]
+    },
+    {
+        id: 26,
+        nombre: "Chocolate con Fresas",
+        categoriaId: 1,
+        categoriaNombre: "Pasteles",
+        descripcion: "Prueba nuestro exquisito pastel de chocolate con crema y fresas, que hacen a este pastel tan delicioso.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 860.00,
+                personas: "De 15 a 18 personas"
+            },
+        ],
+        fotos: ["/Pasteles/CHOCOLATE_CON_FRESAS.jpg", "/Pasteles/CHOCOLATE_CON_FRESAS_2.jpg"]
+    },
+    {
+        id: 27,
+        nombre: "Pastel Tradicional",
+        categoriaId: 1,
+        categoriaNombre: "Pasteles",
+        descripcion: "Prueba nuestro pastel tradicional, con pan de vainilla, nuestro delicioso betún blanco y mermelada de chabacano.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 780.00,
+                personas: "De 15 a 18 personas"
+            },
+        ],
+        fotos: ["/Pasteles/TRADICIONAL.jpg", "/Pasteles/TRADICIONAL_2.jpg"]
+    },
+    {
+        id: 28,
+        nombre: "Pastel de Frutos Rojos",
+        categoriaId: 1,
+        categoriaNombre: "Pasteles",
+        descripcion: "Prueba nuestro nuevo pastel de frutos rojos. Pastel disponible únicamente bajo pedido.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 1250.00,
+                personas: "De 15 a 18 personas"
+            },
+            {
+                tamanio: "Mediano Alto",
+                precio: 860.00,
+                personas: "De 10 a 12 personas"
+            },
+        ],
+        fotos: ["/Pasteles/FRUTOS_ROJOS.jpg", "/Pasteles/FRUTOS_ROJOS_2.jpg"]
+    },
+
+    // PAYS
+    {
+        id: 29,
+        nombre: "Pay de Queso con Fresas",
+        categoriaId: 2,
+        categoriaNombre: "Pays",
+        descripcion: "Prueba nuestro delicioso pay de queso con fresas.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 860.00,
+                personas: "De 15 a 18 personas"
+            },
+            {
+                tamanio: "Mediano",
+                precio: 460.00,
+                personas: "De 4 a 6 personas"
+            },
+            {
+                tamanio: "Chico",
+                precio: 190.00,
+                personas: "De 1 a 2 personas"
+            },
+        ],
+        fotos: ["/Pays/PAY_FRESA.jpg", "/Pays/PAY_FRESA_2.jpg"]
+    },
+    {
+        id: 30,
+        nombre: "Pay de Queso con Mango",
+        categoriaId: 2,
+        categoriaNombre: "Pays",
+        descripcion: "Prueba nuestro delicioso pay de queso con mango.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 860.00,
+                personas: "De 15 a 18 personas"
+            },
+            {
+                tamanio: "Mediano",
+                precio: 460.00,
+                personas: "De 4 a 6 personas"
+            },
+            {
+                tamanio: "Chico",
+                precio: 190.00,
+                personas: "De 1 a 2 personas"
+            },
+        ],
+        fotos: ["/Pays/PAY_MANGO.jpg", "/Pays/PAY_MANGO_2.jpg"]
+    },
+    {
+        id: 31,
+        nombre: "Pay Tortuga",
+        categoriaId: 2,
+        categoriaNombre: "Pays",
+        descripcion: "Prueba nuestro delicioso pay de queso con chocolate chips, nuez, caramelo, cajeta y chocolate.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 860.00,
+                personas: "De 15 a 18 personas"
+            },
+            {
+                tamanio: "Mediano",
+                precio: 460.00,
+                personas: "De 4 a 6 personas"
+            },
+            {
+                tamanio: "Chico",
+                precio: 190.00,
+                personas: "De 1 a 2 personas"
+            },
+        ],
+        fotos: ["/Pays/TORTUGA.jpg", "/Pays/TORTUGA_2.jpg"]
+    },
+    {
+        id: 32,
+        nombre: "Pay de Queso con Manzana",
+        categoriaId: 2,
+        categoriaNombre: "Pays",
+        descripcion: "Prueba nuestro delicioso pay de queso con manzana, canela y mucha nuez.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 940.00,
+                personas: "De 15 a 18 personas"
+            },
+            {
+                tamanio: "Mediano",
+                precio: 460.00,
+                personas: "De 4 a 6 personas"
+            },
+            {
+                tamanio: "Chico",
+                precio: 190.00,
+                personas: "De 1 a 2 personas"
+            },
+        ],
+        fotos: ["/Pays/PAY_MANZANA.jpg", "/Pays/PAY_MANZANA_2.jpg"]
+    },
+    {
+        id: 33,
+        nombre: "Pay de Nuez",
+        categoriaId: 2,
+        categoriaNombre: "Pays",
+        descripcion: "Prueba nuestra deliciosa tarta de nuez.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 940.00,
+                personas: "De 15 a 18 personas"
+            },
+        ],
+        fotos: ["/Pays/PAY_NUEZ.jpg", "/Pays/PAY_NUEZ_2.jpg"]
+    },
+    {
+        id: 34,
+        nombre: "Pay de Limón",
+        categoriaId: 2,
+        categoriaNombre: "Pays",
+        descripcion: "Prueba nuestro nuevo pay de limón.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 820.00,
+                personas: "De 15 a 18 personas"
+            },
+            {
+                tamanio: "Mediano",
+                precio: 460.00,
+                personas: "De 4 a 6 personas"
+            },
+            {
+                tamanio: "Chico",
+                precio: 190.00,
+                personas: "De 1 a 2 personas"
+            },
+        ],
+        fotos: ["/Pays/PAY_LIMON.jpg", "/Pays/PAY_LIMON_2.jpg"]
+    },
+
+    // BROWNIES
+    {
+        id: 35,
+        nombre: "Mini Brownies",
+        categoriaId: 3,
+        categoriaNombre: "Brownies",
+        descripcion: "Prueba nuestros deliciosos mini brownies de cajeta, crunch, chocolate, betún alemán y almendra.",
+        variaciones: [
+            {
+                tamanio: "Caja Familiar",
+                precio: 680.00,
+                personas: "40 piezas"
+            },
+            {
+                tamanio: "Caja Grande",
+                precio: 480.00,
+                personas: "25 piezas"
+            },
+            {
+                tamanio: "Caja Mediana",
+                precio: 350.00,
+                personas: "16 piezas"
+            },
+            {
+                tamanio: "Caja Regular",
+                precio: 200.00,
+                personas: "9 piezas"
+            },
+            {
+                tamanio: "Caja Chica",
+                precio: 120.00,
+                personas: "5 piezas"
+            },
+            {
+                tamanio: "Caja Individual",
+                precio: 110.00,
+                personas: "4 piezas"
+            },
+        ],
+        fotos: ["/Brownies/MINI_BROWNIES.jpg", "/Brownies/MINI_BROWNIES_2.jpg"]
+    },
+    {
+        id: 36,
+        nombre: "Brownie con Azúcar Glass",
+        categoriaId: 3,
+        categoriaNombre: "Brownies",
+        descripcion: "Prueba nuestros deliciosos brownies.",
+        variaciones: [
+            {
+                tamanio: "Caja Grande",
+                precio: 250.00,
+                personas: "9 piezas"
+            },
+            {
+                tamanio: "Caja Chica",
+                precio: 190.00,
+                personas: "6 piezas"
+            },
+        ],
+        fotos: ["/Brownies/BROWNIES_GLASS.jpg", "/Brownies/BROWNIES_GLASS_2.jpg"]
+    },
+
+    // GALLETAS
+    {
+        id: 37,
+        nombre: "Galletas de Avena",
+        categoriaId: 4,
+        categoriaNombre: "Galletas",
+        descripcion: "Prueba nuestras galletas de avena con nuestra tradicional receta, las preferidas de todos.",
+        variaciones: [
+            {
+                tamanio: "Cilindro Grande",
+                precio: 500.00,
+                personas: ""
+            },
+            {
+                tamanio: "Cilindo Mediano",
+                precio: 330.00,
+                personas: ""
+            },
+            {
+                tamanio: "Cilindro Chico",
+                precio: 170.00,
+                personas: ""
+            },
+            {
+                tamanio: "Caja Grande",
+                precio: 520.00,
+                personas: ""
+            },
+            {
+                tamanio: "Caja Chica",
+                precio: 320.00,
+                personas: ""
+            },
+            {
+                tamanio: "Bolsita",
+                precio: 80.00,
+                personas: ""
+            },
+            {
+                tamanio: "Bolsita Avena con Monkfruit",
+                precio: 80.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Galletas/AVENA.jpg", "/Galletas/AVENA_2.jpg", "/Galletas/AVENA_3.jpg", "/Galletas/AVENA_4.jpg", "/Galletas/AVENA_5.jpg"]
+    },
+    {
+        id: 38,
+        nombre: "Galletas de Chocochips",
+        categoriaId: 4,
+        categoriaNombre: "Galletas",
+        descripcion: "Prueba nuestras deliciosas galletas de chocolate chip hechas a mano.",
+        variaciones: [
+            {
+                tamanio: "Cilindro Grande",
+                precio: 500.00,
+                personas: ""
+            },
+            {
+                tamanio: "Cilindo Mediano",
+                precio: 330.00,
+                personas: ""
+            },
+            {
+                tamanio: "Cilindro Chico",
+                precio: 170.00,
+                personas: ""
+            },
+            {
+                tamanio: "Caja Grande",
+                precio: 520.00,
+                personas: ""
+            },
+            {
+                tamanio: "Caja Chica",
+                precio: 320.00,
+                personas: ""
+            },
+            {
+                tamanio: "Bolsita",
+                precio: 80.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Galletas/CHOCOCHIP.jpg", "/Galletas/CHOCOCHIP_2.jpg", "/Galletas/CHOCOCHIP_3.jpg", "/Galletas/CHOCOCHIP_4.jpg"]
+    },
+    {
+        id: 39,
+        nombre: "Polvorones y Hojarascas",
+        categoriaId: 4,
+        categoriaNombre: "Galletas",
+        descripcion: "Prueba nuestros deliciosos polvorones y hojarascas.",
+        variaciones: [
+            {
+                tamanio: "Caja Polvorones",
+                precio: 210.00,
+                personas: ""
+            },
+            {
+                tamanio: "Caja Hojarascas",
+                precio: 180.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Galletas/POLVORONES_HOJARASCAS.jpg", "/Galletas/POLVORONES_HOJARASCAS_2.jpg", "/Galletas/POLVORON.jpg", "/Galletas/HOJARASCA.jpg"]
+    },
+    {
+        id: 40,
+        nombre: "Galletas Combinadas",
+        categoriaId: 4,
+        categoriaNombre: "Galletas",
+        descripcion: "Deliciosa combinación de hojarascas, polvorones, chocochips y galletas de avena. Para cualquier gusto.",
+        variaciones: [
+            {
+                tamanio: "Caja Grande",
+                precio: 360.00,
+                personas: "Caja con 9 galletas"
+            },
+            {
+                tamanio: "Caja Chica",
+                precio: 250.00,
+                personas: "Caja con 6 galletas"
+            },
+        ],
+        fotos: ["/Galletas/GALLETAS_COMBINADAS.jpg", "/Galletas/GALLETAS_COMBINADAS_2.jpg", "/Galletas/GALLETAS_COMBINADAS_3.jpg"]
+    },
+    {
+        id: 41,
+        nombre: "Galletas de Mantequilla",
+        categoriaId: 4,
+        categoriaNombre: "Galletas",
+        descripcion: "Prueba nuestras deliciosas galletas de mantequilla, rellenas de mermelada y cajeta.",
+        variaciones: [
+            {
+                tamanio: "Caja Grande",
+                precio: 340.00,
+                personas: "Caja de 9 galletas"
+            },
+            {
+                tamanio: "Caja Chica",
+                precio: 230.00,
+                personas: "Caja de 6 galletas"
+            },
+        ],
+        fotos: ["/Galletas/GALLETAS_FLOR.jpg", "/Galletas/GALLETAS_FLOR_2.jpg", "/Galletas/GALLETAS_FLOR_3.jpg"]
+    },
+    {
+        id: 42,
+        nombre: "Cookie Cake",
+        categoriaId: 4,
+        categoriaNombre: "Galletas",
+        descripcion: "Prueba nuestra deliciosas galleta gigantes, ideales para festejar. Producto únicamente bajo pedido.",
+        variaciones: [
+            {
+                tamanio: "Cookie Cake",
+                precio: 630.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Galletas/GALLETA_GIGANTE.jpg", "/Galletas/GALLETA_GIGANTE_2.jpg"]
+    },
+
+    // KETO
+    {
+        id: 43,
+        nombre: "Gansito Keto",
+        categoriaId: 5,
+        categoriaNombre: "Keto",
+        descripcion: "Nuestro gansito keto, ideal para los antojos de la dieta keto. Pruébalo, es delicioso!",
+        variaciones: [
+            {
+                tamanio: "Gansito Keto",
+                precio: 85.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Keto/GANSITO.jpg", "/Keto/GANSITO_2.jpg"]
+    },
+    {
+        id: 44,
+        nombre: "Copitas Keto",
+        categoriaId: 5,
+        categoriaNombre: "Keto",
+        descripcion: "Nuestras famosas copitas, ahora para la dieta keto. Pruébalas en sabores de pay de queso con fresas o de chocolate.",
+        variaciones: [
+            {
+                tamanio: "Copita Keto",
+                precio: 70.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Keto/COPITAS_KETO.jpg", "/Keto/COPITAS_KETO_2.jpg"]
+    },
+    {
+        id: 45,
+        nombre: "Brownie con Queso",
+        categoriaId: 5,
+        categoriaNombre: "Keto",
+        descripcion: "Brownie con queso bajo en carbohidratos. Perfecto para un antojo saludable!",
+        variaciones: [
+            {
+                tamanio: "Brownie con Queso",
+                precio: 70.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Keto/BROWNIE_CON_QUESO.jpg", "/Keto/BROWNIE_CON_QUESO_2.jpg"]
+    },
+    {
+        id: 46,
+        nombre: "Brownie Individual",
+        categoriaId: 5,
+        categoriaNombre: "Keto",
+        descripcion: "Brownie individual bajo en carbohidratos. Receta original y casera, deliciosa!",
+        variaciones: [
+            {
+                tamanio: "Individual",
+                precio: 70.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Keto/BROWNIE.jpg", "/Keto/BROWNIE_2.jpg"]
+    },
+    {
+        id: 47,
+        nombre: "Pay de Queso Keto",
+        categoriaId: 5,
+        categoriaNombre: "Keto",
+        descripcion: "Prueba nuestro nuevo pay bajo en carbohidratos y sin azúcar. Elaborado con harina de almendra y splenda, especial para la dieta Keto.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 940.00,
+                personas: "De 15 a 18 personas"
+            },
+            {
+                tamanio: "Mediano",
+                precio: 550.00,
+                personas: "De 4 a 6 personas"
+            },
+            {
+                tamanio: "Chico",
+                precio: 190.00,
+                personas: "De 1 a 2 personas"
+            },
+        ],
+        fotos: ["/Keto/PAY_KETO.jpg", "/Keto/PAY_KETO_2.jpg"]
+    },
+
+    // MUFFINS Y PANQUÉS
+    {
+        id: 48,
+        nombre: "Panqués y Mini Panqués",
+        categoriaId: 6,
+        categoriaNombre: "Muffins y Panqués",
+        descripcion: "Prueba nuestros deliciosos panqués de limón y coffecake.",
+        variaciones: [
+            {
+                tamanio: "Panqué Grande",
+                precio: 480.00,
+                personas: ""
+            },
+            {
+                tamanio: "Panqué Chico",
+                precio: 180.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/MuffinsPanques/COFFEECAKE_2.jpg", "/MuffinsPanques/LIMON_2.jpg"]
+    },
+    {
+        id: 49,
+        nombre: "Mini Muffins",
+        categoriaId: 6,
+        categoriaNombre: "Muffins y Panqués",
+        descripcion: "Prueba nuestros deliciosos mini muffins de distintos sabores.",
+        variaciones: [
+            {
+                tamanio: "Mini Muffins",
+                precio: 310.00,
+                personas: "Caja de 12 mini muffins"
+            },
+        ],
+        fotos: ["/MuffinsPanques/MINIMUFFINS.jpg", "/MuffinsPanques/MINIMUFFINS_2.jpg"]
+    },
+
+    // INDIVIDUALES
+    {
+        id: 50,
+        nombre: "Copitas",
+        categoriaId: 7,
+        categoriaNombre: "Individuales",
+        descripcion: "Prueba nuestras deliciosas copitas de brownie, fresas con crema, mostachón con fresas, queso con fresas, mango con crema, mostachón de mango, queso con mango, 4 leches y zanahoria.",
+        variaciones: [
+            {
+                tamanio: "Copita",
+                precio: 100.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Individuales/COPITAS.jpg", "/Individuales/COPITAS_2.jpg", "/Individuales/COPITAS_3.jpg", "/Individuales/COPITAS_4.jpg", "/Individuales/COPITAS_5.jpg", "/Individuales/COPITAS_6.jpg", "/Individuales/COPITAS_7.jpg", "/Individuales/COPITAS_8.jpg", "/Individuales/COPITAS_9.jpg", "/Individuales/COPITAS_10.jpg"]
+    },
+    {
+        id: 51,
+        nombre: "Kekitos y Mini Kekitos",
+        categoriaId: 7,
+        categoriaNombre: "Individuales",
+        descripcion: "Prueba nuestros deliciosos kekitos. Disponibles únicamente bajo pedido.",
+        variaciones: [
+            {
+                tamanio: "Caja con 12 mini kekitos",
+                precio: 280.00,
+                personas: ""
+            },
+            {
+                tamanio: "Kekitos con betún de chocolate",
+                precio: 45.00,
+                personas: ""
+            },
+            {
+                tamanio: "Kekitos betún de colores",
+                precio: 25.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Individuales/KEKITOS.jpg", "/Individuales/KEKITOS_2.jpg", "/Individuales/KEKITOS_3.jpg"]
+    },
+    {
+        id: 52,
+        nombre: "Trocitos de Brownie",
+        categoriaId: 7,
+        categoriaNombre: "Individuales",
+        descripcion: "Prueba nuestros deliciosos y nuevos trocitos de brownie.",
+        variaciones: [
+            {
+                tamanio: "Bolsita",
+                precio: 50.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Individuales/TROCITO_BROWNIE.jpg", "/Individuales/TROCITO_BROWNIE_2.jpg", "/Individuales/TROCITO_BROWNIE_3.jpg"]
+    },
+    {
+        id: 53,
+        nombre: "Mini Pays",
+        categoriaId: 7,
+        categoriaNombre: "Individuales",
+        descripcion: "Prueba nuestros deliciosos minipays de fruta o nuez.",
+        variaciones: [
+            {
+                tamanio: "Caja Familiar",
+                precio: 790.00,
+                personas: "40 piezas"
+            },
+            {
+                tamanio: "Caja Grande",
+                precio: 550.00,
+                personas: "25 piezas"
+            },
+        ],
+        fotos: ["/Individuales/PAYCITOS.jpg", "/Individuales/PAYCITOS_2.jpg", "/Individuales/PAYCITOS_3.jpg"]
+    },
+
+    // TEMPORADA
 ];
