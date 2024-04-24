@@ -1,12 +1,11 @@
 'use client'
 
 import NavBar from "../../../components/Navbar";
+import Footer from "@/components/Footer";
 import { productos } from '../../../data/productos';
-import { useState } from 'react';
+import ProductCard from "@/components/ProductCard";
 
 export default function Pasteles() {
-
-    const [hoveredProductId, setHoveredProductId] = useState<number | null>(null);
 
     return (
         <main className="flex min-h-screen flex-col">
@@ -14,37 +13,29 @@ export default function Pasteles() {
             {/* NAVBAR */}
             <NavBar />
 
-            {/* HERO */}
+            {/* TITLE */}
             <section>
-
                 <div className="mx-auto max-w-2xl text-center py-10">
                     <p className="mt-2 text-3xl font-bold tracking-tight text-mainRojo-100 sm:text-4xl">
                         Pasteles
                     </p>
                     <hr className="bg-mainRojo-100 h-1 mt-5 mx-auto" style={{ width: '10%' }} />
                 </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
-                    {productos
-                        .filter((producto) => producto.categoriaId === 1)
-                        .map((producto) => (
-                            <div
-                                key={producto.id}
-                                className="border border-gray-200 p-4 rounded-md hover:scale-105 transform transition duration-300 ease-in-out hover:cursor-pointer"
-                                onMouseEnter={() => setHoveredProductId(producto.id)}
-                                onMouseLeave={() => setHoveredProductId(null)}
-                            >
-                                <img
-                                    src={hoveredProductId === producto.id && producto.fotos.length > 1 ? producto.fotos[1] : producto.fotos[0]}
-                                    alt={producto.nombre}
-                                    className="w-full h-48 object-cover rounded-md"
-                                />
-                                <h2 className="text-lg font-semibold mt-2">{producto.nombre}</h2>
-                                <p className="text-sm text-gray-600">{producto.descripcion}</p>
-                            </div>
-                        ))}
-                </div>
             </section>
+
+
+            {/* PRODUCTOS */}
+            <section className="w-fit mx-auto grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-10 gap-x-12 mt-4 mb-14">
+                {productos
+                    .filter((producto) => producto.categoriaId === 1)
+                    .map((producto) => (
+                        <ProductCard key={producto.id} producto={producto} />
+                    ))}
+            </section>
+
+
+            {/* FOOTER */}
+            <Footer />
 
 
         </main>

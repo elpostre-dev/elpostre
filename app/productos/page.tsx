@@ -36,8 +36,8 @@ export default function Productos() {
                                     {/* Pasteles */}
                                     <Link href={'/productos/pasteles'} className="relative group flex justify-center items-center h-full w-full hover:cursor-pointer bg-mainRojo-100">
                                         <img className="object-center object-cover h-full w-full group-hover:opacity-50 transition duration-500" src="/categorias/pastel-categoria.jpg" alt="shoe-image" />
-                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 p-6 z-0 px-20 w-52 bg-mainRojo-100" />
-                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute md:text-base font-medium leading-none md:py-2 py-10 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
+                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 lg:p-6 md:p-11 p-11 sm:p-16 z-0 px-20 w-96 md:w-52 bg-mainRojo-100" />
+                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute lg:text-base md:text-2xl font-medium leading-none lg:py-2 md:py-6 sm:py-10 py-5 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
                                             Pasteles
                                         </button>
                                     </Link>
@@ -46,8 +46,8 @@ export default function Productos() {
                                     {/* Pays */}
                                     <Link href={'/productos/pays'} className="relative group flex justify-center items-center h-full w-full hover:cursor-pointer bg-mainRojo-100">
                                         <img className="object-center object-cover h-full w-full group-hover:opacity-50 transition duration-500" src="/categorias/pay-categoria.jpg" alt="shoe-image" />
-                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 p-6 z-0 px-20 w-52 bg-mainRojo-100" />
-                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute md:text-base font-medium leading-none md:py-2 py-10 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
+                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 lg:p-6 md:p-11 p-11 sm:p-16 z-0 px-20 w-96 md:w-52 bg-mainRojo-100" />
+                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute lg:text-base md:text-2xl font-medium leading-none lg:py-2 md:py-6 sm:py-10 py-5 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
                                             Pays
                                         </button>
                                     </Link>
@@ -59,8 +59,8 @@ export default function Productos() {
                                     {/* Brownies */}
                                     <Link href={'/productos/brownies'} className="relative group flex justify-center items-center h-full w-full hover:cursor-pointer bg-mainRojo-100">
                                         <img className="object-center object-cover h-full w-full group-hover:opacity-50 transition duration-500" src="/categorias/brownies-categoria.jpg" alt="shoe-image" />
-                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 p-6 z-0 px-20 w-52 bg-mainRojo-100" />
-                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute md:text-base font-medium leading-none md:py-2 py-10 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
+                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 lg:p-6 md:p-11 p-11 sm:p-16 z-0 px-20 w-96 md:w-52 bg-mainRojo-100" />
+                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute lg:text-base md:text-2xl font-medium leading-none lg:py-2 md:py-6 sm:py-10 py-5 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
                                             Brownies
                                         </button>
                                     </Link>
@@ -68,8 +68,8 @@ export default function Productos() {
                                     {/* Galletas */}
                                     <Link href={'/productos/galletas'} className="relative group flex justify-center items-center h-full w-full hover:cursor-pointer bg-mainRojo-100">
                                         <img className="object-center object-cover h-full w-full group-hover:opacity-50 transition duration-500" src="/categorias/galletas-categoria.jpg" alt="shoe-image" />
-                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 p-6 z-0 px-20 w-52 bg-mainRojo-100" />
-                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute md:text-base font-medium leading-none md:py-2 py-10 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
+                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 lg:p-6 md:p-11 p-11 sm:p-16 z-0 px-20 w-96 md:w-52 bg-mainRojo-100" />
+                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute lg:text-base md:text-2xl font-medium leading-none lg:py-2 md:py-6 sm:py-10 py-5 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
                                             Galletas
                                         </button>
                                     </Link>
@@ -81,8 +81,8 @@ export default function Productos() {
                                     {/* Keto */}
                                     <Link href={'/productos/keto'} className="relative group flex justify-center items-center h-full w-full hover:cursor-pointer bg-mainRojo-100">
                                         <img className="object-center object-cover h-full w-full group-hover:opacity-50 transition duration-500" src="/categorias/keto-categoria.jpg" alt="shoe-image" />
-                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 p-6 z-0 px-20 w-52 bg-mainRojo-100" />
-                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute md:text-base font-medium leading-none md:py-2 py-10 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
+                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 lg:p-6 md:p-11 p-11 sm:p-16 z-0 px-20 w-96 md:w-52 bg-mainRojo-100" />
+                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute lg:text-base md:text-2xl font-medium leading-none lg:py-2 md:py-6 sm:py-10 py-5 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
                                             Keto
                                         </button>
                                     </Link>
@@ -90,8 +90,8 @@ export default function Productos() {
                                     {/* Muffins y Panqués */}
                                     <Link href={'/productos/muffins-panques'} className="relative group flex justify-center items-center h-full w-full hover:cursor-pointer bg-mainRojo-100">
                                         <img className="object-center object-cover h-full w-full group-hover:opacity-50 transition duration-500" src="/categorias/muffinspanques-categoria.jpg" alt="shoe-image" />
-                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 p-6 z-0 px-20 w-52 bg-mainRojo-100" />
-                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute md:text-base font-medium leading-none md:py-2 py-10 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
+                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 lg:p-6 md:p-11 p-11 sm:p-16 z-0 px-20 w-96 md:w-52 bg-mainRojo-100" />
+                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute lg:text-base md:text-2xl font-medium leading-none lg:py-2 md:py-6 sm:py-10 py-5 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
                                             Muffins y Panqués
                                         </button>
                                     </Link>
@@ -103,8 +103,8 @@ export default function Productos() {
                                     {/* Individuales */}
                                     <Link href={'/productos/individuales'} className="relative group flex justify-center items-center h-full w-full hover:cursor-pointer bg-mainRojo-100">
                                         <img className="object-center object-cover h-full w-full group-hover:opacity-50 transition duration-500" src="/categorias/individuales-categoria.jpg" alt="shoe-image" />
-                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 p-6 z-0 px-20 w-52 bg-mainRojo-100" />
-                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute md:text-base font-medium leading-none md:py-2 py-10 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
+                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 lg:p-6 md:p-11 p-11 sm:p-16 z-0 px-20 w-96 md:w-52 bg-mainRojo-100" />
+                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute lg:text-base md:text-2xl font-medium leading-none lg:py-2 md:py-6 sm:py-10 py-5 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
                                             Individuales
                                         </button>
                                     </Link>
@@ -112,8 +112,8 @@ export default function Productos() {
                                     {/* Temporada */}
                                     <Link href={'/productos/temporada'} className="relative group flex justify-center items-center h-full w-full hover:cursor-pointer bg-mainRojo-100">
                                         <img className="object-center object-cover h-full w-full group-hover:opacity-50 transition duration-500" src="/categorias/temporada-categoria.jpg" alt="shoe-image" />
-                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 p-6 z-0 px-20 w-52 bg-mainRojo-100" />
-                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute md:text-base font-medium leading-none md:py-2 py-10 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
+                                        <div className="absolute opacity-0 group-hover:opacity-50 transition duration-500 bottom-3 lg:p-6 md:p-11 p-11 sm:p-16 z-0 px-20 w-96 md:w-52 bg-mainRojo-100" />
+                                        <button className="text-center focus:outline-none bottom-4 z-10 absolute lg:text-base md:text-2xl font-medium leading-none lg:py-2 md:py-6 sm:py-10 py-5 w-80 text-4xl md:w-48 bg-transparent group-hover:bg-mainRojo-100 bg-white text-black group-hover:text-white transition duration-500">
                                             Temporada
                                         </button>
                                     </Link>

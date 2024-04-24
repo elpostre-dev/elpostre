@@ -31,7 +31,7 @@ export default function Footer() {
                 <div className="flex my-5 justify-center gap-x-2">
 
                     {/* Instagram */}
-                    <Link aria-label="instagram" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center" href="https://www.instagram.com" target="blank">
+                    <Link aria-label="instagram" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center" href="https://www.instagram.com/pasteleriaelpostre/" target="blank">
                         <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 fillRule="evenodd"
@@ -43,14 +43,14 @@ export default function Footer() {
                     </Link>
 
                     {/* Linkedin */}
-                    <Link aria-label="linked-in" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center" href="https://www.linkedin.com/company/cassad-proptech/" target="blank">
+                    {/* <Link aria-label="linked-in" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center" href="https://www.linkedin.com/company/cassad-proptech/" target="blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 30 30" fill="white">
                             <path d="M24,4H6C4.895,4,4,4.895,4,6v18c0,1.105,0.895,2,2,2h18c1.105,0,2-0.895,2-2V6C26,4.895,25.105,4,24,4z M10.954,22h-2.95 v-9.492h2.95V22z M9.449,11.151c-0.951,0-1.72-0.771-1.72-1.72c0-0.949,0.77-1.719,1.72-1.719c0.948,0,1.719,0.771,1.719,1.719 C11.168,10.38,10.397,11.151,9.449,11.151z M22.004,22h-2.948v-4.616c0-1.101-0.02-2.517-1.533-2.517 c-1.535,0-1.771,1.199-1.771,2.437V22h-2.948v-9.492h2.83v1.297h0.04c0.394-0.746,1.356-1.533,2.791-1.533 c2.987,0,3.539,1.966,3.539,4.522V22z"></path>
                         </svg>
-                    </Link>
+                    </Link> */}
 
                     {/* Email */}
-                    <a aria-label="email" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center" href="mailto:mmca@cassad.com.mx" target="blank">
+                    <a aria-label="email" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center" href="mailto:pasteleriaelpostre@hotmail.com" target="blank">
                         <svg width="20" height="20" viewBox="0 0 25 25" fill="white" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
                             <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
@@ -58,7 +58,7 @@ export default function Footer() {
                     </a>
 
                     {/* Twitter */}
-                    <Link aria-label="twitter" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center" href="https://twitter.com/" target="blank">
+                    {/* <Link aria-label="twitter" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center" href="https://twitter.com/" target="blank">
                         <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 fillRule="evenodd"
@@ -67,10 +67,22 @@ export default function Footer() {
                                 fill="white"
                             />
                         </svg>
+                    </Link> */}
+
+                    {/* Facebook */}
+                    <Link aria-label="twitter" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center" href="https://www.facebook.com/PasteleriaElPostre" target="blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48" fill="none">
+                            <path
+                                fill="white"
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                d="M25,3C12.85,3,3,12.85,3,25c0,11.03,8.125,20.137,18.712,21.728V30.831h-5.443v-5.783h5.443v-3.848 c0-6.371,3.104-9.168,8.399-9.168c2.536,0,3.877,0.188,4.512,0.274v5.048h-3.612c-2.248,0-3.033,2.131-3.033,4.533v3.161h6.588 l-0.894,5.783h-5.694v15.944C38.716,45.318,47,36.137,47,25C47,12.85,37.15,3,25,3z"
+                            />
+                        </svg>
                     </Link>
 
                     {/* YouTube */}
-                    <Link aria-label="youtube" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center" href="https://www.youtube.com/" target="blank">
+                    {/* <Link aria-label="youtube" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center" href="https://www.youtube.com/" target="blank">
                         <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 fillRule="evenodd"
@@ -79,7 +91,7 @@ export default function Footer() {
                                 fill="white"
                             />
                         </svg>
-                    </Link>
+                    </Link> */}
 
                 </div>
 

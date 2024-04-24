@@ -2,7 +2,7 @@
 export interface Variacion {
     tamanio: string;
     precio: number;
-    personas: string; // Indica para cuántas personas es adecuado el pastel
+    personas: string;
 }
 
 export interface Producto {
@@ -10,9 +10,10 @@ export interface Producto {
     nombre: string;
     categoriaId: number;
     categoriaNombre: string;
-    descripcion: string; // Descripción general del producto
+    descripcion: string;
     variaciones: Variacion[];
     fotos: string[];
+    temporada?: string;
 }
 
 export const productos: Producto[] = [
