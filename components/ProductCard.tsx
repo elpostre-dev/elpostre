@@ -5,6 +5,7 @@ interface ProductCardProps {
     producto: Producto;
 }
 
+// https://tailwindflex.com/@arya/responsive-products-grid
 const ProductCard: React.FC<ProductCardProps> = ({ producto }) => {
     return (
         <div className="flex flex-col xl:w-64 lg:w-72 md:w-80 w-96 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl" key={producto.id}>

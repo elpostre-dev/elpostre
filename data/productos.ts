@@ -1207,4 +1207,295 @@ export const productos: Producto[] = [
     },
 
     // TEMPORADA
+    {
+        id: 54,
+        nombre: "Tortugas, Pretzels y Buñuelos",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Prueba nuestras deliciosas tortugas hechas con nuez de la india, pecana, caramelo y chocolate. Al igual que nuestros pretzels cubiertos de chocolate y buñuelos. Solamente en esta temporada tan especial. Productos disponibles hasta agotar existencias.",
+        variaciones: [
+            {
+                tamanio: "1 Tortuga Gigante",
+                precio: 95.00,
+                personas: ""
+            },
+            {
+                tamanio: "4 Tortuguitas",
+                precio: 95.00,
+                personas: ""
+            },
+            {
+                tamanio: "Caja de Pretzels",
+                precio: 95.00,
+                personas: ""
+            },
+            {
+                tamanio: "Caja de 10 Buñuelos",
+                precio: 410.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_1.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_2.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_3.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_4.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_5.jpg"],
+        temporada: "Navidad"
+    },
+    {
+        id: 55,
+        nombre: "Surtido",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Prueba nuestra deliciosa combinación de galletas. Producto disponible hasta agotar existencia.",
+        variaciones: [
+            {
+                tamanio: "Caja de Acrílico Grande",
+                precio: 590.00,
+                personas: ""
+            },
+            {
+                tamanio: "Caja de Acrílico Mediana",
+                precio: 500.00,
+                personas: ""
+            },
+            {
+                tamanio: "Caja de Acrílico Chica",
+                precio: 370.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Temporada/Navidad/Surtido_1.jpg", "/Temporada/Navidad/Surtido_2.jpg", "/Temporada/Navidad/Surtido_3.png"],
+        temporada: "Navidad"
+    },
+    {
+        id: 56,
+        nombre: "Pastel Navideño",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Prueba nuestro delicioso Pastel de Copo de Nieve, de pan vainilla con betún de merengue o bien, nuestro Pastel de Monos de Jengibre, de pan de vainilla con betún de chocolate.",
+        variaciones: [
+            {
+                tamanio: "Copo de Nieve Mediano Alto",
+                precio: 780.00,
+                personas: "10 a 12 personas"
+            },
+            {
+                tamanio: "Copo de Nieve Mediano Bajo",
+                precio: 450.00,
+                personas: "4 a 6 personas"
+            },
+            {
+                tamanio: "Mono de Jengibre Mediano Alto",
+                precio: 780.00,
+                personas: "10 a 12 personas"
+            },
+            {
+                tamanio: "Mono de Jengibre Mediano Bajo",
+                precio: 450.00,
+                personas: "4 a 6 personas"
+            },
+            {
+                tamanio: "Mono de Jengibre Chico",
+                precio: 260.00,
+                personas: "1 a 2 personas"
+            },
+        ],
+        fotos: ["/Temporada/Navidad/Pastel_Navideno_1.jpg", "/Temporada/Navidad/Pastel_Navideno_2.jpg", "/Temporada/Navidad/Pastel_Navideno_3.jpg"],
+        temporada: "Navidad"
+    },
+    {
+        id: 57,
+        nombre: "Galletas de Chocochips o Avena",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Prueba nuestras deliciosas galletas de avena y chocochips, con ese toque navideño.",
+        variaciones: [
+            {
+                tamanio: "Vidrio Grande",
+                precio: 640.00,
+                personas: ""
+            },
+            {
+                tamanio: "Vidrio Mediano",
+                precio: 500.00,
+                personas: ""
+            },
+            {
+                tamanio: "Vidrio Chico",
+                precio: 370.00,
+                personas: ""
+            },
+            {
+                tamanio: "Cilindro Grande",
+                precio: 500.00,
+                personas: ""
+            },
+            {
+                tamanio: "Cilindro Mediano",
+                precio: 330.00,
+                personas: ""
+            },
+            {
+                tamanio: "Cilindro Chico",
+                precio: 170.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Temporada/Navidad/Galletas_Chocochips_Avena_1.png", "/Temporada/Navidad/Galletas_Chocochips_Avena_2.jpg", "/Temporada/Navidad/Galletas_Chocochips_Avena_3.jpg", "/Temporada/Navidad/Galletas_Chocochips_Avena_4.jpg"],
+        temporada: "Navidad"
+    },
+    {
+        id: 58,
+        nombre: "Tradicional Rosca de Vainilla con Chocolate",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Prueba nuestra tradicional rosca de vainilla con chocolate, o bien en presentación de pastel.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 780.00,
+                personas: ""
+            },
+            {
+                tamanio: "Mediano Alto",
+                precio: 710.00,
+                personas: ""
+            },
+            {
+                tamanio: "Mediano Bajo",
+                precio: 390.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Temporada/Navidad/Rosca_Tradicional_1.jpg", "/Temporada/Navidad/Rosca_Tradicional_2.jpg", "/Temporada/Navidad/Rosca_Tradicional_3.jpg", "/Temporada/Navidad/Rosca_Tradicional_4.jpg"],
+        temporada: "Navidad"
+    },
+    {
+        id: 59,
+        nombre: "Brownies Decorados",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Prueba nuestros deliciosos mini brownies de cajeta, crunch, chocolate, betún alemán y almendra.",
+        variaciones: [
+            {
+                tamanio: "Caja Familiar",
+                precio: 680.00,
+                personas: "40 piezas"
+            },
+            {
+                tamanio: "Caja Grande",
+                precio: 480.00,
+                personas: "25 piezas"
+            },
+            {
+                tamanio: "Caja Mediana",
+                precio: 350.00,
+                personas: "16 piezas"
+            },
+            {
+                tamanio: "Caja Regular",
+                precio: 200.00,
+                personas: "9 piezas"
+            },
+            {
+                tamanio: "Caja Chica",
+                precio: 120.00,
+                personas: "5 piezas"
+            },
+            {
+                tamanio: "Caja Individual",
+                precio: 110.00,
+                personas: "4 piezas"
+            },
+        ],
+        fotos: ["/Temporada/Navidad/Brownies_Decorados_1.jpg", "/Temporada/Navidad/Brownies_Decorados_2.jpg", "/Temporada/Navidad/Brownies_Decorados_3.jpg", "/Temporada/Navidad/Brownies_Decorados_4.jpg"],
+        temporada: "Navidad"
+    },
+    {
+        id: 60,
+        nombre: "Mostachón de Corazón",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Prueba nuestro delicioso mostachón con fresas, para esa ocasión especial.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 0.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Temporada/SanValentin/Mostachon_Corazon_1.jpg", "/Temporada/SanValentin/Mostachon_Corazon_2.jpg", "/Temporada/SanValentin/Mostachon_Corazon_3.jpg"],
+        temporada: "San Valentín"
+    },
+    {
+        id: 61,
+        nombre: "Pay de Queso de Corazón",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Prueba nuestro delicioso pay de queso con fresas y chocolate.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 0.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Temporada/SanValentin/Pay_Queso_Corazon_1.jpg", "/Temporada/SanValentin/Pay_Queso_Corazon_2.jpg", "/Temporada/SanValentin/Pay_Queso_Corazon_3.jpg"],
+        temporada: "San Valentín"
+    },
+    {
+        id: 62,
+        nombre: "Pingüino de Corazón",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Prueba nuestro delicioso pingüino en forma de corazón, para impresionar a esa persona especial.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 0.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Temporada/SanValentin/Pinguino_Corazon_1.jpg", "/Temporada/SanValentin/Pinguino_Corazon_2.jpg", "/Temporada/SanValentin/Pinguino_Corazon_3.jpg"],
+        temporada: "San Valentín"
+    },
+    {
+        id: 63,
+        nombre: "Brownies de Corazón",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Prueba nuestros deliciosos brownies en forma de corazón.",
+        variaciones: [
+            {
+                tamanio: "Brownie",
+                precio: 0.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Temporada/SanValentin/Brownie_Corazon_1.jpg", "/Temporada/SanValentin/Brownie_Corazon_2.jpg", "/Temporada/SanValentin/Brownie_Corazon_3.jpg"],
+        temporada: "San Valentín"
+    },
+    {
+        id: 63,
+        nombre: "Bodas, Comuniones y Bautizos",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Delicioso pastel para una ocasión especial.",
+        variaciones: [
+            {
+                tamanio: "Mediano Alto de Pistache",
+                precio: 0.00,
+                personas: "Pastel para 10 a 12 personas"
+            },
+            {
+                tamanio: "Mediano Alto de Merengue",
+                precio: 0.00,
+                personas: "Pastel para 10 a 12 personas"
+            },
+            {
+                tamanio: "Kekitos de Merengue",
+                precio: 0.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Temporada/BodasComunionesBautizos/BodasComunionesBautizos_1.jpg", "/Temporada/BodasComunionesBautizos/BodasComunionesBautizos_2.jpg", "/Temporada/BodasComunionesBautizos/BodasComunionesBautizos_3.jpg", "/Temporada/BodasComunionesBautizos/BodasComunionesBautizos_4.jpg"],
+        temporada: "Bodas, Comuniones y Bautizos"
+    },
 ];
