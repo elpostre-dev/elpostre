@@ -1,5 +1,6 @@
 import React from 'react';
 import { Producto } from "@/data/productos"
+import Link from 'next/link';
 
 interface ProductCardProps {
     producto: Producto;
@@ -7,9 +8,12 @@ interface ProductCardProps {
 
 // https://tailwindflex.com/@arya/responsive-products-grid
 const ProductCard: React.FC<ProductCardProps> = ({ producto }) => {
+
+    const productURL = `/productos/${producto.id}`;
+
     return (
         <div className="flex flex-col xl:w-64 lg:w-72 md:w-80 w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl" key={producto.id}>
-            <a href="#" className="flex flex-col h-full">
+            <Link href={productURL} className="flex flex-col h-full">
 
                 {/* foto */}
                 <img src={producto.fotos[0]}
@@ -40,7 +44,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ producto }) => {
 
                     {/* Aquí puede ir la sección de precios o cualquier otro contenido adicional */}
                 </div>
-            </a>
+            </Link>
         </div>
     )
 }

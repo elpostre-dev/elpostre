@@ -1473,7 +1473,7 @@ export const productos: Producto[] = [
         temporada: "San Valentín"
     },
     {
-        id: 63,
+        id: 64,
         nombre: "Bodas, Comuniones y Bautizos",
         categoriaId: 8,
         categoriaNombre: "Temporada",
