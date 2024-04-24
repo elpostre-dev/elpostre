@@ -8,16 +8,16 @@ interface ProductCardProps {
 // https://tailwindflex.com/@arya/responsive-products-grid
 const ProductCard: React.FC<ProductCardProps> = ({ producto }) => {
     return (
-        <div className="flex flex-col xl:w-64 lg:w-72 md:w-80 w-96 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl" key={producto.id}>
+        <div className="flex flex-col xl:w-64 lg:w-72 md:w-80 w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl" key={producto.id}>
             <a href="#" className="flex flex-col h-full">
 
                 {/* foto */}
                 <img src={producto.fotos[0]}
                     alt={producto.nombre}
-                    className="xl:h-72 h-80 xl:w-64 lg:w-72 md:w-80 w-96 object-cover rounded-t-xl"
+                    className="xl:h-72 h-80 xl:w-64 lg:w-72 md:w-80 w-80 object-cover rounded-t-xl"
                 />
 
-                <div className="px-4 py-3 flex flex-col flex-grow xl:w-64 lg:w-72 md:w-80 w-96">
+                <div className="px-4 py-3 flex flex-col flex-grow xl:w-64 lg:w-72 md:w-80 w-80">
 
                     {/* categoría */}
                     <p className="text-gray-400 mr-3 uppercase text-xs">{producto.categoriaNombre}</p>

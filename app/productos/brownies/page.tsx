@@ -4,6 +4,15 @@ import NavBar from "../../../components/Navbar";
 import { productos } from '../../../data/productos';
 import ProductCard from "@/components/ProductCard";
 import Footer from "@/components/Footer";
+import Link from "next/link";
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 
 export default function Brownies() {
 
@@ -12,6 +21,29 @@ export default function Brownies() {
 
             {/* NAVBAR */}
             <NavBar />
+
+            {/* BREADCRUMB */}
+            <div className="px-10 py-5 bg-red-50">
+                <Breadcrumb>
+                    <BreadcrumbList>
+                        <BreadcrumbItem>
+                            <BreadcrumbLink asChild>
+                                <Link href="/">Inicio</Link>
+                            </BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem>
+                            <BreadcrumbLink asChild>
+                                <Link href="/productos">Productos</Link>
+                            </BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem>
+                            <BreadcrumbPage>Brownies</BreadcrumbPage>
+                        </BreadcrumbItem>
+                    </BreadcrumbList>
+                </Breadcrumb>
+            </div>
 
 
             {/* TITLE */}
