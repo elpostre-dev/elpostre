@@ -20,8 +20,14 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 
+import { productos } from "@/data/productos";
+
 
 export default function Home() {
+
+  // const bestsellerIds = [2, 29, 35, 16, 37, 38, 14];
+  const bestsellerIds = [2, 29, 16, 14];
+  const bestsellers = productos.filter(producto => bestsellerIds.includes(producto.id));
 
   const plugin = React.useRef(
     Autoplay({ delay: 3000, stopOnInteraction: false })
@@ -103,81 +109,27 @@ export default function Home() {
 
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
-            {/* Producto #1 */}
-            <div className="group relative">
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-50 lg:h-80">
-                <img src="/Brownies/BROWNIES_GLASS.jpg" alt="Front of men&#039;s Basic Tee in black." className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-md text-gray-700 font-semibold">
-                    <a href="#">
-                      <span aria-hidden="true" className="absolute inset-0"></span>
-                      Brownie Glass
-                    </a>
-                  </h3>
-                  <p className="mt-1 text-sm font text-gray-500">Brownies</p>
-                </div>
-                <p className="text-md font-medium text-gray-900">$500</p>
-              </div>
-            </div>
+            {bestsellers.map(producto => (
+              <>
+                <Link href={`/productos/${producto.id}`} className="group relative">
+                  <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-50 lg:h-80">
+                    <img src={producto.fotos[0]} alt="Front of men&#039;s Basic Tee in black." className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
+                  </div>
+                  <div className="mt-4 flex justify-between">
+                    <div>
+                      <h3 className="text-md text-gray-700 font-semibold">
+                        <span aria-hidden="true" className="absolute inset-0"></span>
+                        {producto.nombre}
+                      </h3>
+                      <p className="mt-1 text-sm font text-gray-500">{producto.categoriaNombre}</p>
+                    </div>
+                    {/* <p className="text-md font-medium text-gray-900">$500</p> */}
+                  </div>
+                </Link>
+              </>
 
-            {/* Producto #2 */}
-            <div className="group relative">
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-50 lg:h-80">
-                <img src="/Galletas/CHOCOCHIP.jpg" alt="Front of men&#039;s Basic Tee in black." className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-md text-gray-700 font-semibold">
-                    <a href="#">
-                      <span aria-hidden="true" className="absolute inset-0"></span>
-                      Chocochips
-                    </a>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">Galletas</p>
-                </div>
-                <p className="text-md font-medium text-gray-900">$500</p>
-              </div>
-            </div>
+            ))}
 
-            {/* Producto #3 */}
-            <div className="group relative">
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-50 lg:h-80">
-                <img src="/Pasteles/PASTEL_BROWNIE.jpg" alt="Front of men&#039;s Basic Tee in black." className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-md text-gray-700 font-semibold">
-                    <a href="#">
-                      <span aria-hidden="true" className="absolute inset-0"></span>
-                      Pastel Brownie
-                    </a>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">Pastel</p>
-                </div>
-                <p className="text-md font-medium text-gray-900">$500</p>
-              </div>
-            </div>
-
-            {/* Producto #4 */}
-            <div className="group relative">
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-50 lg:h-80">
-                <img src="/Individuales/COPITAS.jpg" alt="Front of men&#039;s Basic Tee in black." className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-md text-gray-700 font-semibold">
-                    <a href="#">
-                      <span aria-hidden="true" className="absolute inset-0"></span>
-                      Copitas
-                    </a>
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">Individuales</p>
-                </div>
-                <p className="text-md font-medium text-gray-900">$500</p>
-              </div>
-            </div>
 
           </div>
 
@@ -263,16 +215,15 @@ export default function Home() {
             {/* Rating #1 */}
             <div className="mb-12 md:mb-0">
               <div className="mb-6 flex justify-center">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
-                  className="w-32 rounded-full shadow-lg" />
+                <img src="/logos/logo_rojo.jpg"
+                  className="w-20 rounded-full shadow-lg" />
               </div>
-              <h5 className="text-lg font-bold">Maria Smantha</h5>
+              {/* <h5 className="text-lg font-bold">Lisa Cudrow</h5> */}
               <h6 className="mb-4 font-medium text-slate-800">
-                Web Developer
+                Opiniones de Google
               </h6>
               <p className="mb-4 text-gray-700">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos
-                id officiis hic tenetur quae quaerat ad velit ab hic.
+                Los pasteles más ricos de Monterrey! Pasteles, pays de queso con fruta o de chocolate, brownies y más! Perfecto para cualquier antojo!
               </p>
 
               <ul className="mb-0 flex justify-center">
@@ -303,7 +254,7 @@ export default function Home() {
                 <li>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" className="w-5 text-mainAmarillo-100">
                     <path fill="currentColor"
-                      d="m480 757 157 95-42-178 138-120-182-16-71-168v387ZM233 976l65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
+                      d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
                   </svg>
                 </li>
               </ul>
@@ -314,16 +265,15 @@ export default function Home() {
             {/* Rating #2 */}
             <div className="mb-12 md:mb-0">
               <div className="mb-6 flex justify-center">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).jpg"
-                  className="w-32 rounded-full shadow-lg" />
+                <img src="/logos/logo_rojo.jpg"
+                  className="w-20 rounded-full shadow-lg" />
               </div>
-              <h5 className="text-lg font-bold">Lisa Cudrow</h5>
+              {/* <h5 className="text-lg font-bold">Maria Smantha</h5> */}
               <h6 className="mb-4 font-medium text-slate-800">
-                Graphic Designer
+                Opiniones de Google
               </h6>
               <p className="mb-4 text-gray-700">
-                Ut enim ad minima veniam, quis nostrum exercitationem ullam
-                corporis suscipit laboriosam, nisi ut aliquid commodi.
+                Siempre es calidad lo que llevamos a casa y si quieres quedar bien con un detalle, es garantía las galletas o un pastelito. Pudiera parecer costoso pero vale la pena. Sin duda gran sabor y calidad.
               </p>
 
               <ul className="mb-0 flex justify-center">
@@ -365,16 +315,15 @@ export default function Home() {
             {/* Rating #3 */}
             <div className="mb-0">
               <div className="mb-6 flex justify-center">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(9).jpg"
-                  className="w-32 rounded-full shadow-lg" />
+                <img src="/logos/logo_rojo.jpg"
+                  className="w-20 rounded-full shadow-lg" />
               </div>
-              <h5 className="text-lg font-bold">John Smith</h5>
+              {/* <h5 className="text-lg font-bold">John Smith</h5> */}
               <h6 className="mb-4 font-medium text-slate-800">
-                Marketing Specialist
+                Opiniones de Google
               </h6>
               <p className="mb-4 text-gray-700">
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                blanditiis praesentium voluptatum deleniti atque corrupti.
+                Deliciosos pasteles, hace 3 años que siempre venimos aqui a comprar para los cumpleaños de todos.
               </p>
 
               <ul className="mb-0 flex justify-center">
@@ -405,7 +354,7 @@ export default function Home() {
                 <li>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" className="w-5 text-mainAmarillo-100">
                     <path fill="currentColor"
-                      d="m323 851 157-94 157 95-42-178 138-120-182-16-71-168-71 167-182 16 138 120-42 178Zm-90 125 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-355Z" />
+                      d="m233 976 65-281L80 506l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z" />
                   </svg>
                 </li>
               </ul>
