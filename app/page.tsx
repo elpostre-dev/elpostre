@@ -112,7 +112,7 @@ export default function Home() {
             {bestsellers.map(producto => (
               <>
                 <Link href={`/productos/${producto.id}`} className="group relative">
-                  <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-50 lg:h-80">
+                  <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-50 h-80">
                     <img src={producto.fotos[0]} alt="Front of men&#039;s Basic Tee in black." className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                   </div>
                   <div className="mt-4 flex justify-between">
