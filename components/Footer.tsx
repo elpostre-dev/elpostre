@@ -7,7 +7,7 @@ export default function Footer() {
         <footer className="bg-gray-100 p-10">
             <div className="mx-auto max-w-screen-xl text-center">
 
-                <a href="#" className="flex justify-center items-center text-2xl font-semibold text-gray-900">
+                <a className="flex justify-center items-center text-2xl font-semibold text-gray-900">
                     <Image src="/logos/logo_dorado.png" height={80} width={160} alt="icon"></Image>
                 </a>
 
@@ -49,14 +49,6 @@ export default function Footer() {
                         </svg>
                     </Link> */}
 
-                    {/* Email */}
-                    <a aria-label="email" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center" href="mailto:pasteleriaelpostre@hotmail.com" target="blank">
-                        <svg width="20" height="20" viewBox="0 0 25 25" fill="white" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
-                            <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
-                        </svg>
-                    </a>
-
                     {/* Twitter */}
                     {/* <Link aria-label="twitter" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center" href="https://twitter.com/" target="blank">
                         <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -92,6 +84,30 @@ export default function Footer() {
                             />
                         </svg>
                     </Link> */}
+
+                    {/* Rappi */}
+                    <Link
+                        aria-label="twitter"
+                        className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center"
+                        href="https://www.rappi.com.mx/restaurantes/1306704483-el-postre"
+                        target="blank"
+                    >
+                        <img
+                            src="/logos/bigote.png"  // Update the path to where your PNG is stored
+                            alt="Rappi"  // Descriptive alternative text for accessibility
+                            width="25"
+                            height="25"
+                            style={{ display: 'block' }} // Ensures the image does not have extra space around it
+                        />
+                    </Link>
+
+                    {/* Email */}
+                    <a aria-label="email" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 opacity-50 w-8 h-8 flex-shrink-0 bg-gray-500 cursor-pointer hover:bg-gray-700 rounded-full flex items-center justify-center" href="mailto:pasteleriaelpostre@hotmail.com" target="blank">
+                        <svg width="20" height="20" viewBox="0 0 25 25" fill="white" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
+                            <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+                        </svg>
+                    </a>
 
                 </div>
 

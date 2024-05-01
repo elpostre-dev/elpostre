@@ -48,7 +48,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ producto }) => {
                     <div>
                         <p>
                             <span className="bg-gray-200 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
-                                {producto.variaciones.length} {producto.variaciones.length > 1 ? "variaciones" : "variación"}
+                                {producto.variaciones.length} {producto.variaciones.length > 1 ? "tamaños" : "tamaño"}
                             </span>
                         </p>
                     </div>

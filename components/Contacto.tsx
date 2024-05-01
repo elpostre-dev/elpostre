@@ -1,10 +1,12 @@
 'use client'
 
+import Link from "next/link";
+
 export default function Contacto() {
 
     return (
         <section className="">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-28 ">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 ">
 
                 <div className="max-w-2xl lg:max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl font-extrabold text-gray-900">
@@ -65,7 +67,24 @@ export default function Contacto() {
                         </div>
                     </div>
                 </div>
+
+                {/* RAPPI */}
+                <div className="px-4 mx-auto max-w-screen-xl lg:px-6 pt-14">
+                    <div className="mx-auto max-w-screen-sm text-center border-2 rounded-xl py-8 hover:shadow-xl hover:cursor-pointer">
+                        <div className="flex items-center justify-center mx-auto">
+                            <h2 className="text-4xl font-extrabold mb-2 text-gray-900 mr-2">Encuéntranos en</h2>
+                            <img src="/logos/rappi_2.png" className="w-24" />
+                        </div>
+
+                        <p className="mb-6 font-light text-gray-500 md:text-lg">Pide a domicilio y recibelo de inmediato.</p>
+                        <Link href="https://www.rappi.com.mx/restaurantes/1306704483-el-postre" target="_blank" className="text-white bg-mainRojo-100 hover:bg-red-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none">
+                            Ir a la tienda
+                        </Link>
+                    </div>
+                </div>
+
             </div>
+
         </section>
     );
 }
