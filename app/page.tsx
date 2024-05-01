@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/carousel"
 
 import { productos } from "@/data/productos";
+import { useState, useEffect } from "react";
 
 
 export default function Home() {
@@ -36,6 +37,7 @@ export default function Home() {
   const [current, setCurrent] = React.useState(0)
   const [count, setCount] = React.useState(0)
 
+  // Efecto para actualizar el contador de imágenes en el carousel
   React.useEffect(() => {
     if (!api) {
       return
@@ -49,6 +51,7 @@ export default function Home() {
     })
   }, [api])
 
+  // Imágenes y textos para el carousel de promociones
   const images = [
     {
       url: "/home.jpg",
@@ -66,6 +69,23 @@ export default function Home() {
       description: "A professonal website drives sales. Create a beautiful website to impress and engage new customers and establish your business online",
     },
   ];
+
+  // Estado para controlar la visibilidad del banner
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Al montar el componente, verifica si el banner ya fue cerrado anteriormente
+  useEffect(() => {
+    const isBannerClosed = localStorage.getItem('bannerClosed');
+    if (isBannerClosed != 'true') {
+      setIsVisible(true);
+    }
+  }, []);
+
+  // Función para ocultar el banner y guardar esta información en el localStorage
+  const hideBanner = () => {
+    setIsVisible(false);
+    localStorage.setItem('bannerClosed', 'true');
+  };
 
   return (
     <main className="flex min-h-screen flex-col">
@@ -485,6 +505,40 @@ export default function Home() {
 
       {/* FOOTER */}
       <Footer />
+
+
+      {/* BANNER */}
+      {isVisible && (
+        <div id="bottom-banner" tabIndex={1} className="fixed bottom-0 start-0 z-50 flex justify-between w-full p-6 bg-mainRojo-100">
+          <div className="flex items-center mx-auto">
+            <p className="flex items-center text-lg font-normal text-gray-200">
+              <span className="inline-flex p-1 me-3 bg-mainRosa-100 rounded-full w-8 h-8 items-center justify-center">
+                <svg className="w-5 h-5 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M18.435 7.546A2.32 2.32 0 0 1 17.7 5.77a3.354 3.354 0 0 0-3.47-3.47 2.322 2.322 0 0 1-1.776-.736 3.357 3.357 0 0 0-4.907 0 2.281 2.281 0 0 1-1.776.736 3.414 3.414 0 0 0-2.489.981 3.372 3.372 0 0 0-.982 2.49 2.319 2.319 0 0 1-.736 1.775 3.36 3.36 0 0 0 0 4.908A2.317 2.317 0 0 1 2.3 14.23a3.356 3.356 0 0 0 3.47 3.47 2.318 2.318 0 0 1 1.777.737 3.36 3.36 0 0 0 4.907 0 2.36 2.36 0 0 1 1.776-.737 3.356 3.356 0 0 0 3.469-3.47 2.319 2.319 0 0 1 .736-1.775 3.359 3.359 0 0 0 0-4.908ZM8.5 5.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Zm3 9.063a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm2.207-6.856-6 6a1 1 0 0 1-1.414-1.414l6-6a1 1 0 0 1 1.414 1.414Z" />
+                </svg>
+                <span className="sr-only">Discount</span>
+              </span>
+              <span>
+                Visita nuestra nueva
+                <a href="/productos" className="items-center text-lg font-bold text-gray-200 ms-1 inline-flex hover:underline">
+                  tienda en línea
+                  <svg className="w-3 h-3 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </a>
+              </span>
+            </p>
+          </div>
+          <div className="flex items-center">
+            <button onClick={hideBanner} type="button" className="flex-shrink-0 inline-flex justify-center w-7 h-7 items-center text-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5">
+              <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+              </svg>
+              <span className="sr-only">Close banner</span>
+            </button>
+          </div>
+        </div>
+      )}
 
 
     </main>
