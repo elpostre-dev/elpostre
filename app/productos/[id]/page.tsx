@@ -31,6 +31,7 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
     const [currentImage, setCurrentImage] = useState<string>("");
     const [tamanio, setTamanio] = useState<any>("");
     const [variacion, setVariacion] = useState<any>(null);
+    const [categoria, setCategoria] = useState<string>("");
 
     useEffect(() => {
         const productoEncontrado = productos.find((p) => p.id === Number(id));
@@ -39,6 +40,24 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
             setCurrentImage(productoEncontrado.fotos[0]);
             setTamanio(productoEncontrado.variaciones[0].tamanio);
             setVariacion(productoEncontrado.variaciones[0]);
+            if (productoEncontrado.categoriaId == 1) {
+                setCategoria("pasteles");
+            } else if (productoEncontrado.categoriaId == 2) {
+                setCategoria("pays");
+            } else if (productoEncontrado.categoriaId == 3) {
+                setCategoria("brownies");
+            } else if (productoEncontrado.categoriaId == 4) {
+                setCategoria("galletas");
+            } else if (productoEncontrado.categoriaId == 5) {
+                setCategoria("keto");
+            } else if (productoEncontrado.categoriaId == 6) {
+                setCategoria("muffins-panques");
+            } else if (productoEncontrado.categoriaId == 7) {
+                setCategoria("individuales");
+            } else if (productoEncontrado.categoriaId == 8) {
+                setCategoria("temporada");
+            }
+
         }
     }, [id]);
 
@@ -76,6 +95,12 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
                                 </BreadcrumbItem>
                                 <BreadcrumbSeparator />
                                 <BreadcrumbItem>
+                                    <BreadcrumbLink asChild>
+                                        <Link href={`/productos/${categoria}`}>{producto.categoriaNombre}</Link>
+                                    </BreadcrumbLink>
+                                </BreadcrumbItem>
+                                <BreadcrumbSeparator />
+                                <BreadcrumbItem>
                                     <BreadcrumbPage>{producto.nombre}</BreadcrumbPage>
                                 </BreadcrumbItem>
                             </BreadcrumbList>
@@ -102,18 +127,16 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
                                 {/* Detalles */}
                                 <div>
 
-                                    <div className="flex flex-wrap items-start gap-4">
 
-                                        {/* nombre */}
-                                        <div>
-                                            <h2 className="text-2xl font-extrabold text-mainRojo-100 uppercase">{producto.nombre}</h2>
-                                            <p className="text-sm text-gray-400 mt-2">{producto.categoriaNombre}</p>
-                                        </div>
-
+                                    {/* nombre */}
+                                    <div>
+                                        <h2 className="text-2xl font-extrabold text-mainRojo-100 uppercase">{producto.nombre}</h2>
+                                        <p className="text-sm text-gray-400 mt-2">{producto.categoriaNombre}</p>
                                     </div>
 
                                     <hr className="my-8" />
 
+                                    {/* descripcion */}
                                     <div>
                                         <h3 className="text-lg font-bold text-gray-800">Descripción</h3>
                                         <p className="text-gray-400 text-sm mt-2">
@@ -123,9 +146,12 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
 
                                     <hr className="my-8" />
 
+                                    {/* precio y personas */}
                                     <div className="flex flex-wrap gap-4 items-start">
                                         <div>
-                                            <p className="text-gray-800 text-3xl font-bold">${variacion?.precio}</p>
+                                            <p className="text-gray-800 text-3xl font-bold">
+                                                {variacion?.precio > 0 ? `$${variacion?.precio}` : ``}
+                                            </p>
                                             <p className="text-gray-400 text-xl mt-1">
                                                 {variacion?.tamanio}
                                                 <br />
@@ -136,6 +162,7 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
 
                                     <hr className="my-8" />
 
+                                    {/* tamaño */}
                                     <div>
                                         <h3 className="text-lg font-bold text-gray-800">Tamaño</h3>
                                         <div className='mt-2 w-full'>
@@ -164,6 +191,7 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
 
                                     <hr className="my-8" />
 
+                                    {/* botones */}
                                     <div className="flex flex-wrap gap-4">
                                         <button type="button" className="min-w-[200px] px-4 py-3 bg-gray-800 hover:bg-gray-900 text-white text-sm font-bold rounded">Comprar ahora</button>
                                         <button type="button" className="min-w-[200px] px-4 py-2.5 border border-gray-800 bg-transparent hover:bg-gray-50 text-gray-800 text-sm font-bold rounded">Agregar al carrito</button>

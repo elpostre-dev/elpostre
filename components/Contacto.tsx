@@ -72,8 +72,8 @@ export default function Contacto() {
                 <div className="px-4 mx-auto max-w-screen-xl lg:px-6 pt-14">
                     <div className="mx-auto max-w-screen-sm text-center border-2 rounded-xl py-8 hover:shadow-xl hover:cursor-pointer">
                         <div className="flex items-center justify-center mx-auto">
-                            <h2 className="text-4xl font-extrabold mb-2 text-gray-900 mr-2">Encuéntranos en</h2>
-                            <img src="/logos/rappi_2.png" className="w-24" />
+                            <h2 className="text-2xl md:text-4xl font-extrabold mb-2 text-gray-900 mr-2">Encuéntranos en</h2>
+                            <img src="/logos/rappi_2.png" className="md:w-24 w-16" />
                         </div>
 
                         <p className="mb-6 font-light text-gray-500 md:text-lg">Pide a domicilio y recibelo de inmediato.</p>
