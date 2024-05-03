@@ -81,7 +81,7 @@ export default function Pedido() {
 
                             {/* Productos */}
                             {cartItems.map((item, index) => (
-                                <div className="flex flex-col min-[500px]:flex-row min-[500px]:items-center gap-5 py-6  border-b border-gray-200 group">
+                                <div className="flex flex-col min-[500px]:flex-row min-[500px]:items-center gap-5 py-6  border-b border-gray-200 group" key={item.nombre}>
 
                                     {/* photo */}
                                     <div className="w-full md:max-w-[126px]">
