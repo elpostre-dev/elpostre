@@ -23,6 +23,23 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { Button } from "@/components/ui/button"
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+
+import { useCart } from '@/lib/CartContext';
 
 export default function SingleProduct({ params }: { params: { id: string } }) {
 
@@ -30,16 +47,23 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
     const [producto, setProducto] = useState<Producto | null>(null);
     const [currentImage, setCurrentImage] = useState<string>("");
     const [tamanio, setTamanio] = useState<any>("");
-    const [variacion, setVariacion] = useState<any>(null);
     const [categoria, setCategoria] = useState<string>("");
+    const [productoAgregado, setProductoAgregado] = useState<Boolean>(false);
+
+    const [cartImage, setCartImage] = useState<string>("");
+    const [variacion, setVariacion] = useState<any>(null);
+    const [productName, setProductName] = useState<string>("");
+    const [cantidad, setCantidad] = useState<number>(1);
 
     useEffect(() => {
         const productoEncontrado = productos.find((p) => p.id === Number(id));
         if (productoEncontrado) {
             setProducto(productoEncontrado);
+            setCartImage(productoEncontrado.fotos[0]);
             setCurrentImage(productoEncontrado.fotos[0]);
             setTamanio(productoEncontrado.variaciones[0].tamanio);
             setVariacion(productoEncontrado.variaciones[0]);
+            setProductName(productoEncontrado.nombre);
             if (productoEncontrado.categoriaId == 1) {
                 setCategoria("pasteles");
             } else if (productoEncontrado.categoriaId == 2) {
@@ -57,7 +81,6 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
             } else if (productoEncontrado.categoriaId == 8) {
                 setCategoria("temporada");
             }
-
         }
     }, [id]);
 
@@ -65,6 +88,34 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
         const variacionNueva = producto?.variaciones.find((v) => v.tamanio === tamanio);
         setVariacion(variacionNueva);
     }, [tamanio]);
+
+    const { addToCart } = useCart();
+    const router = useRouter();
+
+    const handleAddToCart = () => {
+        addToCart({
+            productId: Number(id),
+            nombre: productName,
+            cantidad: cantidad,
+            photo: cartImage,
+            variacion: {
+                tamanio: variacion.tamanio,
+                precio: variacion.precio,
+                personas: variacion.personas,
+            }
+        });
+        toast.success('Producto agregado exitosamente', {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            // theme: "colored",
+        });
+        // router.push("/pedido");
+    };
 
 
     // https://readymadeui.com/tailwind/ecommerce/ecommerce-product-view-template
@@ -162,8 +213,28 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
 
                                     <hr className="my-8" />
 
+                                    {/* cantidad */}
+                                    <div className=''>
+                                        <h3 className="text-lg font-bold text-gray-800">Cantidad</h3>
+                                        <div className="relative flex items-center max-w-[8rem] mt-2">
+                                            <button type="button" onClick={() => setCantidad(cantidad - 1)} disabled={cantidad == 1} className="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none">
+                                                <svg className="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                                </svg>
+                                            </button>
+                                            <input type="text" className="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5"
+                                                placeholder="999" value={cantidad} required />
+                                            <button type="button" onClick={() => setCantidad(cantidad + 1)} disabled={cantidad == 10} className="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none">
+                                                <svg className="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        {/* <p id="helper-text-explanation" className="mt-2 text-sm text-gray-500">Please select a 5 digit number from 0 to 9.</p> */}
+                                    </div>
+
                                     {/* tamaño */}
-                                    <div>
+                                    <div className='mt-6'>
                                         <h3 className="text-lg font-bold text-gray-800">Tamaño</h3>
                                         <div className='mt-2 w-full'>
                                             <Select
@@ -191,11 +262,49 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
 
                                     <hr className="my-8" />
 
-                                    {/* botones */}
-                                    <div className="flex flex-wrap gap-4">
-                                        <button type="button" className="min-w-[200px] px-4 py-3 bg-gray-800 hover:bg-gray-900 text-white text-sm font-bold rounded">Comprar ahora</button>
-                                        <button type="button" className="min-w-[200px] px-4 py-2.5 border border-gray-800 bg-transparent hover:bg-gray-50 text-gray-800 text-sm font-bold rounded">Agregar al carrito</button>
-                                    </div>
+                                    {/* Boton agregar - dialog success */}
+                                    <Dialog>
+                                        <DialogTrigger asChild>
+                                            <div className="flex flex-wrap gap-4">
+                                                <button type="button" onClick={handleAddToCart} className="min-w-[200px] px-4 py-3 bg-gray-800 hover:bg-gray-500 hover:shadow-lg focus:ring-2 text-white text-sm font-bold rounded">
+                                                    Agregar al carrito
+                                                </button>
+                                                <ToastContainer />
+                                            </div>
+                                        </DialogTrigger>
+                                        <DialogContent className="sm:max-w-md p-4 bg-white rounded-lg shadow">
+                                            <DialogHeader>
+                                                <DialogTitle style={{ display: 'flex', alignItems: 'center' }}>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style={{ width: '24px', height: '24px', marginRight: '8px', color: 'green' }}>
+                                                        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
+                                                    </svg>
+                                                    Producto agregado
+                                                </DialogTitle>
+                                            </DialogHeader>
+                                            <hr />
+                                            <div className="flex my-4">
+                                                {/* Product Image */}
+                                                <div className="w-1/3">
+                                                    <img src={cartImage} alt={producto.nombre} className="rounded-lg shadow-lg" />
+                                                </div>
+                                                {/* Product Details */}
+                                                <div className="w-2/3 ml-4">
+                                                    <h3 className="text-lg font-semibold">{producto.nombre}</h3>
+                                                    <p>Cantidad: {cantidad}</p>
+                                                    <p>Variación: {variacion?.tamanio}</p>
+                                                    <p>Total: ${variacion?.precio * cantidad}</p>
+                                                </div>
+                                            </div>
+                                            <DialogFooter className="flex justify-center mx-auto">
+                                                <Link href={'/productos'} className="px-4 py-3 m-2 bg-gray-800 hover:bg-gray-600 hover:shadow-lg focus:ring-2 text-white text-sm font-bold rounded">
+                                                    Seguir comprando
+                                                </Link>
+                                                <Link href={'/pedido'} className="text-center px-4 py-3 m-2 bg-gray-200 hover:bg-gray-300 hover:shadow-lg focus:ring-2 text-gray-800 text-sm font-bold rounded">
+                                                    Ver carrito
+                                                </Link>
+                                            </DialogFooter>
+                                        </DialogContent>
+                                    </Dialog>
 
                                 </div>
                             </div>
