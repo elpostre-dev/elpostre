@@ -8,7 +8,7 @@ interface Variacion {
     personas: string;
 }
 
-interface CartItem {
+export interface CartItem {
     productId: number;
     nombre: string;
     cantidad: number;
