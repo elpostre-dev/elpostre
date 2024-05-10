@@ -55,7 +55,7 @@ export default function CartItemProduct({ item }: { item: CartItem }) {
 
 
                     {/* cantidad */}
-                    <div className="flex items-center justify-between w-full h-full max-md:mt-3 md:col-span-2">
+                    <div className="flex items-center justify-between w-full md:h-full max-md:mt-3 md:col-span-2">
 
                         <div className="flex items-center h-full mx-auto md:mx-0">
 
@@ -102,12 +102,12 @@ export default function CartItemProduct({ item }: { item: CartItem }) {
                     </div>
 
                     {/* precio */}
-                    <div className="flex items-center justify-start max-md:mt-3 h-full md:col-span-1 mx-auto md:mx-0">
+                    <div className="flex items-center justify-start max-md:mt-3 md:h-full md:col-span-1 mx-auto md:mx-0">
                         <p className="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300 group-hover:text-mainRojo-100">{formatCurrency(item.variacion.precio * item.cantidad)}</p>
                     </div>
 
                     {/* borrar */}
-                    <div className="flex items-center md:justify-center max-md:mt-3 h-full md:col-span-1 mx-auto md:mx-0">
+                    <div className="flex items-center md:justify-center max-md:mt-3 md:h-full md:col-span-1 mx-auto md:mx-0">
                         <button onClick={handleRemoveItem} className="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-800 hover:shadow-lg text-white text-sm font-medium rounded-md">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 md:m-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
