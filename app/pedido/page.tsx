@@ -32,6 +32,38 @@ export default function Pedido() {
     const total = getTotal();
     const [loadedCart, setLoadedCart] = useState(false);
 
+    const [code, setCode] = useState('');
+    const [message, setMessage] = useState('');
+    const [discount, setDiscount] = useState(0);
+    const [isCodeValid, setIsCodeValid] = useState(false);
+    const [searchingDiscount, setSearchingDiscount] = useState(false);
+
+    const validateCode = async () => {
+        setSearchingDiscount(true);
+        try {
+            const response = await fetch(`/api/validate-discounts`, {
+                method: "POST",
+                body: JSON.stringify({ code: code })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setMessage(`Código válido. Descuento del ${data.percentage}% aplicado.`);
+                setIsCodeValid(true);
+                setDiscount(data.percentage / 100);
+                setSearchingDiscount(false);
+            } else {
+                setMessage('Código inválido. Intente de nuevo.');
+                setIsCodeValid(false);
+                setDiscount(0);
+                setSearchingDiscount(false);
+            }
+
+        } catch (error) {
+            console.log('error', error);
+        }
+    };
+
     useEffect(() => {
         if (cartItems) {
             setLoadedCart(true);
@@ -184,41 +216,78 @@ export default function Pedido() {
 
                                     <div className="mt-8">
 
-                                        <div className="flex items-center justify-between pb-6">
-                                            <p className="font-normal text-lg leading-8 text-black">{cant} {cant > 1 ? "Productos" : "Producto"}</p>
-                                            <p className="font-medium text-lg leading-8 text-black">{formatCurrency(total)} MXN</p>
+                                        <div className="flex items-center justify-between pb-2">
+                                            <p className="font-light text-lg leading-8 text-black">{cant} {cant > 1 ? "Productos" : "Producto"}</p>
+                                            <p className="font-light text-lg leading-8 text-black">{formatCurrency(total)} MXN</p>
                                         </div>
 
-                                        <form>
-                                            <label className="flex items-center mb-1.5 text-gray-400 text-sm font-medium">
+                                        {discount > 0 &&
+                                            <>
+                                                <div className="flex items-center justify-between pb-2">
+                                                    <p className="font-light text-lg leading-8 text-black">Descuento {discount * 100}%</p>
+                                                    <p className="font-light text-lg leading-8 text-black">-{formatCurrency(total * discount)} MXN</p>
+                                                </div>
+
+                                                <div className="flex items-center justify-between pb-6">
+                                                    <p className="font-bold text-lg leading-8 text-black">Total</p>
+                                                    <p className="font-bold text-lg leading-8 text-black">{formatCurrency(total * (1 - discount))} MXN</p>
+                                                </div>
+                                            </>
+                                        }
+
+                                        <div>
+
+                                            {/* DESCUENTO */}
+                                            <label className="flex items-center mb-1.5 pt-4 text-gray-400 text-sm font-medium">
                                                 Código de descuento
                                             </label>
                                             <div className="flex pb-4 w-full">
                                                 <div className="relative w-full ">
-                                                    <div className=" absolute left-0 top-0 py-2.5 px-4 text-gray-300">
-
-                                                    </div>
                                                     <input type="text"
                                                         className="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400 "
-                                                        placeholder="xxxx xxxx xxxx" />
+                                                        placeholder="Ingresa código..."
+                                                        value={code}
+                                                        disabled={searchingDiscount || isCodeValid}
+                                                        onChange={(e) => setCode(e.target.value)} />
                                                 </div>
                                             </div>
 
+                                            {message && <p className="mb-2 italic">{message}</p>}
+
                                             <div className="flex items-center border-b border-gray-200">
-                                                <button onClick={() => console.log('validar')} className="rounded-lg w-full bg-black py-2.5 px-4 text-white text-sm font-semibold text-center mb-8 transition-all duration-500 hover:bg-black/60 hover:shadow-lg">
-                                                    Validar
+                                                <button
+                                                    type="button"
+                                                    onClick={validateCode}
+                                                    disabled={searchingDiscount || code.length < 0 || isCodeValid}
+                                                    className="rounded-lg w-full bg-black py-2.5 px-4 text-white text-sm font-semibold text-center mb-8 transition-all duration-500 hover:bg-black/60 hover:shadow-lg"
+                                                >
+                                                    {
+                                                        searchingDiscount ?
+                                                            'Validando...'
+                                                            :
+                                                            isCodeValid ?
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 mx-auto">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                                </svg>
+                                                                :
+                                                                'Validar'
+                                                    }
                                                 </button>
                                             </div>
 
+
+                                            {/* PAGO */}
                                             <div className="flex items-center justify-between py-8">
-                                                <p className="font-medium text-xl leading-8 text-black">{cant} {cant > 1 ? "Productos" : "Producto"}</p>
-                                                <p className="font-semibold text-xl leading-8 text-mainRojo-100">{formatCurrency(total)} MXN</p>
+                                                <p className="font-medium text-xl leading-8 text-black">Total</p>
+                                                <p className="font-semibold text-xl leading-8 text-mainRojo-100">{formatCurrency(
+                                                    discount > 0 ? total * (1 - discount) : total
+                                                )} MXN</p>
                                             </div>
 
-                                            <button onClick={() => console.log('pagar')} className="w-full text-center bg-mainRojo-100 rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-red-400 hover:shadow-lg">
+                                            <button className="w-full text-center bg-mainRojo-100 rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-red-400 hover:shadow-lg">
                                                 Ir al pago
                                             </button>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

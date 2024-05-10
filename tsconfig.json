@@ -11,11 +11,13 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
+    "target": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "forceConsistentCasingInFileNames": true,
     "plugins": [
       {
         "name": "next"
@@ -31,7 +33,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "app/api/validate-discounts/route.js"
   ],
   "exclude": [
     "node_modules"
