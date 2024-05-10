@@ -21,7 +21,7 @@ const links = [
     },
     // {
     //     name: 'Haz tu pedido',
-    //     href: '/pedido',
+    //     href: '/carrito',
     // },
 ];
 
@@ -46,7 +46,7 @@ export default function NavBar() {
                 <div>
                     {/* carrito */}
                     <Link
-                        href="/pedido"
+                        href="/carrito"
                         className="inline-flex items-center p-2 h-10 mr-3 justify-center text-sm text-gray-700 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
                     >
                         <span className="sr-only">Carrito</span>
@@ -88,7 +88,7 @@ export default function NavBar() {
                         {/* carrito */}
                         <li className='hidden md:block'>
                             <Link
-                                href={'/pedido'}
+                                href={'/carrito'}
                                 className='flex items-center justify-center py-1 px-3 hover:bg-transparent hover:border-mainRojo-100 border border-gray-700 rounded text-md text-gray-700 hover:text-mainRojo-100 shadow hover:shadow-lg'
                             >
                                 <span className="relative inline-flex items-center">

@@ -115,7 +115,7 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
             progress: undefined,
             // theme: "colored",
         });
-        // router.push("/pedido");
+        // router.push("/carrito");
     };
 
 
@@ -303,7 +303,7 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
                                         <hr className="my-8" />
 
                                         {/* Boton agregar - dialog success */}
-                                        {variacion?.precio > 0 ?
+                                        {producto?.categoriaId !== 8 ?
                                             <Dialog>
                                                 <DialogTrigger asChild>
                                                     <div className="flex flex-wrap gap-4">
@@ -339,7 +339,7 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
                                                         <Link href={'/productos'} className="px-4 py-3 m-2 bg-gray-800 hover:bg-gray-600 hover:shadow-lg focus:ring-2 text-white text-sm font-bold rounded">
                                                             Seguir comprando
                                                         </Link>
-                                                        <Link href={'/pedido'} className="text-center px-4 py-3 m-2 bg-gray-200 hover:bg-gray-300 hover:shadow-lg focus:ring-2 text-gray-800 text-sm font-bold rounded">
+                                                        <Link href={'/carrito'} className="text-center px-4 py-3 m-2 bg-gray-200 hover:bg-gray-300 hover:shadow-lg focus:ring-2 text-gray-800 text-sm font-bold rounded">
                                                             Ver carrito
                                                         </Link>
                                                     </DialogFooter>

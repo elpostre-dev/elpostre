@@ -24,7 +24,7 @@ export default function Footer() {
                         <a href="/nosotros" className="mr-4 hover:underline md:mr-6 ">Nosotros</a>
                     </li>
                     <li>
-                        <a href="/pedido" className="mr-4 hover:underline md:mr-6 ">Haz tu pedido</a>
+                        <a href="/carrito" className="mr-4 hover:underline md:mr-6 ">Haz tu pedido</a>
                     </li>
                 </ul>
 
