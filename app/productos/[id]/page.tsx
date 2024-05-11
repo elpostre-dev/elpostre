@@ -222,7 +222,7 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
                                         {/* nombre */}
                                         <div>
                                             <h2 className="text-2xl font-extrabold text-mainRojo-100 uppercase">{producto.nombre}</h2>
-                                            <p className="text-sm text-gray-400 mt-2">{producto.categoriaNombre}</p>
+                                            <p className="text-md text-gray-400 mt-2">{producto.categoriaNombre}</p>
                                         </div>
 
                                         <hr className="my-8" />
@@ -230,7 +230,7 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
                                         {/* descripcion */}
                                         <div>
                                             <h3 className="text-lg font-bold text-gray-800">Descripción</h3>
-                                            <p className="text-gray-400 text-sm mt-2">
+                                            <p className="text-gray-400 text-lg mt-2">
                                                 {producto.descripcion}
                                             </p>
                                         </div>

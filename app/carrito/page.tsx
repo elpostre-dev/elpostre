@@ -52,6 +52,7 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 
 import { format } from "date-fns";
+import { formatInTimeZone } from 'date-fns-tz'
 import { es } from 'date-fns/locale'; // Importa el locale español
 
 
@@ -243,6 +244,7 @@ export default function Carrito() {
                         className=" relative z-10 after:contents-[''] after:absolute after:z-0 after:h-full xl:after:w-1/3 after:top-0 after:right-0 after:bg-gray-50">
                         <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto relative z-10">
                             <div className="grid grid-cols-12">
+
                                 <div className="col-span-12 xl:col-span-8 lg:pr-8 pt-14 pb-8 lg:py-20 w-full max-xl:max-w-3xl max-xl:mx-auto">
 
                                     {/* CARRITO */}
@@ -454,13 +456,16 @@ export default function Carrito() {
                                                                 onSelect={setDate}
                                                                 disabled={(date) => {
                                                                     const today = new Date();
+                                                                    formatInTimeZone(today, 'America/Monterrey', 'yyyy-MM-dd HH:mm:ss zzz');
+
                                                                     const startDate = new Date();
-                                                                    startDate.setDate(today.getDate() + 1); // Sets start date to 2 days from now
+                                                                    startDate.setDate(today.getDate());
+                                                                    formatInTimeZone(startDate, 'America/Monterrey', 'yyyy-MM-dd HH:mm:ss zzz');
 
                                                                     const endDate = new Date();
-                                                                    endDate.setDate(today.getDate() + 9); // Sets end date to 7 days from now
+                                                                    endDate.setDate(today.getDate() + 9);
+                                                                    formatInTimeZone(endDate, 'America/Monterrey', 'yyyy-MM-dd HH:mm:ss zzz');
 
-                                                                    // Disable dates that are before the start date or after the end date
                                                                     return date < startDate || date > endDate;
                                                                 }}
                                                                 initialFocus
@@ -614,6 +619,7 @@ export default function Carrito() {
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </section>
