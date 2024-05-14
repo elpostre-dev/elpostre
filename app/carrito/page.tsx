@@ -13,6 +13,10 @@ import { formatCurrency } from "@/lib/utils";
 import { useState, useEffect, use } from "react";
 import { cn } from "@/lib/utils"
 
+import { loadStripe } from "@stripe/stripe-js";
+
+const asyncStripe = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? '');
+
 import {
     AlertDialog,
     AlertDialogAction,
@@ -165,25 +169,142 @@ export default function Carrito() {
         })
     };
 
-    const handleFinalizarCompra = () => {
+    // const router = useRouter();
+
+    const handleFinalizarCompra = async () => {
+
         if (name.length === 0 || email.length === 0 || phone.length === 0 || pickupPerson.length === 0 || !date || pickupTime.length === 0 || emailError || phoneError) {
+
             setEmptyFieldsError(true);
+
         } else {
+
             setEmptyFieldsError(false);
-            console.log('=====================================');
-            console.log('name', name)
-            console.log('email', email)
-            console.log('phone', phone)
-            console.log('pickupPerson', pickupPerson)
+            // console.log('=====================================');
+            // console.log('name', name)
+            // console.log('email', email)
+            // console.log('phone', phone)
+            // console.log('pickupPerson', pickupPerson)
+            const formattedDate = '';
             if (date) {
                 const formattedDate = format(date, "EEEE d 'de' MMMM, yyyy", { locale: es });
-                console.log('date', formattedDate); // Ejemplo: 'martes 3 de abril, 2024'
+                // console.log('date', formattedDate); // Ejemplo: 'martes 3 de abril, 2024'
             }
-            console.log('pickupTime', pickupTime)
-            console.log('messageClient', messageClient)
-            // setFinalizarCompra(true);
+            // console.log('pickupTime', pickupTime)
+            // console.log('messageClient', messageClient)
+            // console.log('=====================================');
+
+            const temp_prods = cartItems.map((item) => {
+                return {
+                    id: item.productId,
+                    nombre: item.nombre,
+                    cantidad: item.cantidad,
+                    precio: item.variacion.precio,
+                    tamanio: item.variacion.tamanio,
+                }
+            });
+
+            const order_info = {
+                total: total * (1 - discount),
+                name,
+                email,
+                phone,
+                pickupPerson,
+                formattedDate,
+                pickupTime,
+                messageClient,
+            }
+
+            try {
+                const stripe = await asyncStripe;
+                const res = await fetch(`/api/stripe/session`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        products: temp_prods,
+                        orderInfo: order_info,
+                        code,
+                    })
+                });
+
+                if (res.ok) {
+                    console.log('response is ok')
+                } else {
+                    console.log('response is NOT ok')
+                }
+
+                const { sessionId } = await res.json();
+                if (stripe) {
+                    const { error } = await stripe.redirectToCheckout({ sessionId });
+                    console.log(error);
+                    if (error) {
+                        // router.push("/error");
+                        console.log("Stripe error 1", error.message)
+                    }
+                } else {
+                    console.log("Stripe is null");
+                }
+            } catch (err) {
+                console.log(err);
+                // router.push("/error");
+                console.log("Stripe error 2")
+            }
         }
     }
+
+    const handler = async () => {
+
+        const temp_prods = cartItems.map((item) => {
+            return {
+                id: item.productId,
+                nombre: item.nombre,
+                cantidad: item.cantidad,
+                precio: item.variacion.precio,
+                tamanio: item.variacion.tamanio,
+            }
+        });
+
+        try {
+            const stripe = await asyncStripe;
+            const res = await fetch(`/api/stripe/session`, {
+                method: "POST",
+                body: JSON.stringify({
+                    products: temp_prods,
+                    total: total * (1 - discount),
+                    name,
+                    email,
+                    phone,
+                    pickupPerson,
+                    date,
+                    pickupTime,
+                    messageClient,
+                    code,
+                })
+            });
+
+            if (res.ok) {
+                // const data = await res.json();
+                console.log('response is ok')
+            } else {
+                console.log('response is NOT ok')
+            }
+
+            const { sessionId } = await res.json();
+            if (stripe) {
+                const { error } = await stripe.redirectToCheckout({ sessionId });
+                console.log(error);
+                if (error) {
+                    // router.push("/error");
+                    console.log("Stripe error 1", error.message)
+                }
+            } else {
+                console.log("Stripe is null");
+            }
+        } catch (err) {
+            console.log(err);
+            // router.push("/error");
+            console.log("Stripe error 2")
+        }
+    };
 
     return (
         <main className="flex min-h-screen flex-col">
@@ -256,12 +377,12 @@ export default function Carrito() {
                                         <CollapsibleTrigger className="flex items-center justify-between py-6 px-4 cursor-pointer w-full hover:bg-gray-100">
                                             <h2 className="font-manrope font-bold text-3xl leading-10 text-black">Carrito de compras</h2>
                                             {isCarritoOpen ?
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                                 </svg>
                                                 :
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
                                                 </svg>
 
                                             }
@@ -324,7 +445,7 @@ export default function Carrito() {
                                                             fill="none">
                                                             <path
                                                                 d="M12.7757 5.5L18.3319 11.0562M18.3319 11.0562L12.7757 16.6125M18.3319 11.0562L1.83203 11.0562"
-                                                                stroke="gray" stroke-width="1.6" stroke-linecap="round" />
+                                                                stroke="gray" strokeWidth="1.6" strokeLinecap="round" />
                                                         </svg>
                                                     </Link>
                                                 </div>
@@ -345,12 +466,12 @@ export default function Carrito() {
                                         <CollapsibleTrigger className="flex items-center justify-between py-6 px-4 cursor-pointer w-full hover:bg-gray-100">
                                             <h2 className="font-manrope font-bold text-3xl leading-10 text-black">Información del pedido</h2>
                                             {isDatosClienteOpen ?
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                                 </svg>
                                                 :
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
                                                 </svg>
 
                                             }
@@ -442,8 +563,8 @@ export default function Carrito() {
                                                                 )}
                                                             >
                                                                 {/* <CalendarIcon className="mr-2 h-4 w-4" /> */}
-                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="mr-2 h-4 w-4">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="mr-2 h-4 w-4">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
                                                                 </svg>
 
                                                                 {date ? format(date, "PPP") : <span>Selecciona fecha...</span>}
@@ -587,8 +708,8 @@ export default function Carrito() {
                                                                 'Validando...'
                                                                 :
                                                                 isCodeValid ?
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 mx-auto">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 mx-auto">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                                                     </svg>
                                                                     :
                                                                     'Validar'
@@ -606,8 +727,8 @@ export default function Carrito() {
                                                 </div>
 
                                                 {emptyFieldsError && <p className="mb-2 italic text-red-500 flex">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 mr-2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 mr-2">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
                                                     </svg>
                                                     Favor de llenar correctamente todos los campos requeridos
                                                 </p>}

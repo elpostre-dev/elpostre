@@ -67,12 +67,12 @@ export default function CartItemProduct({ item }: { item: CartItem }) {
                                 <svg className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                                     xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                     viewBox="0 0 22 22" fill="none">
-                                    <path d="M16.5 11H5.5" stroke="" stroke-width="1.6"
-                                        stroke-linecap="round" />
-                                    <path d="M16.5 11H5.5" stroke="" stroke-opacity="0.2" stroke-width="1.6"
-                                        stroke-linecap="round" />
-                                    <path d="M16.5 11H5.5" stroke="" stroke-opacity="0.2" stroke-width="1.6"
-                                        stroke-linecap="round" />
+                                    <path d="M16.5 11H5.5" stroke="" strokeWidth="1.6"
+                                        strokeLinecap="round" />
+                                    <path d="M16.5 11H5.5" stroke="" strokeOpacity="0.2" strokeWidth="1.6"
+                                        strokeLinecap="round" />
+                                    <path d="M16.5 11H5.5" stroke="" strokeOpacity="0.2" strokeWidth="1.6"
+                                        strokeLinecap="round" />
                                 </svg>
                             </button>
 
@@ -89,12 +89,12 @@ export default function CartItemProduct({ item }: { item: CartItem }) {
                                 <svg className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                                     xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                     viewBox="0 0 22 22" fill="none">
-                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" stroke-width="1.6"
-                                        stroke-linecap="round" />
-                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" stroke-opacity="0.2"
-                                        stroke-width="1.6" stroke-linecap="round" />
-                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" stroke-opacity="0.2"
-                                        stroke-width="1.6" stroke-linecap="round" />
+                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" strokeWidth="1.6"
+                                        strokeLinecap="round" />
+                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" strokeOpacity="0.2"
+                                        strokeWidth="1.6" strokeLinecap="round" />
+                                    <path d="M11 5.5V16.5M16.5 11H5.5" stroke="" strokeOpacity="0.2"
+                                        strokeWidth="1.6" strokeLinecap="round" />
                                 </svg>
                             </button>
 
@@ -110,7 +110,7 @@ export default function CartItemProduct({ item }: { item: CartItem }) {
                     <div className="flex items-center md:justify-center max-md:mt-3 md:h-full md:col-span-1 mx-auto md:mx-0">
                         <button onClick={handleRemoveItem} className="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-800 hover:shadow-lg text-white text-sm font-medium rounded-md">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 md:m-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                             </svg>
                             <span className="block md:hidden">Eliminar</span>
                         </button>
