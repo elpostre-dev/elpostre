@@ -54,20 +54,20 @@ export default function Home() {
   // Imágenes y textos para el carousel de promociones
   const images = [
     {
-      url: "/home.jpg",
-      title: '"Coolest t-shirts in town"',
-      description: "A professonal website drives sales. Create a beautiful website to impress and engage new customers and establish your business online",
+      url: "/Individuales/COPITAS.jpg",
+      title: 'Martes Tranquilo',
+      description: "¡Disfruta de un pastel mediano o grande y recibe una copita gratis! Solo válida en sucursal los martes.",
     },
     {
-      url: "/home.jpg",
-      title: "Encuéntranos en tienda",
-      description: "A professonal website drives sales. Create a beautiful website to impress and engage new customers and establish your business online",
+      url: "/sucursal.jpg",
+      title: "Descuento de Cumpleaños",
+      description: "Celebra tu cumpleaños con un 20% de descuento en cualquier pastel grande. Solo válida en sucursal con identificación.",
     },
-    {
-      url: "/home.jpg",
-      title: "Autenticidad, comodidad y simpleza",
-      description: "A professonal website drives sales. Create a beautiful website to impress and engage new customers and establish your business online",
-    },
+    // {
+    //   url: "/home.jpg",
+    //   title: "Autenticidad, comodidad y simpleza",
+    //   description: "A professonal website drives sales. Create a beautiful website to impress and engage new customers and establish your business online",
+    // },
   ];
 
   // Estado para controlar la visibilidad del banner
@@ -104,7 +104,7 @@ export default function Home() {
           // backgroundPosition: "center",
           // backgroundAttachment: "fixed",
           // opacity: "0.5",
-          height: "90vh",
+          height: "91vh",
         }}
       >
         {/* <div className="px-4 mx-auto max-w-screen-xl text-center flex flex-col items-center justify-center h-full">
@@ -157,7 +157,7 @@ export default function Home() {
       </div>
 
 
-      {/* CAROUSEL */}
+      {/* CAROUSEL promociones */}
       <div className="mx-auto w-full">
 
         <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:max-w-7xl lg:px-8 text-center">
@@ -178,7 +178,7 @@ export default function Home() {
             {images.map((image, index) => (
               <CarouselItem
                 key={index}
-                className="bg-center bg-no-repeat bg-blend-multiply bg-neutral-500 bg-cover"
+                className="bg-center bg-no-repeat bg-blend-multiply bg-neutral-600 bg-cover"
                 style={{
                   backgroundImage: `url(${image.url})`,
                   // backgroundSize: "cover",
@@ -192,7 +192,7 @@ export default function Home() {
                     <h1 className="text-4xl lg:text-5xl xl:text-6xl text-center font-black text-gray-100">
                       {image.title}
                     </h1>
-                    <p className="mt-5 sm:mt-10 lg:w-10/12 text-gray-400 font-normal text-center text-sm sm:text-lg">
+                    <p className="mt-5 sm:mt-10 lg:w-10/12 text-gray-400 font-normal text-center sm:text-xl text-lg">
                       {image.description}
                     </p>
                   </div>

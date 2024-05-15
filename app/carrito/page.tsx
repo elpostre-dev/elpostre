@@ -91,11 +91,10 @@ export default function Carrito() {
     const [messageClient, setMessageClient] = useState('');
 
     const horas = [
-        "10:00 AM - 12:00 PM",
-        "12:00 PM - 02:00 PM",
-        "02:00 PM - 04:00 PM",
-        "04:00 PM - 06:00 PM",
-        "06:00 PM - 08:00 PM",
+        "11:00 AM - 1:00 PM",
+        "1:00 PM - 03:00 PM",
+        "03:00 PM - 05:00 PM",
+        "05:00 PM - 07:00 PM",
     ];
 
     const handleEmailChange = () => {
@@ -174,26 +173,13 @@ export default function Carrito() {
     const handleFinalizarCompra = async () => {
 
         if (name.length === 0 || email.length === 0 || phone.length === 0 || pickupPerson.length === 0 || !date || pickupTime.length === 0 || emailError || phoneError) {
-
             setEmptyFieldsError(true);
-
         } else {
-
             setEmptyFieldsError(false);
-            // console.log('=====================================');
-            // console.log('name', name)
-            // console.log('email', email)
-            // console.log('phone', phone)
-            // console.log('pickupPerson', pickupPerson)
-            const formattedDate = '';
-            if (date) {
-                const formattedDate = format(date, "EEEE d 'de' MMMM, yyyy", { locale: es });
-                // console.log('date', formattedDate); // Ejemplo: 'martes 3 de abril, 2024'
-            }
-            // console.log('pickupTime', pickupTime)
-            // console.log('messageClient', messageClient)
-            // console.log('=====================================');
-
+            // const formattedDate = '';
+            // if (date) {
+            //     const formattedDate = format(date, "EEEE d 'de' MMMM, yyyy", { locale: es });
+            // }
             const temp_prods = cartItems.map((item) => {
                 return {
                     id: item.productId,
@@ -205,15 +191,19 @@ export default function Carrito() {
             });
 
             const order_info = {
-                total: total * (1 - discount),
+                total: total,
                 name,
                 email,
                 phone,
                 pickupPerson,
-                formattedDate,
+                formattedDate: format(date, "EEEE d 'de' MMMM, yyyy", { locale: es }),
                 pickupTime,
                 messageClient,
+                discount,
             }
+
+            localStorage.setItem('orderInfo', JSON.stringify(order_info));
+            localStorage.setItem('cartItems', JSON.stringify(temp_prods));
 
             try {
                 const stripe = await asyncStripe;
@@ -251,60 +241,6 @@ export default function Carrito() {
         }
     }
 
-    const handler = async () => {
-
-        const temp_prods = cartItems.map((item) => {
-            return {
-                id: item.productId,
-                nombre: item.nombre,
-                cantidad: item.cantidad,
-                precio: item.variacion.precio,
-                tamanio: item.variacion.tamanio,
-            }
-        });
-
-        try {
-            const stripe = await asyncStripe;
-            const res = await fetch(`/api/stripe/session`, {
-                method: "POST",
-                body: JSON.stringify({
-                    products: temp_prods,
-                    total: total * (1 - discount),
-                    name,
-                    email,
-                    phone,
-                    pickupPerson,
-                    date,
-                    pickupTime,
-                    messageClient,
-                    code,
-                })
-            });
-
-            if (res.ok) {
-                // const data = await res.json();
-                console.log('response is ok')
-            } else {
-                console.log('response is NOT ok')
-            }
-
-            const { sessionId } = await res.json();
-            if (stripe) {
-                const { error } = await stripe.redirectToCheckout({ sessionId });
-                console.log(error);
-                if (error) {
-                    // router.push("/error");
-                    console.log("Stripe error 1", error.message)
-                }
-            } else {
-                console.log("Stripe is null");
-            }
-        } catch (err) {
-            console.log(err);
-            // router.push("/error");
-            console.log("Stripe error 2")
-        }
-    };
 
     return (
         <main className="flex min-h-screen flex-col">

@@ -24,15 +24,13 @@ export const POST = async (request) => {
 
     try {
 
-        const date = new Date().toISOString();
-
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ["card"], // Only allow card payments
             line_items: stripe_products,
             mode: "payment",
             discounts: body?.code ? [{ coupon: body.code }] : [],
             cancel_url: `${host}/carrito`,
-            success_url: `${host}/success`,
+            success_url: `${host}/success?session_id={CHECKOUT_SESSION_ID}`,
         });
 
         return new Response(JSON.stringify({ sessionId: session.id }), { status: 200 });
