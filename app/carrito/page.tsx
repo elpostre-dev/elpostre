@@ -119,9 +119,10 @@ export default function Carrito() {
         }
     };
 
-    const validatePhone = (phoneNum: any) => {
-        const isValid = /^\d+$/.test(phoneNum);
-        return (isValid && phoneNum.length >= 7);
+    const validatePhone = (phoneNum: any): boolean => {
+        // Regular expression to allow digits, spaces, parentheses, and the plus sign
+        const isValid = /^[\d\s()+-]+$/.test(phoneNum);
+        return isValid && phoneNum.replace(/[\s()+-]/g, '').length >= 7;
     };
 
     const validateCode = async () => {
