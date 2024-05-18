@@ -24,7 +24,17 @@ export const POST = async (request) => {
         // Verificar si el session_id ya existe
         const existingOrder = await client.query('SELECT * FROM orders WHERE session_id = $1', [session_id]);
         if (existingOrder.rows.length > 0) {
-            return new Response(JSON.stringify({ order: existingOrder.rows[0] }), { status: 200 });
+            const order = existingOrder.rows[0];
+
+            // Fetch client info
+            const clientResult = await client.query('SELECT * FROM clients WHERE client_id = $1', [order.client_id]);
+            const clientInfo = clientResult.rows[0];
+
+            // Fetch order items
+            const orderItemsResult = await client.query('SELECT * FROM order_items WHERE order_id = $1', [order.order_id]);
+            const orderItems = orderItemsResult.rows;
+
+            return new Response(JSON.stringify({ order, client: clientInfo, items: orderItems }), { status: 200 });
         }
 
         // Start a transaction
@@ -56,10 +66,14 @@ export const POST = async (request) => {
         );
         await Promise.all(orderItemsPromises);
 
+        // Fetch inserted order items
+        const orderItemsResult = await client.query('SELECT * FROM order_items WHERE order_id = $1', [order.order_id]);
+        const orderItems = orderItemsResult.rows;
+
         // Commit transaction
         await client.query('COMMIT');
 
-        return new Response(JSON.stringify({ order }), { status: 200 });
+        return new Response(JSON.stringify({ order, client: { client_id: clientId, name, email, phone }, items: orderItems }), { status: 200 });
     } catch (err) {
         // Rollback transaction in case of error
         await client.query('ROLLBACK');

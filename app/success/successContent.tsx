@@ -3,6 +3,30 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useCart } from "@/lib/CartContext";
+import { formatCurrency } from '@/lib/utils';
+
+import { productos } from '@/data/productos';
+
+import { Button } from "@/components/ui/button"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+
+const bestsellerIds = [2, 29, 16, 14];
+const bestsellers = productos.filter(producto => bestsellerIds.includes(producto.id));
+
+type Client = {
+    client_id: string;
+    name: string;
+    email: string;
+    phone: string;
+};
 
 type Order = {
     order_id: string;
@@ -17,14 +41,28 @@ type Order = {
     datetime_ordered: string;
     total: number;
     session_id: string;
-    // Add other fields as necessary
+};
+
+type OrderItem = {
+    item_id: string;
+    order_id: string;
+    product_name: string;
+    size: string;
+    unit_price: number;
+    quantity: number;
+};
+
+type OrderResponse = {
+    order: Order;
+    client: Client;
+    items: OrderItem[];
 };
 
 const SuccessContent = () => {
     const searchParams = useSearchParams();
     const session_id = searchParams.get('session_id');
     const { emptyCart } = useCart();
-    const [order, setOrder] = useState<Order | null>(null);
+    const [order, setOrder] = useState<OrderResponse | null>(null);
     const [loading, setLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -63,8 +101,8 @@ const SuccessContent = () => {
                         });
 
                         if (orderRes.ok) {
-                            const { order } = await orderRes.json();
-                            setOrder(order);
+                            const result = await orderRes.json();
+                            setOrder(result);
                             localStorage.removeItem('orderInfo');
                             localStorage.removeItem('cartItems');
                             emptyCart();
@@ -91,7 +129,7 @@ const SuccessContent = () => {
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center" style={{ height: '60vh' }}>
                 <div role="status" className="flex flex-col items-center justify-center">
                     <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin fill-gray-500" viewBox="0 0 100 101" xmlns="http://www.w3.org/2000/svg">
                         <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
@@ -99,7 +137,8 @@ const SuccessContent = () => {
                     </svg>
                     <span className="sr-only">Cargando...</span>
                 </div>
-                <p className="text-lg ml-2 text-gray-500">Estamos generando el resumen del pedido...</p>
+                <p className="text-lg ml-2 text-gray-500 hidden sm:block">Estamos generando el resumen del pedido...</p>
+                <p className="text-lg ml-2 text-gray-500 block sm:hidden">Generando el resumen...</p>
             </div>
         );
     }
@@ -109,16 +148,143 @@ const SuccessContent = () => {
     }
 
     return (
-        <div>
-            <h1 className="text-4xl font-bold mb-2">¡Gracias por tu compra!</h1>
-            <p className="text-lg">Tu pedido ha sido recibido y está siendo procesado.</p>
-            <h2>Detalles del pedido:</h2>
-            <p>ID del pedido: {order.order_id}</p>
-            <p>Nombre: {order.pickup_person_name}</p>
-            <p>Fecha de recogida: {order.pickup_date}</p>
-            <p>Hora de recogida: {order.pickup_hour}</p>
-            {/* Agrega más detalles del pedido según sea necesario */}
-        </div>
+        <>
+
+            {/* https://www.tailwindir.com/component/invoice-table */}
+            {console.log(order)}
+
+            <div className="bg-white">
+                <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:pb-24">
+                    <div >
+                        <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                            ¡Gracias por tu compra!
+                        </h1>
+                        <p className="mt-2 text-md text-gray-500">
+                            Tu pedido ha sido recibido y está siendo procesado. Recibirás un correo electrónico con la confirmación del pedido.
+                        </p>
+                    </div>
+
+                    <div className="mt-16">
+
+                        <div className="space-y-20">
+                            <div className="rounded-lg bg-gray-50 px-4 py-6 sm:flex sm:items-center sm:justify-between sm:space-x-6 sm:px-6 lg:space-x-8">
+                                <dl className="flex-auto space-y-6 divide-y divide-gray-200 text-sm text-gray-600 sm:grid sm:grid-cols-4 sm:gap-x-6 sm:space-y-0 sm:divide-y-0 lg:w-1/2">
+                                    <div className="flex justify-between sm:block">
+                                        <dt className="font-medium text-gray-900">Ordenado el</dt>
+                                        <dd className="sm:mt-1">
+                                            <p>{order.order.datetime_ordered}</p>
+                                        </dd>
+                                    </div>
+                                    <div className="flex justify-between pt-6 sm:block sm:pt-0">
+                                        <dt className='font-medium text-gray-900'>Total</dt>
+                                        <dd className="sm:mt-1 font-normal">{formatCurrency(order.order.total)} mxn</dd>
+                                    </div>
+                                    <div className="flex justify-between pt-6 sm:block sm:pt-0">
+                                        <dt className='font-medium text-gray-900'>Descuento</dt>
+                                        <dd className="sm:mt-1 font-normal">{order.order.discount_applied ? formatCurrency(order.order.total - order.order.final_price) : "0"}</dd>
+                                    </div>
+                                    <div className="flex justify-between pt-6 sm:block sm:pt-0">
+                                        <dt className='font-medium text-gray-900'>Precio final</dt>
+                                        <dd className="sm:mt-1 font-normal">{formatCurrency(order.order.final_price)} mxn</dd>
+                                    </div>
+                                </dl>
+                                <Dialog>
+                                    <DialogTrigger asChild>
+                                        <Button className="mt-6 flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto">
+                                            Ver Detalles
+                                        </Button>
+                                    </DialogTrigger>
+                                    <DialogContent className="sm:max-w-[425px]">
+                                        <DialogHeader>
+                                            <DialogTitle>Detalles de la orden</DialogTitle>
+                                            <DialogDescription>
+                                                Aquí puedes ver los detalles de tu orden.
+                                            </DialogDescription>
+                                        </DialogHeader>
+                                        <div className="y-4">
+                                            <hr />
+                                            <div className='flex flex-col py-2'>
+                                                <p className='text-sm text-gray-400'>Ordenado por</p>
+                                                <p className='text-md text-gray-800'>{order.client.name}</p>
+                                                <p className='text-md text-gray-800'>{order.client.email} | {order.client.phone}</p>
+                                            </div>
+                                            <hr />
+                                            <div className='flex flex-col py-2'>
+                                                <p className='text-sm text-gray-400'>Persona que recoge</p>
+                                                <p className='text-md text-gray-800'>{order.order.pickup_person_name}</p>
+                                            </div>
+                                            <hr />
+                                            <div className='flex flex-col py-2'>
+                                                <p className='text-sm text-gray-400'>Fecha y hora de recogida</p>
+                                                <p className='text-md text-gray-800'>{order.order.pickup_date}</p>
+                                                <p className='text-md text-gray-800'>{order.order.pickup_hour}</p>
+                                            </div>
+                                            <hr />
+                                            <div className='flex flex-col py-2'>
+                                                <p className='text-sm text-gray-400'>Comentarios</p>
+                                                <p className='text-md text-gray-800'>{order.order.comments}</p>
+                                            </div>
+                                            <hr />
+                                        </div>
+                                    </DialogContent>
+                                </Dialog>
+                            </div>
+
+                            <table className="mt-4 w-full text-gray-500 sm:mt-6">
+                                <caption className="sr-only">Products</caption>
+                                <thead className="sr-only text-left text-sm text-gray-500 sm:not-sr-only">
+                                    <tr>
+                                        <th scope="col" className="py-3 pr-8 font-normal sm:w-2/5 lg:w-1/3">
+                                            Producto
+                                        </th>
+                                        <th scope="col" className="hidden w-1/5 py-3 pr-8 font-normal sm:table-cell">
+                                            Precio
+                                        </th>
+                                        <th scope="col" className="hidden py-3 pr-8 font-normal sm:table-cell">
+                                            Cantidad
+                                        </th>
+                                        {/* <th scope="col" className="w-0 py-3 text-right font-normal">
+                                            Info
+                                        </th> */}
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-gray-200 border-b border-gray-200 text-sm border-t">
+                                    {order?.items?.map((product) => (
+                                        <tr key={product.item_id}>
+                                            <td className="py-6 pr-8">
+                                                <div className="flex items-center">
+                                                    <img
+                                                        src={productos.find(p => p.nombre === product.product_name)?.fotos[0]}
+                                                        alt={product.product_name}
+                                                        className="mr-6 h-16 w-16 rounded object-cover object-center"
+                                                    />
+                                                    <div>
+                                                        <div className="font-medium text-gray-900">{product.product_name} - {product.size}</div>
+                                                        <div className="mt-1 sm:hidden">{formatCurrency(product.unit_price)} x {product.quantity}</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td className="hidden py-6 pr-8 sm:table-cell">{formatCurrency(product.unit_price)}</td>
+                                            <td className="hidden py-6 pr-8 sm:table-cell">{product.quantity}</td>
+                                            <td className="whitespace-nowrap py-6 text-right font-medium">
+                                                <a href={`/productos/${productos.find(p => p.nombre === product.product_name)?.id}`}
+                                                    className="text-mainRojo-100 border p-3 rounded-md hover:bg-mainRojo-100 hover:text-white transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-mainRojo-100 focus:ring-offset-2"
+                                                >
+                                                    Ver<span className="hidden lg:inline"> Producto</span>
+                                                    <span className="sr-only">, {product.product_name}</span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </>
     );
 };
 

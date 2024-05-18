@@ -71,6 +71,7 @@ export default function Carrito() {
     const [isCarritoOpen, setIsCarritoOpen] = useState(true);
     const [isDatosClienteOpen, setIsDatosClienteOpen] = useState(true);
     const [emptyFieldsError, setEmptyFieldsError] = useState(false);
+    const [loadingFinalizarCompra, setLoadingFinalizarCompra] = useState(false);
 
     // Codigo de descuento
     const [code, setCode] = useState('');
@@ -176,6 +177,7 @@ export default function Carrito() {
             setEmptyFieldsError(true);
         } else {
             setEmptyFieldsError(false);
+            setLoadingFinalizarCompra(true);
             // const formattedDate = '';
             // if (date) {
             //     const formattedDate = format(date, "EEEE d 'de' MMMM, yyyy", { locale: es });
@@ -670,7 +672,7 @@ export default function Carrito() {
                                                 </p>}
 
                                                 <button onClick={handleFinalizarCompra} className="w-full text-center bg-mainRojo-100 rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-red-400 hover:shadow-lg">
-                                                    Finalizar compra
+                                                    {loadingFinalizarCompra ? "Cargando..." : "Finalizar compra"}
                                                 </button>
                                             </div>
                                         </div>
