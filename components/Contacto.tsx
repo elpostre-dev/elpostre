@@ -31,7 +31,7 @@ export default function Contacto() {
                             <div className="max-w-full mx-auto rounded-lg overflow-hidden">
                                 <div className="px-6 py-4">
                                     <h3 className="text-lg font-medium text-gray-900">Dirección</h3>
-                                    <p className="mt-1 text-gray-600">Rio Mississippi 409 Del Valle, 66220 San Pedro Garza García, N.L.</p>
+                                    <p className="mt-1 text-gray-600">Rio Mississippi Oriente 409 Del Valle, 66220 San Pedro Garza García, N.L.</p>
                                 </div>
                                 <div className="border-t border-gray-200 px-6 py-4">
                                     <h3 className="text-lg font-medium text-gray-900">Horarios</h3>

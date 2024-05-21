@@ -185,11 +185,11 @@ export const productos: Producto[] = [
                 precio: 940.00,
                 personas: "De 10 a 12 personas"
             },
-            {
-                tamanio: "Mediano Bajo",
-                precio: 520.00,
-                personas: "De 4 a 6 personas"
-            },
+            // {
+            //     tamanio: "Mediano Bajo",
+            //     precio: 520.00,
+            //     personas: "De 4 a 6 personas"
+            // },
         ],
         fotos: ["/Pasteles/FERRERO.jpg", "/Pasteles/FERRERO_2.jpg"]
     },
@@ -205,11 +205,11 @@ export const productos: Producto[] = [
                 precio: 780.00,
                 personas: "De 15 a 18 personas"
             },
-            {
-                tamanio: "Mediano Alto",
-                precio: 710.00,
-                personas: "De 10 a 12 personas"
-            },
+            // {
+            //     tamanio: "Mediano Alto",
+            //     precio: 710.00,
+            //     personas: "De 10 a 12 personas"
+            // },
             {
                 tamanio: "Mediano Bajo",
                 precio: 390.00,
@@ -790,7 +790,7 @@ export const productos: Producto[] = [
         descripcion: "Prueba nuestros deliciosos mini brownies de cajeta, crunch, chocolate, betún alemán y almendra.",
         variaciones: [
             {
-                tamanio: "Caja Familiar",
+                tamanio: "Caja de 40",
                 precio: 680.00,
                 personas: "40 piezas"
             },
@@ -929,46 +929,46 @@ export const productos: Producto[] = [
         ],
         fotos: ["/Galletas/CHOCOCHIP.jpg", "/Galletas/CHOCOCHIP_2.jpg", "/Galletas/CHOCOCHIP_3.jpg", "/Galletas/CHOCOCHIP_4.jpg"]
     },
-    {
-        id: 39,
-        nombre: "Polvorones y Hojarascas",
-        categoriaId: 4,
-        categoriaNombre: "Galletas",
-        descripcion: "Prueba nuestros deliciosos polvorones y hojarascas.",
-        variaciones: [
-            {
-                tamanio: "Caja Polvorones",
-                precio: 210.00,
-                personas: ""
-            },
-            {
-                tamanio: "Caja Hojarascas",
-                precio: 180.00,
-                personas: ""
-            },
-        ],
-        fotos: ["/Galletas/POLVORONES_HOJARASCAS.jpg", "/Galletas/POLVORONES_HOJARASCAS_2.jpg", "/Galletas/POLVORON.jpg", "/Galletas/HOJARASCA.jpg"]
-    },
-    {
-        id: 40,
-        nombre: "Galletas Combinadas",
-        categoriaId: 4,
-        categoriaNombre: "Galletas",
-        descripcion: "Deliciosa combinación de hojarascas, polvorones, chocochips y galletas de avena. Para cualquier gusto.",
-        variaciones: [
-            {
-                tamanio: "Caja Grande",
-                precio: 360.00,
-                personas: "Caja con 9 galletas"
-            },
-            {
-                tamanio: "Caja Chica",
-                precio: 250.00,
-                personas: "Caja con 6 galletas"
-            },
-        ],
-        fotos: ["/Galletas/GALLETAS_COMBINADAS.jpg", "/Galletas/GALLETAS_COMBINADAS_2.jpg", "/Galletas/GALLETAS_COMBINADAS_3.jpg"]
-    },
+    // {
+    //     id: 39,
+    //     nombre: "Polvorones y Hojarascas",
+    //     categoriaId: 4,
+    //     categoriaNombre: "Galletas",
+    //     descripcion: "Prueba nuestros deliciosos polvorones y hojarascas.",
+    //     variaciones: [
+    //         {
+    //             tamanio: "Caja Polvorones",
+    //             precio: 210.00,
+    //             personas: ""
+    //         },
+    //         {
+    //             tamanio: "Caja Hojarascas",
+    //             precio: 180.00,
+    //             personas: ""
+    //         },
+    //     ],
+    //     fotos: ["/Galletas/POLVORONES_HOJARASCAS.jpg", "/Galletas/POLVORONES_HOJARASCAS_2.jpg", "/Galletas/POLVORON.jpg", "/Galletas/HOJARASCA.jpg"]
+    // },
+    // {
+    //     id: 40,
+    //     nombre: "Galletas Combinadas",
+    //     categoriaId: 4,
+    //     categoriaNombre: "Galletas",
+    //     descripcion: "Deliciosa combinación de hojarascas, polvorones, chocochips y galletas de avena. Para cualquier gusto.",
+    //     variaciones: [
+    //         {
+    //             tamanio: "Caja Grande",
+    //             precio: 360.00,
+    //             personas: "Caja con 9 galletas"
+    //         },
+    //         {
+    //             tamanio: "Caja Chica",
+    //             precio: 250.00,
+    //             personas: "Caja con 6 galletas"
+    //         },
+    //     ],
+    //     fotos: ["/Galletas/GALLETAS_COMBINADAS.jpg", "/Galletas/GALLETAS_COMBINADAS_2.jpg", "/Galletas/GALLETAS_COMBINADAS_3.jpg"]
+    // },
     {
         id: 41,
         nombre: "Galletas de Mantequilla",
