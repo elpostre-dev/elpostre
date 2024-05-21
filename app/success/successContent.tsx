@@ -19,9 +19,6 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 
-const bestsellerIds = [2, 29, 16, 14];
-const bestsellers = productos.filter(producto => bestsellerIds.includes(producto.id));
-
 type Client = {
     client_id: string;
     name: string;
@@ -104,6 +101,18 @@ const SuccessContent = () => {
                         if (orderRes.ok) {
                             const result = await orderRes.json();
                             setOrder(result);
+                            // send email
+                            const emailResult = await fetch('/api/email', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    session_id,
+                                    ...JSON.parse(localStorage.getItem('orderInfo') || '{}'),
+                                    products: JSON.parse(localStorage.getItem('cartItems') || '[]'),
+                                }),
+                            });
                             localStorage.removeItem('orderInfo');
                             localStorage.removeItem('cartItems');
                             emptyCart();
