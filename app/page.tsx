@@ -55,14 +55,14 @@ export default function Home() {
   const images = [
     {
       url: "/Individuales/COPITAS.jpg",
-      title: 'Martes Tranquilo',
+      title: 'Martes de Copitas',
       description: "¡Disfruta de un pastel mediano o grande y recibe una copita gratis! Solo válida en sucursal los martes.",
     },
-    {
-      url: "/sucursal.jpg",
-      title: "Descuento de Cumpleaños",
-      description: "Celebra tu cumpleaños con un 20% de descuento en cualquier pastel grande. Solo válida en sucursal con identificación.",
-    },
+    // {
+    //   url: "/sucursal.jpg",
+    //   title: "Descuento de Cumpleaños",
+    //   description: "Celebra tu cumpleaños con un 20% de descuento en cualquier pastel grande. Solo válida en sucursal con identificación.",
+    // },
     // {
     //   url: "/home.jpg",
     //   title: "Autenticidad, comodidad y simpleza",
