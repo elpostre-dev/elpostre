@@ -78,6 +78,7 @@ export default function NavBar() {
                             <li>
                                 <Link
                                     href={link.href}
+                                    key={link.href}
                                     onClick={() => setIsMenuOpen(false)}
                                     className={clsx(
                                         'block py-2 px-3 rounded text-lg md:rounded-none hover:text-mainRojo-100 md:p-0 border-b-2 border-transparent md:hover:border-b-2 link-underline-md relative',
