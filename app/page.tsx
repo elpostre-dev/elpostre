@@ -592,7 +592,7 @@ export default function Home() {
 
             {bestsellers.map(producto => (
               <>
-                <Link href={`/productos/${producto.id}`} className="group relative">
+                <Link href={`/productos/${producto.id}`} className="group relative" key={producto.id}>
                   <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-50 h-60 lg:h-80">
                     <img src={producto.fotos[0]} alt="Front of men&#039;s Basic Tee in black." className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                   </div>
