@@ -4,6 +4,7 @@ import Mail from 'nodemailer/lib/mailer';
 
 const host = process.env.NEXT_PUBLIC_HOST;
 
+// https://medium.com/@abilsavio/email-contact-form-using-nextjs-app-router-60c29fe70644
 export async function POST(request: NextRequest) {
     const body = await request.json();
 

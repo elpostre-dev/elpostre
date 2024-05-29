@@ -8,6 +8,7 @@ import NavBar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Contacto from "@/components/Contacto";
 import bgImage from "../public/home.jpg";
+import CategoryCard from "@/components/CategoryCard";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -22,13 +23,17 @@ import {
 
 import { productos } from "@/data/productos";
 import { useState, useEffect } from "react";
+import { Producto } from "@/data/productos";
 
 
 export default function Home() {
 
   // const bestsellerIds = [2, 29, 35, 16, 37, 38, 14];
-  const bestsellerIds = [2, 29, 16, 14];
-  const bestsellers = productos.filter(producto => bestsellerIds.includes(producto.id));
+  const bestsellerIds = [2, 29, 35, 37];
+  const bestsellers: Producto[] = bestsellerIds
+    .map(id => productos.find(producto => producto.id === id))
+    .filter((producto): producto is Producto => producto !== undefined);
+
 
   const plugin = React.useRef(
     Autoplay({ delay: 3000, stopOnInteraction: false })
@@ -68,6 +73,49 @@ export default function Home() {
     //   title: "Autenticidad, comodidad y simpleza",
     //   description: "A professonal website drives sales. Create a beautiful website to impress and engage new customers and establish your business online",
     // },
+  ];
+
+  const categoryItem = [
+    {
+      name: "Pasteles",
+      href: "/productos/pasteles",
+      imageUrl: "/categorias/pastel-categoria.jpg",
+    },
+    {
+      name: "Pays",
+      href: "/productos/pays",
+      imageUrl: "/categorias/pay-categoria.jpg",
+    },
+    {
+      name: "Brownies",
+      href: "/productos/brownies",
+      imageUrl: "/categorias/brownies-categoria.jpg",
+    },
+    {
+      name: "Galletas",
+      href: "/productos/galletas",
+      imageUrl: "/categorias/galletas-categoria.jpg",
+    },
+    {
+      name: "Keto",
+      href: "/productos/keto",
+      imageUrl: "/categorias/keto-categoria.jpg",
+    },
+    {
+      name: "Muffins y Panqués",
+      href: "/productos/muffins-panques",
+      imageUrl: "/categorias/muffinspanques-categoria.jpg",
+    },
+    {
+      name: "Individuales",
+      href: "/productos/individuales",
+      imageUrl: "/categorias/individuales-categoria.jpg",
+    },
+    {
+      name: "Temporada",
+      href: "/productos/temporada",
+      imageUrl: "/categorias/temporada-categoria.jpg",
+    }
   ];
 
   // Estado para controlar la visibilidad del banner
@@ -118,51 +166,85 @@ export default function Home() {
       </section>
 
 
-      {/* Best Sellers */}
-      <div className="bg-white">
-        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-14 lg:max-w-7xl lg:px-8">
+      {/* Categorías */}
+      <div className="bg-mainRosa-100 pt-10">
 
-          <h2 className="text-3xl font-semibold tracking-tight text-mainRojo-100 text-center">
-            Conoce nuestros bestsellers
-            <hr className="bg-mainRojo-100 h-1 my-5 mb-10 mx-auto" style={{ width: '10%' }} />
-          </h2>
-
-          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-
-            {bestsellers.map(producto => (
-              <>
-                <Link href={`/productos/${producto.id}`} className="group relative">
-                  <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-50 h-80">
-                    <img src={producto.fotos[0]} alt="Front of men&#039;s Basic Tee in black." className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
-                  </div>
-                  <div className="mt-4 flex justify-between">
-                    <div>
-                      <h3 className="text-md text-gray-700 font-semibold">
-                        <span aria-hidden="true" className="absolute inset-0"></span>
-                        {producto.nombre}
-                      </h3>
-                      <p className="mt-1 text-sm font text-gray-500">{producto.categoriaNombre}</p>
-                    </div>
-                    {/* <p className="text-md font-medium text-gray-900">$500</p> */}
-                  </div>
-                </Link>
-              </>
-
-            ))}
-
-
-          </div>
-
+        <div className="mx-auto max-w-2xl text-center" id="productos">
+          <p className="mt-2 text-3xl font-bold tracking-tight text-mainRojo-100 sm:text-4xl">
+            Productos
+          </p>
+          <hr className="bg-mainRojo-100 h-1 mt-5 mx-auto" style={{ width: '10%' }} />
         </div>
+
+        <div className="flex justify-center items-center">
+          <div className="2xl:mx-auto 2xl:container pb-6 pt-12 px-4 sm:px-6 xl:px-20 2xl:px-0 w-full">
+            <div className="flex flex-col jusitfy-center items-center space-y-10">
+              {/* <div className="flex flex-col justify-center items-center space-y-2">
+                <p className="text-xl leading-5 text-gray-600">2021 Trendsetters</p>
+                <h1 className="text-3xl xl:text-4xl font-semibold leading-7 xl:leading-9 text-gray-800">Shop By Category</h1>
+            </div> */}
+
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+                {categoryItem.map((item, index) => (
+                  <CategoryCard
+                    key={index}
+                    name={item.name}
+                    href={item.href}
+                    imageUrl={item.imageUrl}
+                  />
+                ))}
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+        <hr className="bg-white h-2 mb-3 mx-auto border-0" style={{ width: '80%' }} />
+        <hr className="bg-white h-2 mb-3 mx-auto border-0" style={{ width: '80%' }} />
+        <hr className="bg-white h-2 mb-8 mx-auto border-0" style={{ width: '80%' }} />
       </div>
 
 
+      {/* Nosotros */}
+      {/* TEXTO y FOTOS */}
+      <section className="pt-4 bg-mainAmarillo-200 items-center" id="nosotros">
+        <div className="gap-16 items-center py-10 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:px-6">
+          <div className="text-gray-500 text-xl">
+            <div className="w-full flex justify-center py-4">
+              <div className="w-1/2 sm:w-1/2 md:w-1/2">
+                <Image
+                  src="/logos/logo_dorado.png"
+                  alt="logo"
+                  width={720}  // Tamaño original del logo
+                  height={360}
+                  layout="responsive"
+                  className="mb-3"
+                />
+              </div>
+            </div>
+            {/* <h2 className="mb-4 text-4xl tracking-tight font-bold text-center lg:text-left text-mainRojo-100">
+              Pastelería El Postre
+            </h2> */}
+            <p className="mb-4 text-lg md:text-base lg:text-lg font-light text-center">
+              En la Pastelería El Postre contamos con más de veinte años de experiencia, satisfaciendo y endulzando los paladares de nuestros clientes. Nuestra prioridad es garantizar un excelente postre, utilizando ingredientes de la más alta calidad. Contamos con una amplia variedad de los más exquisitos pasteles, galletas y brownies. Esto nos ha llevado a ser una de las marcas más prestigiadas de nuestra región.
+            </p>
+            {/* <p>We are strategists, designers and developers. Innovators and problem solvers. Small enough to be simple and quick.</p> */}
+          </div>
+          <div className="grid grid-cols-2 gap-4 my-8">
+            <img className="w-full rounded-lg" src="/sucursal2.jpg" alt="sucursal" />
+            <img className="mt-4 w-full lg:mt-10 rounded-lg" src="/galletas.png" alt="galletas" />
+          </div>
+        </div>
+      </section>
+
+
       {/* CAROUSEL promociones */}
-      <div className="mx-auto w-full">
+      {/* <div className="mx-auto w-full">
 
         <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:max-w-7xl lg:px-8 text-center">
           <h2 className="text-3xl font-semibold tracking-tight text-mainRojo-100">
-            Promociones actuales
+            Promociones
             <hr className="bg-mainRojo-100 h-1 mt-5 mx-auto" style={{ width: '10%' }} />
           </h2>
         </div>
@@ -196,10 +278,10 @@ export default function Home() {
                       {image.description}
                     </p>
                   </div>
-                  {/* <div className="flex justify-center items-center">
+                  <div className="flex justify-center items-center">
                     <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-azulito-100 bg-azulito-100 transition duration-150 ease-in-out hover:bg-indigo-600 lg:text-xl lg:font-bold  rounded text-white px-4 sm:px-10 border border-azulito-100 py-2 sm:py-4 text-sm">Get Started</button>
                     <button className="ml-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-azulito-100 bg-transparent transition duration-150 ease-in-out hover:border-indigo-600 lg:text-xl lg:font-bold  hover:text-indigo-600 rounded border border-azulito-100 text-azulito-100 px-4 sm:px-10 py-2 sm:py-4 text-sm">Live Demo</button>
-                  </div> */}
+                  </div>
                 </div>
               </CarouselItem>
             ))}
@@ -214,11 +296,11 @@ export default function Home() {
             ></span>
           ))}
         </div>
-      </div>
+      </div> */}
 
 
       {/* OPINIONES */}
-      <div className="container my-10 mt-14 mb-24 mx-auto md:px-6">
+      {/* <div className="container my-10 mt-14 mb-24 mx-auto md:px-6">
 
         <div className="mx-auto max-w-2xl px-4 py-8 pb-12 sm:px-6 lg:max-w-7xl lg:px-8 text-center">
           <h2 className="text-3xl font-semibold tracking-tight text-mainRojo-100">
@@ -232,13 +314,11 @@ export default function Home() {
           <div className="grid gap-x-6 md:grid-cols-3 lg:gap-x-12">
 
 
-            {/* Rating #1 */}
             <div className="mb-12 md:mb-0">
               <div className="mb-6 flex justify-center">
                 <img src="/logos/logo_rojo.jpg"
                   className="w-20 rounded-full shadow-lg" />
               </div>
-              {/* <h5 className="text-lg font-bold">Lisa Cudrow</h5> */}
               <h6 className="mb-4 font-medium text-slate-800">
                 Opiniones de Google
               </h6>
@@ -282,13 +362,11 @@ export default function Home() {
             </div>
 
 
-            {/* Rating #2 */}
             <div className="mb-12 md:mb-0">
               <div className="mb-6 flex justify-center">
                 <img src="/logos/logo_rojo.jpg"
                   className="w-20 rounded-full shadow-lg" />
               </div>
-              {/* <h5 className="text-lg font-bold">Maria Smantha</h5> */}
               <h6 className="mb-4 font-medium text-slate-800">
                 Opiniones de Google
               </h6>
@@ -332,13 +410,11 @@ export default function Home() {
             </div>
 
 
-            {/* Rating #3 */}
             <div className="mb-0">
               <div className="mb-6 flex justify-center">
                 <img src="/logos/logo_rojo.jpg"
                   className="w-20 rounded-full shadow-lg" />
               </div>
-              {/* <h5 className="text-lg font-bold">John Smith</h5> */}
               <h6 className="mb-4 font-medium text-slate-800">
                 Opiniones de Google
               </h6>
@@ -384,7 +460,7 @@ export default function Home() {
 
           </div>
         </section>
-      </div>
+      </div> */}
 
       {/* OPCIONES DE COMPRA */}
       {/* <div className="flex flex-col my-10 pt-10">
@@ -503,12 +579,50 @@ export default function Home() {
       <Contacto />
 
 
+      {/* Best Sellers */}
+      <div className="bg-white">
+        <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 pb-20 lg:max-w-7xl lg:px-8">
+
+          <h2 className="text-3xl font-semibold tracking-tight text-mainRojo-100 text-center">
+            Conoce nuestros bestsellers
+            <hr className="bg-mainRojo-100 h-1 my-5 mb-10 mx-auto" style={{ width: '10%' }} />
+          </h2>
+
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+
+            {bestsellers.map(producto => (
+              <>
+                <Link href={`/productos/${producto.id}`} className="group relative">
+                  <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-50 h-60 lg:h-80">
+                    <img src={producto.fotos[0]} alt="Front of men&#039;s Basic Tee in black." className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
+                  </div>
+                  <div className="mt-4 flex justify-between">
+                    <div>
+                      <h3 className="text-md text-gray-700 font-semibold">
+                        <span aria-hidden="true" className="absolute inset-0"></span>
+                        {producto.nombre}
+                      </h3>
+                      <p className="mt-1 text-sm font text-gray-500">{producto.categoriaNombre}</p>
+                    </div>
+                    {/* <p className="text-md font-medium text-gray-900">$500</p> */}
+                  </div>
+                </Link>
+              </>
+
+            ))}
+
+          </div>
+
+        </div>
+      </div>
+
+
       {/* FOOTER */}
       <Footer />
 
 
       {/* BANNER */}
-      {isVisible && (
+      {/* {isVisible && (
         <div id="bottom-banner" tabIndex={1} className="fixed bottom-0 start-0 z-50 flex justify-between w-full p-6 bg-mainRojo-100">
           <div className="flex items-center mx-auto">
             <p className="flex items-center text-lg font-normal text-gray-200">
@@ -538,7 +652,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-      )}
+      )} */}
 
 
     </main>

@@ -181,7 +181,7 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
                                     <BreadcrumbSeparator />
                                     <BreadcrumbItem>
                                         <BreadcrumbLink asChild>
-                                            <Link href="/productos">Productos</Link>
+                                            <Link href="/#productos">Productos</Link>
                                         </BreadcrumbLink>
                                     </BreadcrumbItem>
                                     <BreadcrumbSeparator />

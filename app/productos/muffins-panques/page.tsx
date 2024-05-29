@@ -35,7 +35,7 @@ export default function MuffinsPanques() {
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
                             <BreadcrumbLink asChild>
-                                <Link href="/productos">Productos</Link>
+                                <Link href="/#productos">Productos</Link>
                             </BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />

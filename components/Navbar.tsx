@@ -13,11 +13,11 @@ import { useCart } from '@/lib/CartContext';
 const links = [
     {
         name: 'Productos',
-        href: '/productos',
+        href: '/#productos',
     },
     {
         name: 'Nosotros',
-        href: '/nosotros',
+        href: '/#nosotros',
     },
     // {
     //     name: 'Haz tu pedido',

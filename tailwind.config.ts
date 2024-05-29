@@ -24,10 +24,10 @@ const config = {
         },
         mainAmarillo: {
           100: '#debb44',
-          200: '#FFFFF9',
+          200: '#fffef6',
         },
         mainRosa: {
-          100: '#FFFBFD',
+          100: '#fef5f9',
         },
 
         border: "hsl(var(--border))",

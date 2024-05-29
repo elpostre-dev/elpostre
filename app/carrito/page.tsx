@@ -72,6 +72,7 @@ export default function Carrito() {
     const [isDatosClienteOpen, setIsDatosClienteOpen] = useState(true);
     const [emptyFieldsError, setEmptyFieldsError] = useState(false);
     const [loadingFinalizarCompra, setLoadingFinalizarCompra] = useState(false);
+    const [discountActive, setDiscountActive] = useState(false);
 
     // Codigo de descuento
     const [code, setCode] = useState('');
@@ -292,7 +293,7 @@ export default function Carrito() {
                                     </p>
 
                                     <Link
-                                        href="/productos"
+                                        href="/#productos"
                                         className="mt-6 inline-block rounded bg-mainRojo-100 px-5 py-3 text-sm font-medium text-white hover:bg-red-400 hover:shadow-lg focus:outline-none focus:ring"
                                     >
                                         Explorar productos
@@ -623,42 +624,56 @@ export default function Carrito() {
                                             <div>
 
                                                 {/* DESCUENTO */}
-                                                <label className="flex items-center mb-1.5 pt-4 text-gray-400 text-sm font-medium">
-                                                    Código de descuento
-                                                </label>
-                                                <div className="flex pb-4 w-full">
-                                                    <div className="relative w-full ">
-                                                        <input type="text"
-                                                            className="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400 "
-                                                            placeholder="Ingresa código..."
-                                                            value={code}
-                                                            disabled={searchingDiscount || isCodeValid}
-                                                            onChange={(e) => setCode(e.target.value)} />
-                                                    </div>
-                                                </div>
+                                                {discountActive
+                                                    ?
+                                                    <>
+                                                        <label className="flex items-center mb-1.5 pt-4 text-gray-400 text-sm font-medium">
+                                                            Código de descuento
+                                                        </label>
+                                                        <div className="flex pb-4 w-full">
+                                                            <div className="relative w-full ">
+                                                                <input type="text"
+                                                                    className="block w-full h-11 pr-11 pl-5 py-2.5 text-base font-normal shadow-xs text-gray-900 bg-white border border-gray-300 rounded-lg placeholder-gray-500 focus:outline-gray-400 "
+                                                                    placeholder="Ingresa código..."
+                                                                    value={code}
+                                                                    disabled={searchingDiscount || isCodeValid}
+                                                                    onChange={(e) => setCode(e.target.value)} />
+                                                            </div>
+                                                        </div>
 
-                                                {message && <p className="mb-2 italic">{message}</p>}
+                                                        {message && <p className="mb-2 italic">{message}</p>}
 
-                                                <div className="flex items-center border-b border-gray-200">
+                                                        <div className="flex items-center">
+                                                            <button
+                                                                type="button"
+                                                                onClick={validateCode}
+                                                                disabled={searchingDiscount || code.length <= 0 || isCodeValid}
+                                                                className="rounded-lg w-full bg-black py-2.5 px-4 text-white text-sm font-semibold text-center mb-8 transition-all duration-500 hover:bg-black/60 hover:shadow-lg"
+                                                            >
+                                                                {
+                                                                    searchingDiscount ?
+                                                                        'Validando...'
+                                                                        :
+                                                                        isCodeValid ?
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 mx-auto">
+                                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                                            </svg>
+                                                                            :
+                                                                            'Validar'
+                                                                }
+                                                            </button>
+                                                        </div>
+                                                    </>
+                                                    :
                                                     <button
                                                         type="button"
-                                                        onClick={validateCode}
-                                                        disabled={searchingDiscount || code.length <= 0 || isCodeValid}
-                                                        className="rounded-lg w-full bg-black py-2.5 px-4 text-white text-sm font-semibold text-center mb-8 transition-all duration-500 hover:bg-black/60 hover:shadow-lg"
+                                                        onClick={() => setDiscountActive(true)}
+                                                        className="text-sm text-blue-600 underline text-center mb-4 transition-all duration-500 hover:text-blue-800 focus:outline-none focus:ring"
                                                     >
-                                                        {
-                                                            searchingDiscount ?
-                                                                'Validando...'
-                                                                :
-                                                                isCodeValid ?
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 mx-auto">
-                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                                                    </svg>
-                                                                    :
-                                                                    'Validar'
-                                                        }
+                                                        Tengo un código de descuento...
                                                     </button>
-                                                </div>
+                                                }
+                                                <hr className="bg-gray-300 mx-auto mt-2" />
 
 
                                                 {/* FINALIZAR COMPRA */}

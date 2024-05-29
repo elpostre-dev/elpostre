@@ -19,21 +19,6 @@ export interface Producto {
 export const productos: Producto[] = [
     // PASTELES
     {
-        id: 1,
-        nombre: "Pastel Rosas Blancas",
-        categoriaId: 1,
-        categoriaNombre: "Pasteles",
-        descripcion: "Prueba nuestro exquisito pan de vainilla con betún de merengue. Pastel disponible únicamente bajo pedido.",
-        variaciones: [
-            {
-                tamanio: "Mediano Alto",
-                precio: 750.00,
-                personas: "De 10 a 12 personas"
-            },
-        ],
-        fotos: ["/Pasteles/ROSAS_BLANCAS.jpg", "/Pasteles/ROSAS_BLANCAS_2.jpg"]
-    },
-    {
         id: 2,
         nombre: "Rosca de Vainilla y Chocolate",
         categoriaId: 1,
@@ -194,6 +179,31 @@ export const productos: Producto[] = [
         fotos: ["/Pasteles/FERRERO.jpg", "/Pasteles/FERRERO_2.jpg"]
     },
     {
+        id: 10,
+        nombre: "Pastel Zebra",
+        categoriaId: 1,
+        categoriaNombre: "Pasteles",
+        descripcion: "Prueba nuestra deliciosa combinación de pan blanco y chocolate, con el sabor de Milky Way y vainilla.",
+        variaciones: [
+            {
+                tamanio: "Grande",
+                precio: 940.00,
+                personas: "De 15 a 18 personas"
+            },
+            {
+                tamanio: "Mediano Alto",
+                precio: 710.00,
+                personas: "De 10 a 12 personas"
+            },
+            {
+                tamanio: "Chico",
+                precio: 190.00,
+                personas: "De 1 a 2 personas"
+            },
+        ],
+        fotos: ["/Pasteles/ZEBRA.jpg", "/Pasteles/ZEBRA_2.jpg"]
+    },
+    {
         id: 9,
         nombre: "Pastel de Chocolate con Merengue",
         categoriaId: 1,
@@ -219,29 +229,19 @@ export const productos: Producto[] = [
         fotos: ["/Pasteles/ROSCA_CH-MERENGUE.jpg", "/Pasteles/ROSCA_CH-MERENGUE_2.jpg"]
     },
     {
-        id: 10,
-        nombre: "Pastel Zebra",
+        id: 1,
+        nombre: "Pastel Rosas Blancas",
         categoriaId: 1,
         categoriaNombre: "Pasteles",
-        descripcion: "Prueba nuestra deliciosa combinación de pan blanco y chocolate, con el sabor de Milky Way y vainilla.",
+        descripcion: "Prueba nuestro exquisito pan de vainilla con betún de merengue. Pastel disponible únicamente bajo pedido.",
         variaciones: [
             {
-                tamanio: "Grande",
-                precio: 940.00,
-                personas: "De 15 a 18 personas"
-            },
-            {
                 tamanio: "Mediano Alto",
-                precio: 710.00,
+                precio: 750.00,
                 personas: "De 10 a 12 personas"
             },
-            {
-                tamanio: "Chico",
-                precio: 190.00,
-                personas: "De 1 a 2 personas"
-            },
         ],
-        fotos: ["/Pasteles/ZEBRA.jpg", "/Pasteles/ZEBRA_2.jpg"]
+        fotos: ["/Pasteles/ROSAS_BLANCAS.jpg", "/Pasteles/ROSAS_BLANCAS_2.jpg"]
     },
     {
         id: 11,

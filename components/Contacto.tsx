@@ -5,14 +5,14 @@ import Link from "next/link";
 export default function Contacto() {
 
     return (
-        <section className="">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 ">
+        <section className="py-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div className="max-w-2xl lg:max-w-4xl mx-auto text-center">
-                    <h2 className="text-3xl font-extrabold text-gray-900">
+                    <h2 className="text-3xl font-bold text-mainRojo-100">
                         Visítanos en nuestra tienda
                     </h2>
-                    <p className="mt-4 text-lg text-gray-500">
+                    <p className="mt-2 text-lg text-gray-500">
                         Ven a conocernos y disfruta de nuestros productos
                     </p>
                 </div>
@@ -69,7 +69,7 @@ export default function Contacto() {
                 </div>
 
                 {/* RAPPI */}
-                <div className="px-4 mx-auto max-w-screen-xl lg:px-6 pt-14">
+                <div className="px-4 mx-auto max-w-screen-xl lg:px-6 pt-10">
                     <div className="mx-auto max-w-screen-sm text-center border-2 rounded-xl py-8 hover:shadow-xl hover:cursor-pointer">
                         <div className="flex items-center justify-center mx-auto">
                             <h2 className="text-2xl md:text-4xl font-extrabold mb-2 text-gray-900 mr-2">Encuéntranos en</h2>
