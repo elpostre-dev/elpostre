@@ -75,10 +75,9 @@ export default function NavBar() {
                 >
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white md:items-center">
                         {links.map((link) => (
-                            <li>
+                            <li key={link.href}>
                                 <Link
                                     href={link.href}
-                                    key={link.href}
                                     onClick={() => setIsMenuOpen(false)}
                                     className={clsx(
                                         'block py-2 px-3 rounded text-lg md:rounded-none hover:text-mainRojo-100 md:p-0 border-b-2 border-transparent md:hover:border-b-2 link-underline-md relative',
