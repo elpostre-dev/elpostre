@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import NavLink from './NavLink';
 import clsx from "clsx";
 import { Badge } from "@/components/ui/badge"
+import { formatCurrency } from '@/lib/utils';
 
 import { useCart } from '@/lib/CartContext';
 
@@ -19,10 +20,6 @@ const links = [
         name: 'Nosotros',
         href: '/#nosotros',
     },
-    // {
-    //     name: 'Haz tu pedido',
-    //     href: '/carrito',
-    // },
 ];
 
 export default function NavBar() {
@@ -34,8 +31,9 @@ export default function NavBar() {
 
     const pathname = usePathname();
 
-    const { getCartQuantity } = useCart();
+    const { getCartQuantity, getTotal } = useCart();
     const cant = getCartQuantity();
+    const total = getTotal();
 
     return (
         <nav className="sticky top-0 bg-white z-20 shadow-lg">
@@ -53,8 +51,8 @@ export default function NavBar() {
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="h-5 w-5">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                         </svg>
-                        <Badge className='ml-1 bg-gray-700 text-gray-100'>
-                            {cant}
+                        <Badge className='ml-1 bg-gray-500 text-gray-100'>
+                            {formatCurrency(total)}
                         </Badge>
                     </Link>
                     {/* menu */}
@@ -77,12 +75,21 @@ export default function NavBar() {
                 >
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white md:items-center">
                         {links.map((link) => (
-                            <NavLink
-                                key={link.href}
-                                name={link.name}
-                                href={link.href}
-                                path={pathname}
-                            />
+                            <li>
+                                <Link
+                                    href={link.href}
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className={clsx(
+                                        'block py-2 px-3 rounded text-lg md:rounded-none hover:text-mainRojo-100 md:p-0 border-b-2 border-transparent md:hover:border-b-2 link-underline-md relative',
+                                        {
+                                            'text-mainRojo-100 bg-mainAzul-100 md:bg-transparent md:text-mainRojo-100': pathname == link.href,
+                                            'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent': pathname != link.href,
+                                        },
+                                    )}
+                                >
+                                    {link.name}
+                                </Link>
+                            </li>
                         ))}
 
                         {/* carrito */}
@@ -95,8 +102,8 @@ export default function NavBar() {
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                                     </svg>
-                                    <Badge className='ml-2 bg-gray-700 text-gray-100'>
-                                        {cant}
+                                    <Badge className='ml-2 bg-gray-500 text-gray-100'>
+                                        {formatCurrency(total)}
                                     </Badge>
                                     {/* Aquí puedes reactivar el contador si lo necesitas */}
                                     {/* <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-gray-100 transform translate-x-1/2 -translate-y-1/2 bg-gray-500 rounded-full">0</span> */}
