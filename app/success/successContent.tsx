@@ -19,6 +19,9 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 
+import { format } from "date-fns";
+import { es } from 'date-fns/locale'; // Importa el locale español
+
 type Client = {
     client_id: string;
     name: string;
@@ -182,7 +185,6 @@ const SuccessContent = () => {
         <>
 
             {/* https://www.tailwindir.com/component/invoice-table */}
-            {console.log(order)}
 
             <div className="bg-white">
                 <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:pb-24">
@@ -203,7 +205,7 @@ const SuccessContent = () => {
                                     <div className="flex justify-between sm:block">
                                         <dt className="font-medium text-gray-900">Ordenado el</dt>
                                         <dd className="sm:mt-1">
-                                            <p>{order.order.datetime_ordered}</p>
+                                            <p>{format(order.order.datetime_ordered, "EEEE d 'de' MMMM, yyyy", { locale: es })}</p>
                                         </dd>
                                     </div>
                                     <div className="flex justify-between pt-6 sm:block sm:pt-0">
@@ -247,7 +249,7 @@ const SuccessContent = () => {
                                             <hr />
                                             <div className='flex flex-col py-2'>
                                                 <p className='text-sm text-gray-400'>Fecha y hora de recogida</p>
-                                                <p className='text-md text-gray-800'>{order.order.pickup_date}</p>
+                                                <p className='text-md text-gray-800'>{format(order.order.pickup_date, "EEEE d 'de' MMMM, yyyy", { locale: es })}</p>
                                                 <p className='text-md text-gray-800'>{order.order.pickup_hour}</p>
                                             </div>
                                             <hr />

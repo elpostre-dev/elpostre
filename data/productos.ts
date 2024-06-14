@@ -228,21 +228,21 @@ export const productos: Producto[] = [
         ],
         fotos: ["/Pasteles/ROSCA_CH-MERENGUE.jpg", "/Pasteles/ROSCA_CH-MERENGUE_2.jpg"]
     },
-    {
-        id: 1,
-        nombre: "Pastel Rosas Blancas",
-        categoriaId: 1,
-        categoriaNombre: "Pasteles",
-        descripcion: "Prueba nuestro exquisito pan de vainilla con betún de merengue. Pastel disponible únicamente bajo pedido.",
-        variaciones: [
-            {
-                tamanio: "Mediano Alto",
-                precio: 750.00,
-                personas: "De 10 a 12 personas"
-            },
-        ],
-        fotos: ["/Pasteles/ROSAS_BLANCAS.jpg", "/Pasteles/ROSAS_BLANCAS_2.jpg"]
-    },
+    // {
+    //     id: 1,
+    //     nombre: "Pastel Rosas Blancas",
+    //     categoriaId: 1,
+    //     categoriaNombre: "Pasteles",
+    //     descripcion: "Prueba nuestro exquisito pan de vainilla con betún de merengue. Pastel disponible únicamente bajo pedido.",
+    //     variaciones: [
+    //         {
+    //             tamanio: "Mediano Alto",
+    //             precio: 750.00,
+    //             personas: "De 10 a 12 personas"
+    //         },
+    //     ],
+    //     fotos: ["/Pasteles/ROSAS_BLANCAS.jpg", "/Pasteles/ROSAS_BLANCAS_2.jpg"]
+    // },
     {
         id: 11,
         nombre: "Pastel Dark",

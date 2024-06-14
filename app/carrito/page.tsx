@@ -204,7 +204,8 @@ export default function Carrito() {
                 email,
                 phone,
                 pickupPerson,
-                formattedDate: format(date, "EEEE d 'de' MMMM, yyyy", { locale: es }),
+                // formattedDate: format(date, "EEEE d 'de' MMMM, yyyy", { locale: es }),
+                formattedDate: date,
                 pickupTime,
                 messageClient,
                 discount,
@@ -383,7 +384,7 @@ export default function Carrito() {
                                                         </AlertDialogContent>
                                                     </AlertDialog>
 
-                                                    <Link href={'/productos'} className="flex items-center px-4 py-2 m-2 bg-white hover:bg-gray-100 border-gray-500 border hover:shadow-lg focus:ring-2 text-gray-500 text-sm rounded">
+                                                    <Link href={'/#productos'} className="flex items-center px-4 py-2 m-2 bg-white hover:bg-gray-100 border-gray-500 border hover:shadow-lg focus:ring-2 text-gray-500 text-sm rounded">
                                                         Seguir comprando
                                                         <svg className="ml-2" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
                                                             fill="none">

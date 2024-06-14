@@ -1,6 +1,8 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import Mail from 'nodemailer/lib/mailer';
+import { format } from "date-fns";
+import { es } from 'date-fns/locale'; // Importa el locale español
 
 const host = process.env.NEXT_PUBLIC_HOST;
 
@@ -56,7 +58,7 @@ export async function POST(request: NextRequest) {
                 <li><strong>Descuento:</strong> $${discount.toFixed(2)} MXN</li>
                 <li><strong>Precio final:</strong> $${(total * (1 - discount)).toFixed(2)} MXN</li>
                 <li><strong>Persona para recoger:</strong> ${pickupPerson}</li>
-                <li><strong>Fecha de recogida:</strong> ${formattedDate}</li>
+                <li><strong>Fecha de recogida:</strong> ${format(formattedDate, "EEEE d 'de' MMMM, yyyy", { locale: es })}</li>
                 <li><strong>Hora de recogida:</strong> ${pickupTime}</li>
                 <li><strong>Mensaje:</strong> ${messageClient}</li>
                 <li><strong>Link de confirmación:</strong> <a href="${host}/success?session_id=${session_id}">${host}/success?session_id=${session_id}</a></li>
