@@ -95,7 +95,7 @@ export default function OrdersTableItem({ order }: { order: Order }) {
                             </ResizablePanelGroup>
 
                             {order.items.map(item => (
-                                <div>
+                                <div key={item.item_id}>
                                     <hr />
                                     <div key={item.item_id} className="flex items-center justify-between py-2">
                                         <div className="flex flex-row items-center">
