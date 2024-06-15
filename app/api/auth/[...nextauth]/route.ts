@@ -6,6 +6,7 @@ import { JWT } from "next-auth/jwt";
 import { Session, User } from "next-auth";
 
 const authOptions = {
+    secret: process.env.NEXTAUTH_SECRET,
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -55,7 +56,7 @@ const authOptions = {
         }
     },
     pages: {
-        signIn: '/auth/signin',  // Ensure this points to your custom sign-in page
+        signIn: '/auth/signin',  // Asegúrate de que esto apunte a la nueva página de inicio de sesión personalizada
         signOut: '/auth/signout',
         newUser: '/admin' // Redirect here after registration
     }
