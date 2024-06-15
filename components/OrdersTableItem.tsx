@@ -122,7 +122,7 @@ export default function OrdersTableItem({ order }: { order: Order }) {
                                         id="message"
                                         value={order.comments || "Sin comentarios"}
                                         className="bg-gray-100 w-full p-2 rounded-lg border border-gray-300"
-                                        readOnly
+                                        disabled
                                     />
                                 </div>
                             </div>

@@ -1,4 +1,3 @@
-// app/api/auth/[...nextauth]/route.ts
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { sql } from '@vercel/postgres';
@@ -6,7 +5,7 @@ import bcrypt from 'bcrypt';
 import { JWT } from "next-auth/jwt";
 import { Session, User } from "next-auth";
 
-export const authOptions = {
+const authOptions = {
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -56,10 +55,8 @@ export const authOptions = {
         }
     },
     pages: {
-        signIn: '/auth/signin',  // Asegúrate de que esto apunte a la nueva página de inicio de sesión personalizada
+        signIn: '/auth/signin',  // Ensure this points to your custom sign-in page
         signOut: '/auth/signout',
-        // error: '/api/auth/error', // Error code passed in query string as ?error=
-        // verifyRequest: '/api/auth/verify-request', // (used for check email message)
         newUser: '/admin' // Redirect here after registration
     }
 };
