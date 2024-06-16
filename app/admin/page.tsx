@@ -5,7 +5,6 @@ import { SessionProvider } from "next-auth/react";
 import NavBarAdmin from "@/components/NavBarAdmin";
 import OrdersTable from "@/components/OrdersTable";
 import { useSession, signIn } from "next-auth/react";
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import bgImage from "../../public/sucursal.jpg";
 

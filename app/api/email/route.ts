@@ -10,9 +10,6 @@ const host = process.env.NEXT_PUBLIC_HOST;
 export async function POST(request: NextRequest) {
     const body = await request.json();
 
-    console.log('body');
-    console.log(body);
-
     const {
         session_id,
         total,

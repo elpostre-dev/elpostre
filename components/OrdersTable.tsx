@@ -4,21 +4,26 @@ import { useEffect, useState } from 'react';
 import { Order } from '@/types/types';
 import OrdersTableItem from './OrdersTableItem';
 
-const fetchOrders = async () => {
-    const res = await fetch('/api/admin/orders', { cache: 'no-store' });
-    const data = await res.json();
-    return data.orders;
-};
-
 export const revalidate = 0;
 export const dynamic = 'force-dynamic';
 
 const OrdersTable = () => {
     const [orders, setOrders] = useState<Order[]>([]);
 
+    async function fetchOrders() {
+        const res = await fetch('/api/admin/orders', { cache: 'no-store' });
+        const data = await res.json();
+        return data.orders;
+    }
+
     useEffect(() => {
-        fetchOrders().then(setOrders);
+        refreshOrders();
     }, []);
+
+    async function refreshOrders() {
+        const data = await fetchOrders();
+        setOrders(data);
+    }
 
     const incompleteOrders = orders.filter(order => !order.completed);
     const completeOrders = orders.filter(order => order.completed);

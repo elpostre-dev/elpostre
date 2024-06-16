@@ -7,7 +7,6 @@ const host = process.env.NEXT_PUBLIC_HOST;
 export const POST = async (request) => {
 
     const body = await request.json();
-    // console.log("body", body);
 
     const stripe_products = body.products.map((product) => {
         return {

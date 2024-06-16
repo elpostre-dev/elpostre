@@ -37,7 +37,6 @@ function parseDate(dateString: string) {
 
 
 export default function OrdersTableItem({ order }: { order: Order }) {
-    console.log(order)
     return (
         <tr key={order.order_id} className="bg-white border-b">
             <th scope="row" className="px-4 py-4 font-medium text-gray-900 text-wrap max-w-24">
