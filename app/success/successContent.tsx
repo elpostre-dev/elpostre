@@ -19,8 +19,19 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 
-import { format } from "date-fns";
-import { es } from 'date-fns/locale'; // Importa el locale español
+import { format, parse } from 'date-fns';
+import { es } from 'date-fns/locale';
+
+// Function to parse the date string
+function parseDate(dateString: string) {
+    // Extract the date part (yyyy-MM-dd)
+    const datePart = dateString.split(' ')[0];
+
+    // Parse the extracted date part
+    const parsedDate = parse(datePart, 'yyyy-MM-dd', new Date());
+
+    return parsedDate;
+}
 
 type Client = {
     client_id: string;
@@ -205,7 +216,7 @@ const SuccessContent = () => {
                                     <div className="flex justify-between sm:block">
                                         <dt className="font-medium text-gray-900">Ordenado el</dt>
                                         <dd className="sm:mt-1">
-                                            <p>{format(order.order.datetime_ordered, "EEEE d 'de' MMMM, yyyy", { locale: es })}</p>
+                                            <p>{format(parseDate(order.order.datetime_ordered), "EEEE d 'de' MMMM, yyyy", { locale: es })}</p>
                                         </dd>
                                     </div>
                                     <div className="flex justify-between pt-6 sm:block sm:pt-0">

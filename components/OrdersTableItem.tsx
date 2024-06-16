@@ -2,8 +2,8 @@ import Link from "next/link";
 import clsx from "clsx";
 import { Order } from '@/types/types';
 import { formatCurrency } from "@/lib/utils";
-import { format } from "date-fns";
-import { es } from 'date-fns/locale'; // Importa el locale español
+import { format, parse } from 'date-fns';
+import { es } from 'date-fns/locale';
 
 import {
     ResizableHandle,
@@ -24,6 +24,17 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { productos } from '@/data/productos';
 
+// Function to parse the date string
+function parseDate(dateString: string) {
+    // Extract the date part (yyyy-MM-dd)
+    const datePart = dateString.split(' ')[0];
+
+    // Parse the extracted date part
+    const parsedDate = parse(datePart, 'yyyy-MM-dd', new Date());
+
+    return parsedDate;
+}
+
 
 export default function OrdersTableItem({ order }: { order: Order }) {
     console.log(order)
@@ -33,7 +44,7 @@ export default function OrdersTableItem({ order }: { order: Order }) {
                 {order.client_name}
             </th>
             <td className="px-4 py-4 hidden sm:table-cell">{formatCurrency(order.final_price)} MXN</td>
-            <td className="px-4 py-4 hidden md:table-cell">{format(order.datetime_ordered, "EEEE d 'de' MMMM, yyyy", { locale: es })}</td>
+            <td className="px-4 py-4 hidden md:table-cell">{format(parseDate(order.datetime_ordered), "EEEE d 'de' MMMM, yyyy", { locale: es })}</td>
             <td className="px-4 py-4 bg-gray-100">{format(order.pickup_date, "EEEE d 'de' MMMM, yyyy", { locale: es })}</td>
             <td className="px-4 py-4 bg-gray-100 hidden sm:table-cell">{order.pickup_hour}</td>
             <Dialog>
@@ -128,7 +139,7 @@ export default function OrdersTableItem({ order }: { order: Order }) {
                             </div>
 
                             <p className="text-sm">Numero de productos: {order.items.reduce((acc, item) => acc + item.quantity, 0)}</p>
-                            <p className="text-sm">Ordenado el {format(order.datetime_ordered, "EEEE d 'de' MMMM", { locale: es })}</p>
+                            <p className="text-sm">Ordenado el {format(parseDate(order.datetime_ordered), "EEEE d 'de' MMMM, yyyy", { locale: es })}</p>
                         </div>
 
                         {/* RECOGIDA */}
