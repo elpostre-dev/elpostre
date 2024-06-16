@@ -6,8 +6,7 @@ import { formatCurrency } from '@/lib/utils';
 import OrdersTableItem from './OrdersTableItem';
 
 const fetchOrders = async () => {
-    // Add a cache-busting query parameter
-    const res = await fetch(`/api/admin/orders?timestamp=${new Date().getTime()}`);
+    const res = await fetch('/api/admin/orders', { cache: 'no-store' });
     const data = await res.json();
     return data.orders;
 };
@@ -55,6 +54,7 @@ const OrdersTable = () => {
                     </table>
                 </div>
             }
+
 
             {/* Ordenes Anteriores */}
             <h2 className="text-4xl font-semibold py-8 px-8">Órdenes Anteriores</h2>
