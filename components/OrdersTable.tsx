@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { Order } from '@/types/types';
-import { formatCurrency } from '@/lib/utils';
 import OrdersTableItem from './OrdersTableItem';
 
 const fetchOrders = async () => {
@@ -10,6 +9,9 @@ const fetchOrders = async () => {
     const data = await res.json();
     return data.orders;
 };
+
+export const revalidate = 0;
+export const dynamic = 'force-dynamic';
 
 const OrdersTable = () => {
     const [orders, setOrders] = useState<Order[]>([]);
