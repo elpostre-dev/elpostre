@@ -42,7 +42,7 @@ export const POST = async (request) => {
 
         // Insert client info, or update if already exists
         const clientResult = await client.query(
-            'INSERT INTO clients (name, email, phone) VALUES ($1, $2, $3) ON CONFLICT (email) DO UPDATE SET name = $1, phone = $3 RETURNING client_id',
+            'INSERT INTO clients (name, email, phone) VALUES ($1, $2, $3) RETURNING client_id',
             [name, email, phone]
         );
         const clientId = clientResult.rows[0].client_id;
