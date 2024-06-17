@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server';
 import { sql } from '@vercel/postgres';
+import { NextRequest, NextResponse } from 'next/server';
 
 export const GET = async (req: NextRequest) => {
     const client = await sql.connect();
@@ -25,7 +25,7 @@ export const GET = async (req: NextRequest) => {
             status: 200,
             headers: {
                 'Content-Type': 'application/json',
-                'Cache-Control': 'no-store, max-age=0',
+                'Cache-Control': 'no-store, max-age=0, must-revalidate',
             },
         });
     } catch (err) {
