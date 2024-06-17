@@ -25,7 +25,7 @@ export const GET = async (req: NextRequest) => {
             status: 200,
             headers: {
                 'Content-Type': 'application/json',
-                'Cache-Control': 'no-store, max-age=0, must-revalidate',
+                'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0, s-maxage=0, stale-while-revalidate=0',
             },
         });
     } catch (err) {
