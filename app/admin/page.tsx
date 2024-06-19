@@ -30,6 +30,9 @@ function mapToOrders(rows: any[]): Order[] {
     }));
 }
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function Admin() {
     try {
         const result = await sql`

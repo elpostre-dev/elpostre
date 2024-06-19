@@ -8,6 +8,7 @@ import OrdersTable from "@/components/OrdersTable";
 import { useEffect, useState } from 'react';
 import bgImage from "../public/sucursal.jpg";
 import { Order } from '@/types/types';
+import { useRouter } from "next/navigation";
 
 interface AdminContentProps {
     orders: Order[];
@@ -28,11 +29,15 @@ interface AdminContentProps {
 
 const AdminContent: React.FC<AdminContentProps> = ({ orders }) => {
     const { data: session, status } = useSession();
+    const router = useRouter()
 
     useEffect(() => {
         if (status === "loading") return; // Do nothing while loading
         if (!session) {
             signIn(undefined, { callbackUrl: '/admin' });
+        }
+        if (session) {
+            router.refresh()
         }
     }, [session, status]);
 
