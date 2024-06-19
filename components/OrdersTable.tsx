@@ -1,5 +1,4 @@
-'use client';
-
+// components/OrdersTable.tsx
 import { useEffect, useState } from 'react';
 import { Order } from '@/types/types';
 import OrdersTableItem from './OrdersTableItem';
@@ -8,7 +7,6 @@ const OrdersTable = () => {
     const [orders, setOrders] = useState<Order[]>([]);
 
     async function fetchOrders() {
-        console.log('** fetchOrders() - Fetching orders...');
         const res = await fetch('/api/admin/orders', { cache: 'no-store' });
         const data = await res.json();
         setOrders(data.orders);
@@ -16,6 +14,9 @@ const OrdersTable = () => {
 
     useEffect(() => {
         fetchOrders();
+        const intervalId = setInterval(fetchOrders, 5000); // Refresh every 5 seconds
+
+        return () => clearInterval(intervalId); // Clear interval on component unmount
     }, []);
 
     const incompleteOrders = orders.filter(order => !order.completed);
