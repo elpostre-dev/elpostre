@@ -1,47 +1,26 @@
-// components/OrdersTable.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
 import { Order } from '@/types/types';
 import OrdersTableItem from './OrdersTableItem';
 
-async function fetchOrders(): Promise<{ orders: Order[] }> {
-    const res = await fetch('/api/admin/orders', { cache: 'no-store' });
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+export const revalidate = 0
 
-    if (!res.ok) {
-        throw new Error('Failed to fetch data');
-    }
-
-    return res.json();
-}
-
-export default function OrdersTable() {
+const OrdersTable = () => {
     const [orders, setOrders] = useState<Order[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+
+    async function fetchOrders() {
+        console.log('** fetchOrders() - Fetching orders...');
+        const res = await fetch('/api/admin/orders', { cache: 'no-store' });
+        const data = await res.json();
+        setOrders(data.orders);
+    }
 
     useEffect(() => {
-        async function loadOrders() {
-            try {
-                const data = await fetchOrders();
-                setOrders(data.orders);
-                setLoading(false);
-            } catch (err) {
-                setError('Failed to fetch orders');
-                setLoading(false);
-            }
-        }
-
-        loadOrders();
+        fetchOrders();
     }, []);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>{error}</div>;
-    }
 
     const incompleteOrders = orders.filter(order => !order.completed);
     const completeOrders = orders.filter(order => order.completed);
@@ -109,4 +88,6 @@ export default function OrdersTable() {
                 )}
         </div>
     );
-}
+};
+
+export default OrdersTable;
