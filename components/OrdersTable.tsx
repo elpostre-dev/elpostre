@@ -1,21 +1,48 @@
 // components/OrdersTable.tsx
 'use client';
 
-import useSWR from 'swr';
+import { useEffect, useState } from 'react';
 import { Order } from '@/types/types';
 import OrdersTableItem from './OrdersTableItem';
 
-const fetcher = (url: string) => fetch(url).then(res => res.json());
+async function fetchOrders(): Promise<{ orders: Order[] }> {
+    const res = await fetch('/api/admin/orders', { cache: 'no-store' });
 
-const OrdersTable = () => {
-    const { data, error, isLoading } = useSWR('/api/admin/orders', fetcher, {
-        refreshInterval: 5000, // Revalidate every 5 seconds
-    });
+    if (!res.ok) {
+        throw new Error('Failed to fetch data');
+    }
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Failed to load orders</div>;
+    return res.json();
+}
 
-    const orders: Order[] = data.orders;
+export default function OrdersTable() {
+    const [orders, setOrders] = useState<Order[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        async function loadOrders() {
+            try {
+                const data = await fetchOrders();
+                setOrders(data.orders);
+                setLoading(false);
+            } catch (err) {
+                setError('Failed to fetch orders');
+                setLoading(false);
+            }
+        }
+
+        loadOrders();
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>{error}</div>;
+    }
+
     const incompleteOrders = orders.filter(order => !order.completed);
     const completeOrders = orders.filter(order => order.completed);
 
@@ -82,6 +109,4 @@ const OrdersTable = () => {
                 )}
         </div>
     );
-};
-
-export default OrdersTable;
+}
