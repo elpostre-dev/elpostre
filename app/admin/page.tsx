@@ -64,7 +64,6 @@ export default async function Admin() {
             GROUP BY 
                 orders.order_id, 
                 clients.client_id, 
-                orders.client_id, 
                 orders.final_price, 
                 orders.discount_applied, 
                 orders.pickup_date, 
@@ -74,13 +73,15 @@ export default async function Admin() {
                 orders.completed, 
                 orders.datetime_ordered, 
                 orders.total, 
-                orders.session_id 
-            ORDER BY 
-                orders.datetime_ordered DESC;
+                orders.session_id, 
+                clients.name, 
+                clients.email, 
+                clients.phone
+            ORDER BY orders.datetime_ordered DESC;
         `;
 
         const rows = result.rows;
-
+        console.log('Rows:', rows.length);
         const orders: Order[] = mapToOrders(rows);
 
         return (
