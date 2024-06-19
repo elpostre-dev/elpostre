@@ -1,4 +1,6 @@
 // components/OrdersTable.tsx
+'use client';
+
 import useSWR from 'swr';
 import { Order } from '@/types/types';
 import OrdersTableItem from './OrdersTableItem';
@@ -6,10 +8,12 @@ import OrdersTableItem from './OrdersTableItem';
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
 const OrdersTable = () => {
-    const { data, error } = useSWR('/api/admin/orders', fetcher, { refreshInterval: 5000 });
+    const { data, error, isLoading } = useSWR('/api/admin/orders', fetcher, {
+        refreshInterval: 5000, // Revalidate every 5 seconds
+    });
 
+    if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Failed to load orders</div>;
-    if (!data) return <div>Loading...</div>;
 
     const orders: Order[] = data.orders;
     const incompleteOrders = orders.filter(order => !order.completed);

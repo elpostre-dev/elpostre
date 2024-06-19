@@ -1,3 +1,4 @@
+// app/api/admin/orders/route.ts
 import { sql } from '@vercel/postgres';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -21,10 +22,8 @@ export const GET = async (req: NextRequest) => {
 
         const orders = result.rows;
 
-        return new NextResponse(JSON.stringify({ orders }), {
-            status: 200,
+        return NextResponse.json({ orders }, {
             headers: {
-                'Content-Type': 'application/json',
                 'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0, s-maxage=0, stale-while-revalidate=0',
             },
         });
