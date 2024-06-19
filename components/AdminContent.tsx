@@ -1,12 +1,26 @@
+
 // app/admin/page.tsx
 'use client';
 
-import { useSession, signIn } from "next-auth/react";
+import { SessionProvider, useSession, signIn } from "next-auth/react";
 import NavBarAdmin from "@/components/NavBarAdmin";
 import OrdersTable from "@/components/OrdersTable";
 import { useEffect, useState } from 'react';
 import bgImage from "../public/sucursal.jpg";
 import { Order } from '@/types/types';
+
+interface AdminContentProps {
+    orders: Order[];
+}
+
+export const AdminCont: React.FC<AdminContentProps> = ({ orders }) => {
+
+    return (
+        <SessionProvider>
+            <AdminContent orders={orders} />
+        </SessionProvider>
+    );
+}
 
 interface AdminContentProps {
     orders: Order[];
@@ -72,5 +86,3 @@ const AdminContent: React.FC<AdminContentProps> = ({ orders }) => {
         </main>
     );
 }
-
-export default AdminContent;
