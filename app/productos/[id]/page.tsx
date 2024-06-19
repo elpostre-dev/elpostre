@@ -38,6 +38,7 @@ import {
 } from "@/components/ui/dialog"
 
 import { useCart } from '@/lib/CartContext';
+import Modal from '@/components/Modal';
 
 export default function SingleProduct({ params }: { params: { id: string } }) {
 
@@ -52,6 +53,11 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
     const [variacion, setVariacion] = useState<any>(null);
     const [productName, setProductName] = useState<string>("");
     const [cantidad, setCantidad] = useState<number>(1);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
 
     useEffect(() => {
         const productoEncontrado = productos.find((p) => p.id === Number(id));
@@ -230,9 +236,29 @@ export default function SingleProduct({ params }: { params: { id: string } }) {
                                         {/* descripcion */}
                                         <div>
                                             <h3 className="text-lg font-bold text-gray-800">Descripción</h3>
-                                            <p className="text-gray-400 text-lg mt-2">
+                                            <p className="text-gray-400 text-lg my-2">
                                                 {producto.descripcion}
                                             </p>
+                                            {
+                                                producto.categoriaId == 1 || producto.id == 37 || producto.id == 38 ?
+                                                    <div className="flex flex-wrap gap-4">
+                                                        <button
+                                                            type="button"
+                                                            className="min-w-[200px] px-4 py-3 bg-gray-800 hover:bg-gray-500 hover:shadow-lg focus:ring-2 text-white text-sm font-bold rounded"
+                                                            onClick={openModal}
+                                                        >
+                                                            Ver tamaños
+                                                        </button>
+                                                        <Modal
+                                                            isOpen={isModalOpen}
+                                                            onClose={closeModal}
+                                                            title={"Referencia de tamaños"}
+                                                            imageSrc={producto.categoriaId == 1 ? "/pasteles/tamanios_pasteles.jpg" : "/galletas/tamanios_galletas.jpg"}
+                                                        />
+                                                    </div>
+                                                    :
+                                                    <></>
+                                            }
                                         </div>
 
                                         <hr className="my-8" />

@@ -579,12 +579,34 @@ export default function Home() {
       <Contacto />
 
 
+      {/* TAMANIOS DE PASTELES */}
+      <section className="w-full py-14 bg-mainRosa-100">
+        <div className="container flex flex-col items-center justify-center gap-8 px-4 md:px-6">
+          <div className="max-w-2xl lg:max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-mainRojo-100">
+              Conoce nuestros tamaños de pasteles
+            </h2>
+            <p className="mt-2 text-lg text-gray-500">
+              Contamos con una amplia variedad de tamaños de pasteles, desde individuales hasta pasteles para grandes eventos.
+            </p>
+          </div>
+          <img
+            src="/tamanios_pasteles.jpg"
+            alt="Hero Image"
+            width={1113}
+            height={846}
+            className="w-full max-w-3xl rounded-xl"
+          />
+        </div>
+      </section>
+
+
       {/* Best Sellers */}
       <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 pb-20 lg:max-w-7xl lg:px-8">
 
           <h2 className="text-3xl font-semibold tracking-tight text-mainRojo-100 text-center">
-            Conoce nuestros bestsellers
+            Explora nuestros bestsellers
             <hr className="bg-mainRojo-100 h-1 my-5 mb-10 mx-auto" style={{ width: '10%' }} />
           </h2>
 

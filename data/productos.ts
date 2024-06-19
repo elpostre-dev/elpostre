@@ -830,12 +830,12 @@ export const productos: Producto[] = [
         descripcion: "Prueba nuestros deliciosos brownies.",
         variaciones: [
             {
-                tamanio: "Caja Grande",
+                tamanio: "Caja de 9 piezas",
                 precio: 250.00,
                 personas: "9 piezas"
             },
             {
-                tamanio: "Caja Chica",
+                tamanio: "Caja de 6 piezas",
                 precio: 190.00,
                 personas: "6 piezas"
             },
@@ -1029,10 +1029,15 @@ export const productos: Producto[] = [
         descripcion: "Nuestras famosas copitas, ahora para la dieta keto. Pruébalas en sabores de pay de queso con fresas o de chocolate.",
         variaciones: [
             {
-                tamanio: "Copita Keto",
+                tamanio: "Copita Keto de queso con fresas",
                 precio: 70.00,
                 personas: ""
             },
+            {
+                tamanio: "Copita Keto de chocolate",
+                precio: 70.00,
+                personas: ""
+            }
         ],
         fotos: ["/Keto/COPITAS_KETO.jpg", "/Keto/COPITAS_KETO_2.jpg"]
     },
@@ -1111,7 +1116,7 @@ export const productos: Producto[] = [
                 personas: ""
             },
         ],
-        fotos: ["/MuffinsPanques/COFFEECAKE_2.jpg", "/MuffinsPanques/LIMON_2.jpg"]
+        fotos: ["/MuffinsPanques/COFFEECAKE_2.jpg", "/MuffinsPanques/LIMON_2.jpg", "/MuffinsPanques/tamanios_panques.jpg"]
     },
     {
         id: 49,
@@ -1138,10 +1143,50 @@ export const productos: Producto[] = [
         descripcion: "Prueba nuestras deliciosas copitas de brownie, fresas con crema, mostachón con fresas, queso con fresas, mango con crema, mostachón de mango, queso con mango, 4 leches y zanahoria.",
         variaciones: [
             {
-                tamanio: "Copita",
+                tamanio: "Copita de brownie",
                 precio: 100.00,
                 personas: ""
             },
+            {
+                tamanio: "Copita de fresas con crema",
+                precio: 100.00,
+                personas: ""
+            },
+            {
+                tamanio: "Copita de mostachón con fresas",
+                precio: 100.00,
+                personas: ""
+            },
+            {
+                tamanio: "Copita de queso con fresas",
+                precio: 100.00,
+                personas: ""
+            },
+            {
+                tamanio: "Copita de mango con crema",
+                precio: 100.00,
+                personas: ""
+            },
+            {
+                tamanio: "Copita de mostachón de mango",
+                precio: 100.00,
+                personas: ""
+            },
+            {
+                tamanio: "Copita de queso con mango",
+                precio: 100.00,
+                personas: ""
+            },
+            {
+                tamanio: "Copita de 4 leches",
+                precio: 100.00,
+                personas: ""
+            },
+            {
+                tamanio: "Copita de zanahoria",
+                precio: 100.00,
+                personas: ""
+            }
         ],
         fotos: ["/Individuales/COPITAS.jpg", "/Individuales/COPITAS_2.jpg", "/Individuales/COPITAS_3.jpg", "/Individuales/COPITAS_4.jpg", "/Individuales/COPITAS_5.jpg", "/Individuales/COPITAS_6.jpg", "/Individuales/COPITAS_7.jpg", "/Individuales/COPITAS_8.jpg", "/Individuales/COPITAS_9.jpg", "/Individuales/COPITAS_10.jpg"]
     },
@@ -1158,12 +1203,12 @@ export const productos: Producto[] = [
                 personas: ""
             },
             {
-                tamanio: "Kekitos con betún de chocolate",
+                tamanio: "Keko con betún de chocolate",
                 precio: 45.00,
                 personas: ""
             },
             {
-                tamanio: "Kekitos betún de colores",
+                tamanio: "Keko betún de colores",
                 precio: 25.00,
                 personas: ""
             },
@@ -1193,12 +1238,12 @@ export const productos: Producto[] = [
         descripcion: "Prueba nuestros deliciosos minipays de fruta o nuez.",
         variaciones: [
             {
-                tamanio: "Caja Familiar",
+                tamanio: "Caja de 40 piezas",
                 precio: 790.00,
                 personas: "40 piezas"
             },
             {
-                tamanio: "Caja Grande",
+                tamanio: "Caja de 25 piezas",
                 precio: 550.00,
                 personas: "25 piezas"
             },
@@ -1375,32 +1420,32 @@ export const productos: Producto[] = [
         descripcion: "Prueba nuestros deliciosos mini brownies de cajeta, crunch, chocolate, betún alemán y almendra.",
         variaciones: [
             {
-                tamanio: "Caja Familiar",
+                tamanio: "Caja de 40 piezas",
                 precio: 680.00,
                 personas: "40 piezas"
             },
             {
-                tamanio: "Caja Grande",
+                tamanio: "Caja de 25 piezas",
                 precio: 480.00,
                 personas: "25 piezas"
             },
             {
-                tamanio: "Caja Mediana",
+                tamanio: "Caja de 16 piezas",
                 precio: 350.00,
                 personas: "16 piezas"
             },
             {
-                tamanio: "Caja Regular",
+                tamanio: "Caja de 9 piezas",
                 precio: 200.00,
                 personas: "9 piezas"
             },
             {
-                tamanio: "Caja Chica",
+                tamanio: "Caja de 5 piezas",
                 precio: 120.00,
                 personas: "5 piezas"
             },
             {
-                tamanio: "Caja Individual",
+                tamanio: "Caja de 4 piezas",
                 precio: 110.00,
                 personas: "4 piezas"
             },
