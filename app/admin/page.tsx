@@ -4,8 +4,9 @@
 import { SessionProvider, useSession, signIn } from "next-auth/react";
 import NavBarAdmin from "@/components/NavBarAdmin";
 import OrdersTable from "@/components/OrdersTable";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import bgImage from "../../public/sucursal.jpg";
+import { Order } from '@/types/types';
 
 export default function Admin() {
     return (
@@ -17,13 +18,23 @@ export default function Admin() {
 
 function AdminContent() {
     const { data: session, status } = useSession();
+    const [orders, setOrders] = useState<Order[]>([]);
 
     useEffect(() => {
         if (status === "loading") return; // Do nothing while loading
         if (!session) {
             signIn(undefined, { callbackUrl: '/admin' });
         }
+        if (session) {
+            fetchOrders();
+        }
     }, [session, status]);
+
+    async function fetchOrders() {
+        const res = await fetch('/api/admin/orders', { cache: 'no-store' });
+        const data = await res.json();
+        setOrders(data.orders);
+    }
 
     if (status === "loading") {
         return (
@@ -71,7 +82,7 @@ function AdminContent() {
                     </h1>
                 </div>
             </section>
-            <OrdersTable />
+            <OrdersTable orders={orders} />
         </main>
     );
 }
