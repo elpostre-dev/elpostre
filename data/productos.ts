@@ -795,27 +795,27 @@ export const productos: Producto[] = [
                 personas: "40 piezas"
             },
             {
-                tamanio: "Caja Grande",
+                tamanio: "Caja de 25",
                 precio: 480.00,
                 personas: "25 piezas"
             },
             {
-                tamanio: "Caja Mediana",
+                tamanio: "Caja de 16",
                 precio: 350.00,
                 personas: "16 piezas"
             },
             {
-                tamanio: "Caja Regular",
+                tamanio: "Caja de 9",
                 precio: 200.00,
                 personas: "9 piezas"
             },
             {
-                tamanio: "Caja Chica",
+                tamanio: "Caja de 5",
                 precio: 120.00,
                 personas: "5 piezas"
             },
             {
-                tamanio: "Caja Individual",
+                tamanio: "Caja de 4",
                 precio: 110.00,
                 personas: "4 piezas"
             },
