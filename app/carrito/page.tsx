@@ -103,6 +103,22 @@ export default function Carrito() {
         "6:00 PM - 7:00 PM",
     ];
 
+    const horasSabado = [
+        "11:00 AM - 12:00 PM",
+        "12:00 PM - 1:00 PM",
+        "1:00 PM - 2:00 PM",
+        "2:00 PM - 3:00 PM",
+        "3:00 PM - 4:00 PM",
+        "4:00 PM - 5:00 PM",
+        "5:00 PM - 6:00 PM",
+    ];
+
+    const horasDomingo = [
+        "12:00 PM - 1:00 PM",
+        "1:00 PM - 2:00 PM",
+        "2:00 PM - 3:00 PM",
+    ];
+
     const handleEmailChange = () => {
         if (validateEmail(email)) {
             setEmailError(false); // No error
@@ -560,15 +576,37 @@ export default function Carrito() {
                                                         </SelectTrigger>
                                                         <SelectContent className="bg-gray-50 border-gray-300 focus:border-primary-500 focus:ring-primary-500">
                                                             <SelectGroup>
-                                                                {/* <SelectLabel>Fruits</SelectLabel> */}
-                                                                {horas.map((hora, index) => (
-                                                                    <SelectItem
-                                                                        className="bg-white"
-                                                                        key={index}
-                                                                        value={hora}>
-                                                                        {hora}
-                                                                    </SelectItem>
-                                                                ))}
+                                                                {
+                                                                    date?.getDay() === 0 ?
+                                                                        horasDomingo.map((hora, index) => (
+                                                                            <SelectItem
+                                                                                className="bg-white"
+                                                                                key={index}
+                                                                                value={hora}>
+                                                                                {hora}
+                                                                            </SelectItem>
+                                                                        ))
+                                                                        :
+                                                                        date?.getDay() === 6 ?
+                                                                            horasSabado.map((hora, index) => (
+                                                                                <SelectItem
+                                                                                    className="bg-white"
+                                                                                    key={index}
+                                                                                    value={hora}>
+                                                                                    {hora}
+                                                                                </SelectItem>
+                                                                            ))
+                                                                            :
+                                                                            horas.map((hora, index) => (
+                                                                                <SelectItem
+                                                                                    className="bg-white"
+                                                                                    key={index}
+                                                                                    value={hora}>
+                                                                                    {hora}
+                                                                                </SelectItem>
+                                                                            ))
+
+                                                                }
                                                             </SelectGroup>
                                                         </SelectContent>
                                                     </Select>
