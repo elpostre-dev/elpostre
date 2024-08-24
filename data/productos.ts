@@ -63,21 +63,21 @@ export const productos: Producto[] = [
         ],
         fotos: ["/Pasteles/ROSCA_FRESAS.jpg", "/Pasteles/ROSCA_FRESAS_2.jpg"]
     },
-    {
-        id: 4,
-        nombre: "Rosca de Mango",
-        categoriaId: 1,
-        categoriaNombre: "Pasteles",
-        descripcion: "Prueba nuestra deliciosa rosca de pan de vainilla rellena de mango y nuestro betún de queso crema. (Únicamente en temporada)",
-        variaciones: [
-            {
-                tamanio: "Grande",
-                precio: 940.00,
-                personas: "De 15 a 18 personas"
-            },
-        ],
-        fotos: ["/Pasteles/ROSCA_MANGO.jpg", "/Pasteles/ROSCA_MANGO_2.jpg"]
-    },
+    // {
+    //     id: 4,
+    //     nombre: "Rosca de Mango",
+    //     categoriaId: 1,
+    //     categoriaNombre: "Pasteles",
+    //     descripcion: "Prueba nuestra deliciosa rosca de pan de vainilla rellena de mango y nuestro betún de queso crema. (Únicamente en temporada)",
+    //     variaciones: [
+    //         {
+    //             tamanio: "Grande",
+    //             precio: 940.00,
+    //             personas: "De 15 a 18 personas"
+    //         },
+    //     ],
+    //     fotos: ["/Pasteles/ROSCA_MANGO.jpg", "/Pasteles/ROSCA_MANGO_2.jpg"]
+    // },
     {
         id: 5,
         nombre: "Pastel Confetti",
@@ -133,31 +133,31 @@ export const productos: Producto[] = [
         ],
         fotos: ["/Pasteles/MOSTACHON_FRESA.jpg", "/Pasteles/MOSTACHON_FRESA_2.jpg"]
     },
-    {
-        id: 7,
-        nombre: "Mostachón de Mango",
-        categoriaId: 1,
-        categoriaNombre: "Pasteles",
-        descripcion: "Prueba nuestro mostachón de mango, únicamente en temporada.",
-        variaciones: [
-            {
-                tamanio: "Grande",
-                precio: 860.00,
-                personas: "De 15 a 18 personas"
-            },
-            {
-                tamanio: "Mediano",
-                precio: 460.00,
-                personas: "De 4 a 6 personas"
-            },
-            {
-                tamanio: "Chico",
-                precio: 190.00,
-                personas: "De 1 a 2 personas"
-            },
-        ],
-        fotos: ["/Pasteles/MOSTACHON_MANGO.jpg", "/Pasteles/MOSTACHON_MANGO_2.jpg"]
-    },
+    // {
+    //     id: 7,
+    //     nombre: "Mostachón de Mango",
+    //     categoriaId: 1,
+    //     categoriaNombre: "Pasteles",
+    //     descripcion: "Prueba nuestro mostachón de mango, únicamente en temporada.",
+    //     variaciones: [
+    //         {
+    //             tamanio: "Grande",
+    //             precio: 860.00,
+    //             personas: "De 15 a 18 personas"
+    //         },
+    //         {
+    //             tamanio: "Mediano",
+    //             precio: 460.00,
+    //             personas: "De 4 a 6 personas"
+    //         },
+    //         {
+    //             tamanio: "Chico",
+    //             precio: 190.00,
+    //             personas: "De 1 a 2 personas"
+    //         },
+    //     ],
+    //     fotos: ["/Pasteles/MOSTACHON_MANGO.jpg", "/Pasteles/MOSTACHON_MANGO_2.jpg"]
+    // },
     {
         id: 8,
         nombre: "Pastel Ferrero",
@@ -665,31 +665,31 @@ export const productos: Producto[] = [
         ],
         fotos: ["/Pays/PAY_FRESA.jpg", "/Pays/PAY_FRESA_2.jpg"]
     },
-    {
-        id: 30,
-        nombre: "Pay de Queso con Mango",
-        categoriaId: 2,
-        categoriaNombre: "Pays",
-        descripcion: "Prueba nuestro delicioso pay de queso con mango.",
-        variaciones: [
-            {
-                tamanio: "Grande",
-                precio: 860.00,
-                personas: "De 15 a 18 personas"
-            },
-            {
-                tamanio: "Mediano",
-                precio: 460.00,
-                personas: "De 4 a 6 personas"
-            },
-            {
-                tamanio: "Chico",
-                precio: 190.00,
-                personas: "De 1 a 2 personas"
-            },
-        ],
-        fotos: ["/Pays/PAY_MANGO.jpg", "/Pays/PAY_MANGO_2.jpg"]
-    },
+    // {
+    //     id: 30,
+    //     nombre: "Pay de Queso con Mango",
+    //     categoriaId: 2,
+    //     categoriaNombre: "Pays",
+    //     descripcion: "Prueba nuestro delicioso pay de queso con mango.",
+    //     variaciones: [
+    //         {
+    //             tamanio: "Grande",
+    //             precio: 860.00,
+    //             personas: "De 15 a 18 personas"
+    //         },
+    //         {
+    //             tamanio: "Mediano",
+    //             precio: 460.00,
+    //             personas: "De 4 a 6 personas"
+    //         },
+    //         {
+    //             tamanio: "Chico",
+    //             precio: 190.00,
+    //             personas: "De 1 a 2 personas"
+    //         },
+    //     ],
+    //     fotos: ["/Pays/PAY_MANGO.jpg", "/Pays/PAY_MANGO_2.jpg"]
+    // },
     {
         id: 31,
         nombre: "Pay Tortuga",
@@ -1162,21 +1162,21 @@ export const productos: Producto[] = [
                 precio: 100.00,
                 personas: ""
             },
-            {
-                tamanio: "Copita de mango con crema",
-                precio: 100.00,
-                personas: ""
-            },
-            {
-                tamanio: "Copita de mostachón de mango",
-                precio: 100.00,
-                personas: ""
-            },
-            {
-                tamanio: "Copita de queso con mango",
-                precio: 100.00,
-                personas: ""
-            },
+            // {
+            //     tamanio: "Copita de mango con crema",
+            //     precio: 100.00,
+            //     personas: ""
+            // },
+            // {
+            //     tamanio: "Copita de mostachón de mango",
+            //     precio: 100.00,
+            //     personas: ""
+            // },
+            // {
+            //     tamanio: "Copita de queso con mango",
+            //     precio: 100.00,
+            //     personas: ""
+            // },
             {
                 tamanio: "Copita de 4 leches",
                 precio: 100.00,
