@@ -102,7 +102,7 @@ export const productos: Producto[] = [
             },
             {
                 tamanio: "Chico",
-                precio: 170.00,
+                precio: 190.00,
                 personas: "De 1 a 2 personas"
             },
         ],
