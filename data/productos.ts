@@ -27,22 +27,22 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Rosca Grande",
-                precio: 780.00,
+                precio: 860.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano Alto",
-                precio: 710.00,
+                precio: 780.00,
                 personas: "De 10 a 12 personas"
             },
             {
                 tamanio: "Mediano Bajo",
-                precio: 390.00,
+                precio: 430.00,
                 personas: "De 4 a 6 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -57,7 +57,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 940.00,
+                precio: 980.00,
                 personas: "De 15 a 18 personas"
             },
         ],
@@ -72,7 +72,7 @@ export const productos: Producto[] = [
     //     variaciones: [
     //         {
     //             tamanio: "Grande",
-    //             precio: 940.00,
+    //             precio: 980.00,
     //             personas: "De 15 a 18 personas"
     //         },
     //     ],
@@ -87,22 +87,22 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 860.00,
+                precio: 940.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano Alto",
-                precio: 710.00,
+                precio: 780.00,
                 personas: "De 10 a 12 personas"
             },
             {
                 tamanio: "Mediano Bajo",
-                precio: 390.00,
+                precio: 430.00,
                 personas: "De 4 a 6 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -117,17 +117,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 860.00,
+                precio: 940.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano",
-                precio: 460.00,
+                precio: 510.00,
                 personas: "De 4 a 6 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -142,17 +142,17 @@ export const productos: Producto[] = [
     //     variaciones: [
     //         {
     //             tamanio: "Grande",
-    //             precio: 860.00,
+    //             precio: 940.00,
     //             personas: "De 15 a 18 personas"
     //         },
     //         {
     //             tamanio: "Mediano",
-    //             precio: 460.00,
+    //             precio: 510.00,
     //             personas: "De 4 a 6 personas"
     //         },
     //         {
     //             tamanio: "Chico",
-    //             precio: 190.00,
+    //             precio: 210.00,
     //             personas: "De 1 a 2 personas"
     //         },
     //     ],
@@ -167,12 +167,12 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Mediano Alto",
-                precio: 940.00,
+                precio: 980.00,
                 personas: "De 10 a 12 personas"
             },
             // {
             //     tamanio: "Mediano Bajo",
-            //     precio: 520.00,
+            //     precio: 580.00,
             //     personas: "De 4 a 6 personas"
             // },
         ],
@@ -187,17 +187,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 940.00,
+                precio: 980.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano Alto",
-                precio: 710.00,
+                precio: 780.00,
                 personas: "De 10 a 12 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -212,17 +212,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Rosca Grande",
-                precio: 780.00,
+                precio: 860.00,
                 personas: "De 15 a 18 personas"
             },
             // {
             //     tamanio: "Mediano Alto",
-            //     precio: 710.00,
+            //     precio: 780.00,
             //     personas: "De 10 a 12 personas"
             // },
             {
                 tamanio: "Mediano Bajo",
-                precio: 390.00,
+                precio: 430.00,
                 personas: "De 4 a 6 personas"
             },
         ],
@@ -237,7 +237,7 @@ export const productos: Producto[] = [
     //     variaciones: [
     //         {
     //             tamanio: "Mediano Alto",
-    //             precio: 750.00,
+    //             precio: 860.00,
     //             personas: "De 10 a 12 personas"
     //         },
     //     ],
@@ -252,17 +252,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 1200.00,
+                precio: 1320.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano Alto",
-                precio: 860.00,
+                precio: 950.00,
                 personas: "De 10 a 12 personas"
             },
             {
                 tamanio: "Mediano Bajo",
-                precio: 520.00,
+                precio: 580.00,
                 personas: "De 4 a 6 personas"
             },
         ],
@@ -277,12 +277,12 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 860.00,
+                precio: 940.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -297,12 +297,12 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Mediano Alto",
-                precio: 710.00,
+                precio: 780.00,
                 personas: "De 10 a 12 personas"
             },
             {
                 tamanio: "Mediano Bajo",
-                precio: 460.00,
+                precio: 510.00,
                 personas: "De 4 a 6 personas"
             },
         ],
@@ -317,22 +317,22 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 860.00,
+                precio: 940.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano Alto",
-                precio: 710.00,
+                precio: 780.00,
                 personas: "De 10 a 12 personas"
             },
             {
                 tamanio: "Mediano Bajo",
-                precio: 460.00,
+                precio: 510.00,
                 personas: "De 4 a 6 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -347,17 +347,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 1200.00,
+                precio: 1350.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano Alto",
-                precio: 940.00,
+                precio: 980.00,
                 personas: "De 10 a 12 personas"
             },
             {
                 tamanio: "Mediano Bajo",
-                precio: 520.00,
+                precio: 580.00,
                 personas: "De 4 a 6 personas"
             },
         ],
@@ -372,22 +372,22 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 860.00,
+                precio: 940.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano Alto",
-                precio: 710.00,
+                precio: 780.00,
                 personas: "De 10 a 12 personas"
             },
             {
                 tamanio: "Mediano Bajo",
-                precio: 460.00,
+                precio: 510.00,
                 personas: "De 4 a 6 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -402,12 +402,12 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 860.00,
+                precio: 940.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano",
-                precio: 460.00,
+                precio: 510.00,
                 personas: "De 4 a 6 personas"
             },
         ],
@@ -422,12 +422,12 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Mediano Alto",
-                precio: 940.00,
+                precio: 980.00,
                 personas: "De 10 a 12 personas"
             },
             {
                 tamanio: "Mediano Bajo",
-                precio: 520.00,
+                precio: 580.00,
                 personas: "De 4 a 6 personas"
             },
         ],
@@ -442,17 +442,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 860.00,
+                precio: 940.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano Alto",
-                precio: 710.00,
+                precio: 780.00,
                 personas: "De 10 a 12 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -467,17 +467,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 780.00,
+                precio: 860.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano",
-                precio: 460.00,
+                precio: 510.00,
                 personas: "De 4 a 6 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -492,17 +492,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 860.00,
+                precio: 940.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano Bajo",
-                precio: 460.00,
+                precio: 510.00,
                 personas: "De 4 a 6 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -517,17 +517,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 860.00,
+                precio: 940.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano Bajo",
-                precio: 460.00,
+                precio: 510.00,
                 personas: "De 4 a 6 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -542,12 +542,12 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 940.00,
+                precio: 980.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano Alto",
-                precio: 710.00,
+                precio: 830.00,
                 personas: "De 10 a 12 personas"
             },
         ],
@@ -562,12 +562,12 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 1050.00,
+                precio: 1150.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano Alto",
-                precio: 850.00,
+                precio: 940.00,
                 personas: "De 10 a 12 personas"
             },
         ],
@@ -582,7 +582,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 860.00,
+                precio: 940.00,
                 personas: "De 15 a 18 personas"
             },
         ],
@@ -597,7 +597,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 860.00,
+                precio: 940.00,
                 personas: "De 15 a 18 personas"
             },
         ],
@@ -612,7 +612,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 780.00,
+                precio: 860.00,
                 personas: "De 15 a 18 personas"
             },
         ],
@@ -627,12 +627,12 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 1250.00,
+                precio: 1350.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano Alto",
-                precio: 860.00,
+                precio: 950.00,
                 personas: "De 10 a 12 personas"
             },
         ],
@@ -649,17 +649,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 860.00,
+                precio: 940.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano",
-                precio: 460.00,
+                precio: 510.00,
                 personas: "De 4 a 6 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -674,17 +674,17 @@ export const productos: Producto[] = [
     //     variaciones: [
     //         {
     //             tamanio: "Grande",
-    //             precio: 860.00,
+    //             precio: 940.00,
     //             personas: "De 15 a 18 personas"
     //         },
     //         {
     //             tamanio: "Mediano",
-    //             precio: 460.00,
+    //             precio: 510.00,
     //             personas: "De 4 a 6 personas"
     //         },
     //         {
     //             tamanio: "Chico",
-    //             precio: 190.00,
+    //             precio: 210.00,
     //             personas: "De 1 a 2 personas"
     //         },
     //     ],
@@ -699,17 +699,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 860.00,
+                precio: 940.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano",
-                precio: 460.00,
+                precio: 510.00,
                 personas: "De 4 a 6 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -729,12 +729,12 @@ export const productos: Producto[] = [
             },
             {
                 tamanio: "Mediano",
-                precio: 460.00,
+                precio: 510.00,
                 personas: "De 4 a 6 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -749,7 +749,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 940.00,
+                precio: 980.00,
                 personas: "De 15 a 18 personas"
             },
         ],
@@ -764,17 +764,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 820.00,
+                precio: 940.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano",
-                precio: 460.00,
+                precio: 510.00,
                 personas: "De 4 a 6 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -791,32 +791,32 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Caja de 40",
-                precio: 680.00,
+                precio: 750.00,
                 personas: "40 piezas"
             },
             {
                 tamanio: "Caja de 25",
-                precio: 480.00,
+                precio: 530.00,
                 personas: "25 piezas"
             },
             {
                 tamanio: "Caja de 16",
-                precio: 350.00,
+                precio: 385.00,
                 personas: "16 piezas"
             },
             {
                 tamanio: "Caja de 9",
-                precio: 200.00,
+                precio: 220.00,
                 personas: "9 piezas"
             },
             {
                 tamanio: "Caja de 5",
-                precio: 120.00,
+                precio: 130.00,
                 personas: "5 piezas"
             },
             {
                 tamanio: "Caja de 4",
-                precio: 110.00,
+                precio: 120.00,
                 personas: "4 piezas"
             },
         ],
@@ -831,12 +831,12 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Caja de 9 piezas",
-                precio: 250.00,
+                precio: 275.00,
                 personas: "9 piezas"
             },
             {
                 tamanio: "Caja de 6 piezas",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "6 piezas"
             },
         ],
@@ -853,37 +853,37 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Cilindro Grande",
-                precio: 500.00,
+                precio: 550.00,
                 personas: ""
             },
             {
                 tamanio: "Cilindo Mediano",
-                precio: 330.00,
+                precio: 360.00,
                 personas: ""
             },
             {
                 tamanio: "Cilindro Chico",
-                precio: 170.00,
+                precio: 190.00,
                 personas: ""
             },
             {
                 tamanio: "Caja Grande",
-                precio: 520.00,
+                precio: 570.00,
                 personas: ""
             },
             {
                 tamanio: "Caja Chica",
-                precio: 320.00,
+                precio: 350.00,
                 personas: ""
             },
             {
                 tamanio: "Bolsita",
-                precio: 80.00,
+                precio: 90.00,
                 personas: ""
             },
             {
                 tamanio: "Bolsita Avena con Monkfruit",
-                precio: 80.00,
+                precio: 90.00,
                 personas: ""
             },
         ],
@@ -898,32 +898,32 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Cilindro Grande",
-                precio: 500.00,
+                precio: 530.00,
                 personas: ""
             },
             {
                 tamanio: "Cilindo Mediano",
-                precio: 330.00,
+                precio: 360.00,
                 personas: ""
             },
             {
                 tamanio: "Cilindro Chico",
-                precio: 170.00,
+                precio: 190.00,
                 personas: ""
             },
             {
                 tamanio: "Caja Grande",
-                precio: 520.00,
+                precio: 570.00,
                 personas: ""
             },
             {
                 tamanio: "Caja Chica",
-                precio: 320.00,
+                precio: 350.00,
                 personas: ""
             },
             {
                 tamanio: "Bolsita",
-                precio: 80.00,
+                precio: 90.00,
                 personas: ""
             },
         ],
@@ -978,12 +978,12 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Caja Grande",
-                precio: 340.00,
+                precio: 370.00,
                 personas: "Caja de 9 galletas"
             },
             {
                 tamanio: "Caja Chica",
-                precio: 230.00,
+                precio: 250.00,
                 personas: "Caja de 6 galletas"
             },
         ],
@@ -998,7 +998,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Cookie Cake",
-                precio: 630.00,
+                precio: 690.00,
                 personas: ""
             },
         ],
@@ -1015,7 +1015,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Gansito Keto",
-                precio: 85.00,
+                precio: 95.00,
                 personas: ""
             },
         ],
@@ -1050,7 +1050,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Brownie con Queso",
-                precio: 70.00,
+                precio: 75.00,
                 personas: ""
             },
         ],
@@ -1065,7 +1065,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Individual",
-                precio: 70.00,
+                precio: 75.00,
                 personas: ""
             },
         ],
@@ -1080,17 +1080,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 940.00,
+                precio: 980.00,
                 personas: "De 15 a 18 personas"
             },
             {
                 tamanio: "Mediano",
-                precio: 550.00,
+                precio: 610.00,
                 personas: "De 4 a 6 personas"
             },
             {
                 tamanio: "Chico",
-                precio: 190.00,
+                precio: 210.00,
                 personas: "De 1 a 2 personas"
             },
         ],
@@ -1107,12 +1107,12 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Panqué Grande",
-                precio: 480.00,
+                precio: 530.00,
                 personas: ""
             },
             {
                 tamanio: "Panqué Chico",
-                precio: 180.00,
+                precio: 200.00,
                 personas: ""
             },
         ],
@@ -1127,7 +1127,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Mini Muffins",
-                precio: 310.00,
+                precio: 340.00,
                 personas: "Caja de 12 mini muffins"
             },
         ],
@@ -1144,47 +1144,47 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Copita de brownie",
-                precio: 100.00,
+                precio: 110.00,
                 personas: ""
             },
             {
                 tamanio: "Copita de fresas con crema",
-                precio: 100.00,
+                precio: 110.00,
                 personas: ""
             },
             {
                 tamanio: "Copita de mostachón con fresas",
-                precio: 100.00,
+                precio: 110.00,
                 personas: ""
             },
             {
                 tamanio: "Copita de queso con fresas",
-                precio: 100.00,
+                precio: 110.00,
                 personas: ""
             },
             // {
             //     tamanio: "Copita de mango con crema",
-            //     precio: 100.00,
+            //     precio: 110.00,
             //     personas: ""
             // },
             // {
             //     tamanio: "Copita de mostachón de mango",
-            //     precio: 100.00,
+            //     precio: 110.00,
             //     personas: ""
             // },
             // {
             //     tamanio: "Copita de queso con mango",
-            //     precio: 100.00,
+            //     precio: 110.00,
             //     personas: ""
             // },
             {
                 tamanio: "Copita de 4 leches",
-                precio: 100.00,
+                precio: 110.00,
                 personas: ""
             },
             {
                 tamanio: "Copita de zanahoria",
-                precio: 100.00,
+                precio: 110.00,
                 personas: ""
             }
         ],
@@ -1199,17 +1199,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Caja con 12 mini kekitos",
-                precio: 280.00,
+                precio: 310.00,
                 personas: ""
             },
             {
                 tamanio: "Keko con betún de chocolate",
-                precio: 45.00,
+                precio: 50.00,
                 personas: ""
             },
             {
                 tamanio: "Keko betún de colores",
-                precio: 25.00,
+                precio: 28.00,
                 personas: ""
             },
         ],
@@ -1224,7 +1224,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Bolsita",
-                precio: 50.00,
+                precio: 55.00,
                 personas: ""
             },
         ],
@@ -1239,12 +1239,12 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Caja de 40 piezas",
-                precio: 790.00,
+                precio: 8860.00,
                 personas: "40 piezas"
             },
             {
                 tamanio: "Caja de 25 piezas",
-                precio: 550.00,
+                precio: 600.00,
                 personas: "25 piezas"
             },
         ],
@@ -1276,39 +1276,39 @@ export const productos: Producto[] = [
             },
             {
                 tamanio: "Caja de 10 Buñuelos",
-                precio: 410.00,
+                precio: 450.00,
                 personas: ""
             },
         ],
         fotos: ["/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_1.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_2.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_3.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_4.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_5.jpg"],
         temporada: "Navidad"
     },
-    {
-        id: 55,
-        nombre: "Surtido",
-        categoriaId: 8,
-        categoriaNombre: "Temporada",
-        descripcion: "Prueba nuestra deliciosa combinación de galletas. Producto disponible hasta agotar existencia.",
-        variaciones: [
-            {
-                tamanio: "Caja de Acrílico Grande",
-                precio: 590.00,
-                personas: ""
-            },
-            {
-                tamanio: "Caja de Acrílico Mediana",
-                precio: 500.00,
-                personas: ""
-            },
-            {
-                tamanio: "Caja de Acrílico Chica",
-                precio: 370.00,
-                personas: ""
-            },
-        ],
-        fotos: ["/Temporada/Navidad/Surtido_1.jpg", "/Temporada/Navidad/Surtido_2.jpg", "/Temporada/Navidad/Surtido_3.png"],
-        temporada: "Navidad"
-    },
+    // {
+    //     id: 55,
+    //     nombre: "Surtido",
+    //     categoriaId: 8,
+    //     categoriaNombre: "Temporada",
+    //     descripcion: "Prueba nuestra deliciosa combinación de galletas. Producto disponible hasta agotar existencia.",
+    //     variaciones: [
+    //         {
+    //             tamanio: "Caja de Acrílico Grande",
+    //             precio: 590.00,
+    //             personas: ""
+    //         },
+    //         {
+    //             tamanio: "Caja de Acrílico Mediana",
+    //             precio: 500.00,
+    //             personas: ""
+    //         },
+    //         {
+    //             tamanio: "Caja de Acrílico Chica",
+    //             precio: 370.00,
+    //             personas: ""
+    //         },
+    //     ],
+    //     fotos: ["/Temporada/Navidad/Surtido_1.jpg", "/Temporada/Navidad/Surtido_2.jpg", "/Temporada/Navidad/Surtido_3.png"],
+    //     temporada: "Navidad"
+    // },
     {
         id: 56,
         nombre: "Pastel Navideño",
@@ -1318,27 +1318,27 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Copo de Nieve Mediano Alto",
-                precio: 780.00,
+                precio: 850.00,
                 personas: "10 a 12 personas"
             },
             {
                 tamanio: "Copo de Nieve Mediano Bajo",
-                precio: 450.00,
+                precio: 500.00,
                 personas: "4 a 6 personas"
             },
             {
                 tamanio: "Mono de Jengibre Mediano Alto",
-                precio: 780.00,
+                precio: 850.00,
                 personas: "10 a 12 personas"
             },
             {
                 tamanio: "Mono de Jengibre Mediano Bajo",
-                precio: 450.00,
+                precio: 495.00,
                 personas: "4 a 6 personas"
             },
             {
                 tamanio: "Mono de Jengibre Chico",
-                precio: 260.00,
+                precio: 290.00,
                 personas: "1 a 2 personas"
             },
         ],
@@ -1354,32 +1354,32 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Vidrio Grande",
-                precio: 640.00,
+                precio: 700.00,
                 personas: ""
             },
             {
                 tamanio: "Vidrio Mediano",
-                precio: 500.00,
+                precio: 550.00,
                 personas: ""
             },
             {
                 tamanio: "Vidrio Chico",
-                precio: 370.00,
+                precio: 410.00,
                 personas: ""
             },
             {
                 tamanio: "Cilindro Grande",
-                precio: 500.00,
+                precio: 550.00,
                 personas: ""
             },
             {
                 tamanio: "Cilindro Mediano",
-                precio: 330.00,
+                precio: 360.00,
                 personas: ""
             },
             {
                 tamanio: "Cilindro Chico",
-                precio: 170.00,
+                precio: 190.00,
                 personas: ""
             },
         ],
@@ -1395,17 +1395,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 780.00,
+                precio: 860.00,
                 personas: ""
             },
             {
                 tamanio: "Mediano Alto",
-                precio: 710.00,
+                precio: 780.00,
                 personas: ""
             },
             {
                 tamanio: "Mediano Bajo",
-                precio: 390.00,
+                precio: 430.00,
                 personas: ""
             },
         ],
@@ -1421,32 +1421,32 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Caja de 40 piezas",
-                precio: 680.00,
+                precio: 740.00,
                 personas: "40 piezas"
             },
             {
                 tamanio: "Caja de 25 piezas",
-                precio: 480.00,
+                precio: 530.00,
                 personas: "25 piezas"
             },
             {
                 tamanio: "Caja de 16 piezas",
-                precio: 350.00,
+                precio: 385.00,
                 personas: "16 piezas"
             },
             {
                 tamanio: "Caja de 9 piezas",
-                precio: 200.00,
+                precio: 220.00,
                 personas: "9 piezas"
             },
             {
                 tamanio: "Caja de 5 piezas",
-                precio: 120.00,
+                precio: 130.00,
                 personas: "5 piezas"
             },
             {
                 tamanio: "Caja de 4 piezas",
-                precio: 110.00,
+                precio: 120.00,
                 personas: "4 piezas"
             },
         ],
