@@ -1230,26 +1230,26 @@ export const productos: Producto[] = [
         ],
         fotos: ["/Individuales/TROCITO_BROWNIE.jpg", "/Individuales/TROCITO_BROWNIE_2.jpg", "/Individuales/TROCITO_BROWNIE_3.jpg"]
     },
-    {
-        id: 53,
-        nombre: "Mini Pays",
-        categoriaId: 7,
-        categoriaNombre: "Individuales",
-        descripcion: "Prueba nuestros deliciosos minipays de fruta o nuez.",
-        variaciones: [
-            {
-                tamanio: "Caja de 40 piezas",
-                precio: 8860.00,
-                personas: "40 piezas"
-            },
-            {
-                tamanio: "Caja de 25 piezas",
-                precio: 600.00,
-                personas: "25 piezas"
-            },
-        ],
-        fotos: ["/Individuales/PAYCITOS.jpg", "/Individuales/PAYCITOS_2.jpg", "/Individuales/PAYCITOS_3.jpg"]
-    },
+    // {
+    //     id: 53,
+    //     nombre: "Mini Pays",
+    //     categoriaId: 7,
+    //     categoriaNombre: "Individuales",
+    //     descripcion: "Prueba nuestros deliciosos minipays de fruta o nuez.",
+    //     variaciones: [
+    //         {
+    //             tamanio: "Caja de 40 piezas",
+    //             precio: 860.00,
+    //             personas: "40 piezas"
+    //         },
+    //         {
+    //             tamanio: "Caja de 25 piezas",
+    //             precio: 600.00,
+    //             personas: "25 piezas"
+    //         },
+    //     ],
+    //     fotos: ["/Individuales/PAYCITOS.jpg", "/Individuales/PAYCITOS_2.jpg", "/Individuales/PAYCITOS_3.jpg"]
+    // },
 
     // TEMPORADA
     {
