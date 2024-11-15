@@ -791,7 +791,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Caja de 40",
-                precio: 750.00,
+                precio: 740.00,
                 personas: "40 piezas"
             },
             {
