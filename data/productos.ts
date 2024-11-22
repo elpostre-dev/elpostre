@@ -1261,17 +1261,17 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "1 Tortuga Gigante",
-                precio: 95.00,
+                precio: 85.00,
                 personas: ""
             },
-            {
-                tamanio: "4 Tortuguitas",
-                precio: 95.00,
-                personas: ""
-            },
+            // {
+            //     tamanio: "4 Tortuguitas",
+            //     precio: 85.00,
+            //     personas: ""
+            // },
             {
                 tamanio: "Caja de Pretzels",
-                precio: 95.00,
+                precio: 85.00,
                 personas: ""
             },
             {
