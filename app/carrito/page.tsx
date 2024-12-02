@@ -93,7 +93,7 @@ export default function Carrito() {
     const [messageClient, setMessageClient] = useState('');
 
     const horas = [
-        "11:00 AM - 12:00 PM",
+        // "11:00 AM - 12:00 PM",
         "12:00 PM - 1:00 PM",
         "1:00 PM - 2:00 PM",
         "2:00 PM - 3:00 PM",
@@ -104,7 +104,7 @@ export default function Carrito() {
     ];
 
     const horasSabado = [
-        "11:00 AM - 12:00 PM",
+        // "11:00 AM - 12:00 PM",
         "12:00 PM - 1:00 PM",
         "1:00 PM - 2:00 PM",
         "2:00 PM - 3:00 PM",

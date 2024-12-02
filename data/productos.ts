@@ -1254,7 +1254,7 @@ export const productos: Producto[] = [
     // TEMPORADA
     {
         id: 54,
-        nombre: "Tortugas, Pretzels y Buñuelos",
+        nombre: "Pretzels y Tortugas",
         categoriaId: 8,
         categoriaNombre: "Temporada",
         descripcion: "Prueba nuestras deliciosas tortugas hechas con nuez de la india, pecana, caramelo y chocolate. Al igual que nuestros pretzels cubiertos de chocolate y buñuelos. Solamente en esta temporada tan especial. Productos disponibles hasta agotar existencias.",
@@ -1274,13 +1274,13 @@ export const productos: Producto[] = [
                 precio: 85.00,
                 personas: ""
             },
-            {
-                tamanio: "Caja de 10 Buñuelos",
-                precio: 450.00,
-                personas: ""
-            },
+            // {
+            //     tamanio: "Caja de 10 Buñuelos",
+            //     precio: 450.00,
+            //     personas: ""
+            // },
         ],
-        fotos: ["/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_1.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_2.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_3.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_4.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_5.jpg"],
+        fotos: ["/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_1.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_2.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_6.jpg", "/Temporada/Navidad/Tortugas_Pretzels_Bunuelos_5.jpg"],
         temporada: "Navidad"
     },
     // {
@@ -1309,52 +1309,140 @@ export const productos: Producto[] = [
     //     fotos: ["/Temporada/Navidad/Surtido_1.jpg", "/Temporada/Navidad/Surtido_2.jpg", "/Temporada/Navidad/Surtido_3.png"],
     //     temporada: "Navidad"
     // },
+    // {
+    //     id: 56,
+    //     nombre: "Pastel Navideño",
+    //     categoriaId: 8,
+    //     categoriaNombre: "Temporada",
+    //     descripcion: "Prueba nuestro delicioso Pastel de Copo de Nieve, de pan vainilla con betún de merengue o bien, nuestro Pastel de Monos de Jengibre, de pan de vainilla con betún de chocolate.",
+    //     variaciones: [
+    //         {
+    //             tamanio: "Copo de Nieve Mediano Alto",
+    //             precio: 850.00,
+    //             personas: "10 a 12 personas"
+    //         },
+    //         {
+    //             tamanio: "Copo de Nieve Mediano Bajo",
+    //             precio: 500.00,
+    //             personas: "4 a 6 personas"
+    //         },
+    //         {
+    //             tamanio: "Mono de Jengibre Mediano Alto",
+    //             precio: 850.00,
+    //             personas: "10 a 12 personas"
+    //         },
+    //         {
+    //             tamanio: "Mono de Jengibre Mediano Bajo",
+    //             precio: 495.00,
+    //             personas: "4 a 6 personas"
+    //         },
+    //         {
+    //             tamanio: "Mono de Jengibre Chico",
+    //             precio: 290.00,
+    //             personas: "1 a 2 personas"
+    //         },
+    //     ],
+    //     fotos: ["/Temporada/Navidad/Pastel_Navideno_1.jpg", "/Temporada/Navidad/Pastel_Navideno_2.jpg", "/Temporada/Navidad/Pastel_Navideno_3.jpg"],
+    //     temporada: "Navidad"
+    // },
     {
-        id: 56,
-        nombre: "Pastel Navideño",
+        id: 65,
+        nombre: "Pastel Mono Jengibre",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Prueba nuestro delicioso Pastel Mono Jengibre.",
+        variaciones: [
+            {
+                tamanio: "Chico",
+                precio: 290.00,
+                personas: "1 a 2 personas"
+            },
+            {
+                tamanio: "Mediano Bajo",
+                precio: 495.00,
+                personas: "4 a 6 personas"
+            },
+            {
+                tamanio: "Mediano Alto",
+                precio: 850.00,
+                personas: "10 a 12 personas"
+            },
+        ],
+        fotos: ["/Temporada/Navidad/PastelMonoJengibre_1.png", "/Temporada/Navidad/PastelMonoJengibre_2.png"],
+        temporada: "Navidad"
+    },
+    {
+        id: 66,
+        nombre: "Pastel Copos de Nieve",
         categoriaId: 8,
         categoriaNombre: "Temporada",
         descripcion: "Prueba nuestro delicioso Pastel de Copo de Nieve, de pan vainilla con betún de merengue o bien, nuestro Pastel de Monos de Jengibre, de pan de vainilla con betún de chocolate.",
         variaciones: [
             {
-                tamanio: "Copo de Nieve Mediano Alto",
-                precio: 850.00,
-                personas: "10 a 12 personas"
-            },
-            {
-                tamanio: "Copo de Nieve Mediano Bajo",
+                tamanio: "Mediano Bajo",
                 precio: 500.00,
                 personas: "4 a 6 personas"
             },
             {
-                tamanio: "Mono de Jengibre Mediano Alto",
+                tamanio: "Mediano Alto",
                 precio: 850.00,
                 personas: "10 a 12 personas"
             },
-            {
-                tamanio: "Mono de Jengibre Mediano Bajo",
-                precio: 495.00,
-                personas: "4 a 6 personas"
-            },
-            {
-                tamanio: "Mono de Jengibre Chico",
-                precio: 290.00,
-                personas: "1 a 2 personas"
-            },
         ],
-        fotos: ["/Temporada/Navidad/Pastel_Navideno_1.jpg", "/Temporada/Navidad/Pastel_Navideno_2.jpg", "/Temporada/Navidad/Pastel_Navideno_3.jpg"],
+        fotos: ["/Temporada/Navidad/PastelCoposNieve_1.png", "/Temporada/Navidad/PastelCoposNieve_2.png"],
         temporada: "Navidad"
     },
+    // {
+    //     id: 57,
+    //     nombre: "Galletas de Chocochips o Avena",
+    //     categoriaId: 8,
+    //     categoriaNombre: "Temporada",
+    //     descripcion: "Prueba nuestras deliciosas galletas de avena y chocochips, con ese toque navideño.",
+    //     variaciones: [
+    //         {
+    //             tamanio: "Vidrio Grande",
+    //             precio: 700.00,
+    //             personas: ""
+    //         },
+    //         {
+    //             tamanio: "Vidrio Mediano",
+    //             precio: 550.00,
+    //             personas: ""
+    //         },
+    //         {
+    //             tamanio: "Vidrio Chico",
+    //             precio: 410.00,
+    //             personas: ""
+    //         },
+    //         {
+    //             tamanio: "Cilindro Grande",
+    //             precio: 550.00,
+    //             personas: ""
+    //         },
+    //         {
+    //             tamanio: "Cilindro Mediano",
+    //             precio: 360.00,
+    //             personas: ""
+    //         },
+    //         {
+    //             tamanio: "Cilindro Chico",
+    //             precio: 190.00,
+    //             personas: ""
+    //         },
+    //     ],
+    //     fotos: ["/Temporada/Navidad/Galletas_Chocochips_Avena_1.png", "/Temporada/Navidad/Galletas_Chocochips_Avena_2.jpg", "/Temporada/Navidad/Galletas_Chocochips_Avena_3.jpg", "/Temporada/Navidad/Galletas_Chocochips_Avena_4.jpg"],
+    //     temporada: "Navidad"
+    // },
     {
-        id: 57,
-        nombre: "Galletas de Chocochips o Avena",
+        id: 67,
+        nombre: "Galletas de Avena",
         categoriaId: 8,
         categoriaNombre: "Temporada",
-        descripcion: "Prueba nuestras deliciosas galletas de avena y chocochips, con ese toque navideño.",
+        descripcion: "Prueba nuestras deliciosas galletas de avena, con ese toque navideño.",
         variaciones: [
             {
-                tamanio: "Vidrio Grande",
-                precio: 700.00,
+                tamanio: "Vidrio Chico",
+                precio: 410.00,
                 personas: ""
             },
             {
@@ -1363,13 +1451,13 @@ export const productos: Producto[] = [
                 personas: ""
             },
             {
-                tamanio: "Vidrio Chico",
-                precio: 410.00,
+                tamanio: "Vidrio Grande",
+                precio: 700.00,
                 personas: ""
             },
             {
-                tamanio: "Cilindro Grande",
-                precio: 550.00,
+                tamanio: "Cilindro Chico",
+                precio: 190.00,
                 personas: ""
             },
             {
@@ -1378,12 +1466,53 @@ export const productos: Producto[] = [
                 personas: ""
             },
             {
+                tamanio: "Cilindro Grande",
+                precio: 550.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Temporada/Navidad/GalletasAvena_1.png", "/Temporada/Navidad/GalletasAvena_2.png", "/Temporada/Navidad/GalletasAvena_3.png"],
+        temporada: "Navidad"
+    },
+    {
+        id: 68,
+        nombre: "Galletas de Chocochips",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Prueba nuestras deliciosas galletas de chocochips, con ese toque navideño.",
+        variaciones: [
+            {
+                tamanio: "Vidrio Chico",
+                precio: 410.00,
+                personas: ""
+            },
+            {
+                tamanio: "Vidrio Mediano",
+                precio: 550.00,
+                personas: ""
+            },
+            {
+                tamanio: "Vidrio Grande",
+                precio: 700.00,
+                personas: ""
+            },
+            {
                 tamanio: "Cilindro Chico",
                 precio: 190.00,
                 personas: ""
             },
+            {
+                tamanio: "Cilindro Mediano",
+                precio: 360.00,
+                personas: ""
+            },
+            {
+                tamanio: "Cilindro Grande",
+                precio: 550.00,
+                personas: ""
+            },
         ],
-        fotos: ["/Temporada/Navidad/Galletas_Chocochips_Avena_1.png", "/Temporada/Navidad/Galletas_Chocochips_Avena_2.jpg", "/Temporada/Navidad/Galletas_Chocochips_Avena_3.jpg", "/Temporada/Navidad/Galletas_Chocochips_Avena_4.jpg"],
+        fotos: ["/Temporada/Navidad/GalletasChocochips_1.png", "/Temporada/Navidad/GalletasChocochips_2.png", "/Temporada/Navidad/GalletasChocochips_3.png"],
         temporada: "Navidad"
     },
     {
@@ -1451,6 +1580,27 @@ export const productos: Producto[] = [
             },
         ],
         fotos: ["/Temporada/Navidad/Brownies_Decorados_1.jpg", "/Temporada/Navidad/Brownies_Decorados_2.jpg", "/Temporada/Navidad/Brownies_Decorados_3.jpg", "/Temporada/Navidad/Brownies_Decorados_4.jpg"],
+        temporada: "Navidad"
+    },
+    {
+        id: 69,
+        nombre: "Cuadritos de Nuez",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Prueba nuestros deliciosos cuadritos de nuez.",
+        variaciones: [
+            {
+                tamanio: "Caja de 9 piezas",
+                precio: 220.00,
+                personas: ""
+            },
+            {
+                tamanio: "Caja de 16 piezas",
+                precio: 390.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Temporada/Navidad/CuadritosNuez_1.png", "/Temporada/Navidad/CuadritosNuez_2.png"],
         temporada: "Navidad"
     },
     {

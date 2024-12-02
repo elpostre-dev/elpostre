@@ -9,16 +9,18 @@ import { useEffect, useState } from 'react';
 import bgImage from "../public/sucursal.jpg";
 import { Order } from '@/types/types';
 import { useRouter } from "next/navigation";
+import { formatCurrencyShort, formatCurrency } from "@/lib/utils";
 
 interface AdminContentProps {
     orders: Order[];
+    stats: any;
 }
 
-export const AdminCont: React.FC<AdminContentProps> = ({ orders }) => {
+export const AdminCont: React.FC<AdminContentProps> = ({ orders, stats }) => {
 
     return (
         <SessionProvider>
-            <AdminContent orders={orders} />
+            <AdminContent orders={orders} stats={stats} />
         </SessionProvider>
     );
 }
@@ -27,7 +29,7 @@ interface AdminContentProps {
     orders: Order[];
 }
 
-const AdminContent: React.FC<AdminContentProps> = ({ orders }) => {
+const AdminContent: React.FC<AdminContentProps> = ({ orders, stats }) => {
     const { data: session, status } = useSession();
     const router = useRouter()
 
@@ -87,6 +89,34 @@ const AdminContent: React.FC<AdminContentProps> = ({ orders }) => {
                     </h1>
                 </div>
             </section>
+
+            <div className="flex flex-col items-center justify-center p-4 pb-0">
+                {/* <h2 className="text-2xl font-bold text-gray-800">Resumen de pedidos</h2> */}
+                <div className="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-4 w-full container">
+
+                    <div className="p-4 bg-white rounded-lg shadow-lg border">
+                        <h3 className="text-lg font-semibold text-gray-800">Pedidos Totales</h3>
+                        <p className="text-3xl font-bold text-gray-800">{stats.total_orders}</p>
+                    </div>
+
+                    <div className="p-4 bg-white rounded-lg shadow-lg border">
+                        <h3 className="text-lg font-semibold text-gray-800">Ingresos totales</h3>
+                        <p className="text-3xl font-bold text-gray-800">{formatCurrencyShort(stats.total_revenue)}</p>
+                    </div>
+
+                    <div className="p-4 bg-white rounded-lg shadow-lg border">
+                        <h3 className="text-lg font-semibold text-gray-800">Productos vendidos</h3>
+                        <p className="text-3xl font-bold text-gray-800">{stats.total_products_sold}</p>
+                    </div>
+
+                    <div className="p-4 bg-white rounded-lg shadow-lg border">
+                        <h3 className="text-lg font-semibold text-gray-800">Promedio de venta</h3>
+                        <p className="text-3xl font-bold text-gray-800">{formatCurrency(stats.average_order_cost)}</p>
+                    </div>
+
+                </div>
+            </div>
+
             <OrdersTable orders={orders} />
         </main>
     );
