@@ -1582,27 +1582,27 @@ export const productos: Producto[] = [
         fotos: ["/Temporada/Navidad/Brownies_Decorados_1.jpg", "/Temporada/Navidad/Brownies_Decorados_2.jpg", "/Temporada/Navidad/Brownies_Decorados_3.jpg", "/Temporada/Navidad/Brownies_Decorados_4.jpg"],
         temporada: "Navidad"
     },
-    {
-        id: 69,
-        nombre: "Cuadritos de Nuez",
-        categoriaId: 8,
-        categoriaNombre: "Temporada",
-        descripcion: "Prueba nuestros deliciosos cuadritos de nuez.",
-        variaciones: [
-            {
-                tamanio: "Caja de 9 piezas",
-                precio: 220.00,
-                personas: ""
-            },
-            {
-                tamanio: "Caja de 16 piezas",
-                precio: 390.00,
-                personas: ""
-            },
-        ],
-        fotos: ["/Temporada/Navidad/CuadritosNuez_1.png", "/Temporada/Navidad/CuadritosNuez_2.png"],
-        temporada: "Navidad"
-    },
+    // {
+    //     id: 69,
+    //     nombre: "Cuadritos de Nuez",
+    //     categoriaId: 8,
+    //     categoriaNombre: "Temporada",
+    //     descripcion: "Prueba nuestros deliciosos cuadritos de nuez.",
+    //     variaciones: [
+    //         {
+    //             tamanio: "Caja de 9 piezas",
+    //             precio: 220.00,
+    //             personas: ""
+    //         },
+    //         {
+    //             tamanio: "Caja de 16 piezas",
+    //             precio: 390.00,
+    //             personas: ""
+    //         },
+    //     ],
+    //     fotos: ["/Temporada/Navidad/CuadritosNuez_1.png", "/Temporada/Navidad/CuadritosNuez_2.png"],
+    //     temporada: "Navidad"
+    // },
     {
         id: 60,
         nombre: "Mostachón de Corazón",
