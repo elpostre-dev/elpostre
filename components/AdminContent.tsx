@@ -90,8 +90,7 @@ const AdminContent: React.FC<AdminContentProps> = ({ orders, stats }) => {
                 </div>
             </section>
 
-            <div className="flex flex-col items-center justify-center p-4 pb-0">
-                {/* <h2 className="text-2xl font-bold text-gray-800">Resumen de pedidos</h2> */}
+            {/* <div className="flex flex-col items-center justify-center p-4 pb-0">
                 <div className="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-4 w-full container">
 
                     <div className="p-4 bg-white rounded-lg shadow-lg border">
@@ -115,7 +114,7 @@ const AdminContent: React.FC<AdminContentProps> = ({ orders, stats }) => {
                     </div>
 
                 </div>
-            </div>
+            </div> */}
 
             <OrdersTable orders={orders} />
         </main>
