@@ -82,7 +82,7 @@ export default async function Admin() {
                     clients.name, 
                     clients.email, 
                     clients.phone
-                ORDER BY orders.datetime_ordered DESC;
+                ORDER BY orders.pickup_date ASC;
             `,
             sql`
                 SELECT 

@@ -8,7 +8,7 @@ interface OrdersTableProps {
 const OrdersTable: React.FC<OrdersTableProps> = ({ orders }) => {
 
     const incompleteOrders = orders.filter(order => !order.completed);
-    const completeOrders = orders.filter(order => order.completed);
+    const completeOrders = orders.filter(order => order.completed).sort((a, b) => new Date(b.pickup_date).getTime() - new Date(a.pickup_date).getTime());
 
     return (
         <div className="p-6 mb-20">
