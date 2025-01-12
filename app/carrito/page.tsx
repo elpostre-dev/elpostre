@@ -745,9 +745,9 @@ export default function Carrito() {
                                                     Favor de llenar correctamente todos los campos requeridos
                                                 </p>}
 
-                                                {/* <button onClick={handleFinalizarCompra} className="w-full text-center bg-mainRojo-100 rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-red-400 hover:shadow-lg">
+                                                <button onClick={handleFinalizarCompra} className="w-full text-center bg-mainRojo-100 rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-red-400 hover:shadow-lg">
                                                     {loadingFinalizarCompra ? "Cargando..." : "Finalizar compra"}
-                                                </button> */}
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

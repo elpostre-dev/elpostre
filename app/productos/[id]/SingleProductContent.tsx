@@ -328,14 +328,14 @@ export default function SingleProduct({ id }: { id: string }) {
                                         <hr className="my-8" />
 
                                         {/* Boton agregar - dialog success */}
-                                        {producto?.temporada !== "Bodas, Comuniones y Bautizos" && producto?.temporada !== "San Valentín" && producto?.categoriaId !== 5 && producto?.categoriaId !== 7 && producto?.id !== 54 ?
+                                        {producto?.temporada !== "Bodas, Comuniones y Bautizos" && producto?.temporada !== "San Valentín" && producto?.temporada !== "Navidad" && producto?.categoriaId !== 5 && producto?.categoriaId !== 7 && producto?.id !== 54 ?
                                             <Dialog>
                                                 <DialogTrigger asChild>
-                                                    {/* <div className="flex flex-wrap gap-4">
+                                                    <div className="flex flex-wrap gap-4">
                                                         <button type="button" onClick={handleAddToCart} className="min-w-[200px] px-4 py-3 bg-gray-800 hover:bg-gray-500 hover:shadow-lg focus:ring-2 text-white text-sm font-bold rounded">
                                                             Agregar al carrito
                                                         </button>
-                                                    </div> */}
+                                                    </div>
                                                 </DialogTrigger>
                                                 <DialogContent className="sm:max-w-md p-4 bg-white rounded-lg shadow">
                                                     <DialogHeader>
