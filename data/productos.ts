@@ -1668,6 +1668,38 @@ export const productos: Producto[] = [
         temporada: "San Valentín"
     },
     {
+        id: 70,
+        nombre: "Galletas de Corazón",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Prueba nuestras deliciosas galletas de mantequilla rellenas de mermelada de fresa",
+        variaciones: [
+            {
+                tamanio: "2 galletas",
+                precio: 80.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Temporada/SanValentin/Galletas_Corazon_1.jpg"],
+        temporada: "San Valentín"
+    },
+    {
+        id: 71,
+        nombre: "Galleta Gigante de Corazón",
+        categoriaId: 8,
+        categoriaNombre: "Temporada",
+        descripcion: "Nuestra galleta gigante, ahora en forma de corazón.",
+        variaciones: [
+            {
+                tamanio: "Galleta",
+                precio: 690.00,
+                personas: ""
+            },
+        ],
+        fotos: ["/Temporada/SanValentin/Galleta_Gigante_Corazon_1.jpg"],
+        temporada: "San Valentín"
+    },
+    {
         id: 64,
         nombre: "Bodas, Comuniones y Bautizos",
         categoriaId: 8,
