@@ -328,7 +328,7 @@ export default function SingleProduct({ id }: { id: string }) {
                                         <hr className="my-8" />
 
                                         {/* Boton agregar - dialog success */}
-                                        {producto?.temporada !== "Bodas, Comuniones y Bautizos" && producto?.temporada !== "San Valentín" && producto?.temporada !== "Navidad" && producto?.categoriaId !== 5 && producto?.categoriaId !== 7 && producto?.id !== 54 ?
+                                        {producto?.temporada !== "Bodas, Comuniones y Bautizos" && producto?.temporada !== "Navidad" && producto?.categoriaId !== 5 && producto?.categoriaId !== 7 && producto?.id !== 54 ?
                                             <Dialog>
                                                 <DialogTrigger asChild>
                                                     <div className="flex flex-wrap gap-4">
