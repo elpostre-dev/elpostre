@@ -1612,7 +1612,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 0.00,
+                precio: 940.00,
                 personas: ""
             },
         ],
@@ -1628,7 +1628,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 0.00,
+                precio: 940.00,
                 personas: ""
             },
         ],
@@ -1644,7 +1644,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Grande",
-                precio: 0.00,
+                precio: 940.00,
                 personas: ""
             },
         ],
@@ -1660,7 +1660,7 @@ export const productos: Producto[] = [
         variaciones: [
             {
                 tamanio: "Brownie",
-                precio: 0.00,
+                precio: 220.00,
                 personas: ""
             },
         ],
