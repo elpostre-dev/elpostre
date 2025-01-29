@@ -11,6 +11,97 @@ import { Order } from '@/types/types';
 import { useRouter } from "next/navigation";
 import { formatCurrencyShort, formatCurrency } from "@/lib/utils";
 
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { ChevronDown } from "lucide-react"
+import {
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
+} from "@/components/ui/tabs"
+
+// Sample data structure
+const productCategories = [
+    {
+        category: "Electronics",
+        products: [
+            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
+            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
+            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
+        ],
+    },
+    {
+        category: "Clothing",
+        products: [
+            { name: "T-Shirt", price: 19.99, stock: 200, rating: 4.2 },
+            { name: "Jeans", price: 49.99, stock: 150, rating: 4.4 },
+            { name: "Sneakers", price: 79.99, stock: 80, rating: 4.6 },
+        ],
+    },
+    {
+        category: "Home & Kitchen",
+        products: [
+            { name: "Coffee Maker", price: 89.99, stock: 60, rating: 4.1 },
+            { name: "Blender", price: 59.99, stock: 75, rating: 4.3 },
+            { name: "Toaster", price: 29.99, stock: 100, rating: 4.0 },
+        ],
+    },
+    {
+        category: "Electronics",
+        products: [
+            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
+            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
+            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
+        ],
+    },
+    {
+        category: "Clothing",
+        products: [
+            { name: "T-Shirt", price: 19.99, stock: 200, rating: 4.2 },
+            { name: "Jeans", price: 49.99, stock: 150, rating: 4.4 },
+            { name: "Sneakers", price: 79.99, stock: 80, rating: 4.6 },
+        ],
+    },
+    {
+        category: "Home & Kitchen",
+        products: [
+            { name: "Coffee Maker", price: 89.99, stock: 60, rating: 4.1 },
+            { name: "Blender", price: 59.99, stock: 75, rating: 4.3 },
+            { name: "Toaster", price: 29.99, stock: 100, rating: 4.0 },
+        ],
+    },
+    {
+        category: "Electronics",
+        products: [
+            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
+            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
+            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
+        ],
+    },
+    {
+        category: "Clothing",
+        products: [
+            { name: "T-Shirt", price: 19.99, stock: 200, rating: 4.2 },
+            { name: "Jeans", price: 49.99, stock: 150, rating: 4.4 },
+            { name: "Sneakers", price: 79.99, stock: 80, rating: 4.6 },
+        ],
+    },
+    {
+        category: "Home & Kitchen",
+        products: [
+            { name: "Coffee Maker", price: 89.99, stock: 60, rating: 4.1 },
+            { name: "Blender", price: 59.99, stock: 75, rating: 4.3 },
+            { name: "Toaster", price: 29.99, stock: 100, rating: 4.0 },
+        ],
+    },
+]
+
 interface AdminContentProps {
     orders: Order[];
     stats: any;
@@ -116,7 +207,60 @@ const AdminContent: React.FC<AdminContentProps> = ({ orders, stats }) => {
                 </div>
             </div> */}
 
-            <OrdersTable orders={orders} />
+            <Tabs defaultValue="Ordenes" className="w-full">
+                <div className="bg-gray-300 py-2">
+                    <TabsList className="grid w-2/3 md:w-1/2 mx-auto grid-cols-2 bg-transparent border border-white">
+                        <TabsTrigger value="Ordenes">Órdenes</TabsTrigger>
+                        <TabsTrigger value="Productos">Productos</TabsTrigger>
+                    </TabsList>
+                </div>
+                <TabsContent value="Ordenes">
+                    <OrdersTable orders={orders} />
+                </TabsContent>
+                <TabsContent value="Productos">
+                    <div className="container py-6 mb-10">
+
+                        {/* titulo */}
+                        <h2 className="text-2xl md:text-4xl font-semibold pb-4 md:pb-6">Productos</h2>
+
+                        <p>
+                            Próximamente...
+                        </p>
+
+                        {/* <Accordion type="single" collapsible className="w-full">
+                            {productCategories.map((category, index) => (
+                                <AccordionItem value={`item-${index}`} key={index} className="border-none">
+                                    <AccordionTrigger className="text-left border rounded-lg p-4 my-2">
+                                        <span>{category.category}</span>
+                                    </AccordionTrigger>
+                                    <AccordionContent>
+                                        <Table>
+                                            <TableHeader>
+                                                <TableRow>
+                                                    <TableHead>Product Name</TableHead>
+                                                    <TableHead>Price</TableHead>
+                                                    <TableHead>Stock</TableHead>
+                                                    <TableHead>Rating</TableHead>
+                                                </TableRow>
+                                            </TableHeader>
+                                            <TableBody>
+                                                {category.products.map((product, productIndex) => (
+                                                    <TableRow key={productIndex}>
+                                                        <TableCell>{product.name}</TableCell>
+                                                        <TableCell>${product.price.toFixed(2)}</TableCell>
+                                                        <TableCell>{product.stock}</TableCell>
+                                                        <TableCell>{product.rating.toFixed(1)}</TableCell>
+                                                    </TableRow>
+                                                ))}
+                                            </TableBody>
+                                        </Table>
+                                    </AccordionContent>
+                                </AccordionItem>
+                            ))}
+                        </Accordion> */}
+                    </div>
+                </TabsContent>
+            </Tabs>
         </main>
     );
 }

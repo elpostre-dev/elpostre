@@ -11,9 +11,9 @@ const OrdersTable: React.FC<OrdersTableProps> = ({ orders }) => {
     const completeOrders = orders.filter(order => order.completed).sort((a, b) => new Date(b.pickup_date).getTime() - new Date(a.pickup_date).getTime());
 
     return (
-        <div className="p-6 mb-20">
+        <div className="px-6 py-6 mb-20">
             {/* Ordenes Incompletas */}
-            <h2 className="text-4xl font-semibold py-8 px-8">Órdenes Incompletas</h2>
+            <h2 className="text-2xl md:text-4xl font-semibold pb-4 md:pb-6 px-4 md:px-8">Órdenes Incompletas</h2>
             {incompleteOrders.length === 0
                 ? (
                     <div className="flex justify-center items-center bg-gray-200 mx-auto rounded-lg" style={{ height: '20vh', width: '95%' }}>
@@ -43,7 +43,7 @@ const OrdersTable: React.FC<OrdersTableProps> = ({ orders }) => {
                 )}
 
             {/* Ordenes Anteriores */}
-            <h2 className="text-4xl font-semibold py-8 px-8">Órdenes Anteriores</h2>
+            <h2 className="text-2xl md:text-4xl font-semibold pt-10 pb-4 md:pb-6 px-4 md:px-8">Órdenes Anteriores</h2>
             {completeOrders.length === 0
                 ? (
                     <div className="flex justify-center items-center bg-gray-200 mx-auto rounded-lg" style={{ height: '20vh', width: '95%' }}>
