@@ -12,95 +12,13 @@ import { useRouter } from "next/navigation";
 import { formatCurrencyShort, formatCurrency } from "@/lib/utils";
 
 import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { ChevronDown } from "lucide-react"
-import {
     Tabs,
     TabsContent,
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabs"
 
-// Sample data structure
-const productCategories = [
-    {
-        category: "Electronics",
-        products: [
-            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
-            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
-            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
-        ],
-    },
-    {
-        category: "Clothing",
-        products: [
-            { name: "T-Shirt", price: 19.99, stock: 200, rating: 4.2 },
-            { name: "Jeans", price: 49.99, stock: 150, rating: 4.4 },
-            { name: "Sneakers", price: 79.99, stock: 80, rating: 4.6 },
-        ],
-    },
-    {
-        category: "Home & Kitchen",
-        products: [
-            { name: "Coffee Maker", price: 89.99, stock: 60, rating: 4.1 },
-            { name: "Blender", price: 59.99, stock: 75, rating: 4.3 },
-            { name: "Toaster", price: 29.99, stock: 100, rating: 4.0 },
-        ],
-    },
-    {
-        category: "Electronics",
-        products: [
-            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
-            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
-            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
-        ],
-    },
-    {
-        category: "Clothing",
-        products: [
-            { name: "T-Shirt", price: 19.99, stock: 200, rating: 4.2 },
-            { name: "Jeans", price: 49.99, stock: 150, rating: 4.4 },
-            { name: "Sneakers", price: 79.99, stock: 80, rating: 4.6 },
-        ],
-    },
-    {
-        category: "Home & Kitchen",
-        products: [
-            { name: "Coffee Maker", price: 89.99, stock: 60, rating: 4.1 },
-            { name: "Blender", price: 59.99, stock: 75, rating: 4.3 },
-            { name: "Toaster", price: 29.99, stock: 100, rating: 4.0 },
-        ],
-    },
-    {
-        category: "Electronics",
-        products: [
-            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
-            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
-            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
-        ],
-    },
-    {
-        category: "Clothing",
-        products: [
-            { name: "T-Shirt", price: 19.99, stock: 200, rating: 4.2 },
-            { name: "Jeans", price: 49.99, stock: 150, rating: 4.4 },
-            { name: "Sneakers", price: 79.99, stock: 80, rating: 4.6 },
-        ],
-    },
-    {
-        category: "Home & Kitchen",
-        products: [
-            { name: "Coffee Maker", price: 89.99, stock: 60, rating: 4.1 },
-            { name: "Blender", price: 59.99, stock: 75, rating: 4.3 },
-            { name: "Toaster", price: 29.99, stock: 100, rating: 4.0 },
-        ],
-    },
-]
+import ProductosAdmin from "./ProductosAdmin";
 
 interface AdminContentProps {
     orders: Order[];
@@ -181,85 +99,49 @@ const AdminContent: React.FC<AdminContentProps> = ({ orders, stats }) => {
                 </div>
             </section>
 
-            {/* <div className="flex flex-col items-center justify-center p-4 pb-0">
-                <div className="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-4 w-full container">
-
-                    <div className="p-4 bg-white rounded-lg shadow-lg border">
-                        <h3 className="text-lg font-semibold text-gray-800">Pedidos Totales</h3>
-                        <p className="text-3xl font-bold text-gray-800">{stats.total_orders}</p>
-                    </div>
-
-                    <div className="p-4 bg-white rounded-lg shadow-lg border">
-                        <h3 className="text-lg font-semibold text-gray-800">Ingresos totales</h3>
-                        <p className="text-3xl font-bold text-gray-800">{formatCurrencyShort(stats.total_revenue)}</p>
-                    </div>
-
-                    <div className="p-4 bg-white rounded-lg shadow-lg border">
-                        <h3 className="text-lg font-semibold text-gray-800">Productos vendidos</h3>
-                        <p className="text-3xl font-bold text-gray-800">{stats.total_products_sold}</p>
-                    </div>
-
-                    <div className="p-4 bg-white rounded-lg shadow-lg border">
-                        <h3 className="text-lg font-semibold text-gray-800">Promedio de venta</h3>
-                        <p className="text-3xl font-bold text-gray-800">{formatCurrency(stats.average_order_cost)}</p>
-                    </div>
-
-                </div>
-            </div> */}
-
             <Tabs defaultValue="Ordenes" className="w-full">
+
                 <div className="bg-gray-300 py-2">
                     <TabsList className="grid w-2/3 md:w-1/2 mx-auto grid-cols-2 bg-transparent border border-white">
-                        <TabsTrigger value="Ordenes">Órdenes</TabsTrigger>
-                        <TabsTrigger value="Productos">Productos</TabsTrigger>
+                        <TabsTrigger value="Ordenes" className="hover:text-gray-200">Órdenes</TabsTrigger>
+                        <TabsTrigger value="Productos" className="hover:text-gray-200">Productos</TabsTrigger>
                     </TabsList>
                 </div>
+
+                {/* <div className="flex flex-col items-center justify-center p-4 pb-0">
+                    <div className="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-4 w-full container">
+
+                        <div className="p-4 bg-white rounded-lg shadow-lg border">
+                            <h3 className="text-lg font-semibold text-gray-800">Pedidos Totales</h3>
+                            <p className="text-3xl font-bold text-gray-800">{stats.total_orders}</p>
+                        </div>
+
+                        <div className="p-4 bg-white rounded-lg shadow-lg border">
+                            <h3 className="text-lg font-semibold text-gray-800">Ingresos totales</h3>
+                            <p className="text-3xl font-bold text-gray-800">{formatCurrencyShort(stats.total_revenue)}</p>
+                        </div>
+
+                        <div className="p-4 bg-white rounded-lg shadow-lg border">
+                            <h3 className="text-lg font-semibold text-gray-800">Productos vendidos</h3>
+                            <p className="text-3xl font-bold text-gray-800">{stats.total_products_sold}</p>
+                        </div>
+
+                        <div className="p-4 bg-white rounded-lg shadow-lg border">
+                            <h3 className="text-lg font-semibold text-gray-800">Promedio de venta</h3>
+                            <p className="text-3xl font-bold text-gray-800">{formatCurrency(stats.average_order_cost)}</p>
+                        </div>
+
+                    </div>
+                </div> */}
+
                 <TabsContent value="Ordenes">
                     <OrdersTable orders={orders} />
                 </TabsContent>
+
                 <TabsContent value="Productos">
-                    <div className="container py-6 mb-10">
-
-                        {/* titulo */}
-                        <h2 className="text-2xl md:text-4xl font-semibold pb-4 md:pb-6">Productos</h2>
-
-                        <p>
-                            Próximamente...
-                        </p>
-
-                        {/* <Accordion type="single" collapsible className="w-full">
-                            {productCategories.map((category, index) => (
-                                <AccordionItem value={`item-${index}`} key={index} className="border-none">
-                                    <AccordionTrigger className="text-left border rounded-lg p-4 my-2">
-                                        <span>{category.category}</span>
-                                    </AccordionTrigger>
-                                    <AccordionContent>
-                                        <Table>
-                                            <TableHeader>
-                                                <TableRow>
-                                                    <TableHead>Product Name</TableHead>
-                                                    <TableHead>Price</TableHead>
-                                                    <TableHead>Stock</TableHead>
-                                                    <TableHead>Rating</TableHead>
-                                                </TableRow>
-                                            </TableHeader>
-                                            <TableBody>
-                                                {category.products.map((product, productIndex) => (
-                                                    <TableRow key={productIndex}>
-                                                        <TableCell>{product.name}</TableCell>
-                                                        <TableCell>${product.price.toFixed(2)}</TableCell>
-                                                        <TableCell>{product.stock}</TableCell>
-                                                        <TableCell>{product.rating.toFixed(1)}</TableCell>
-                                                    </TableRow>
-                                                ))}
-                                            </TableBody>
-                                        </Table>
-                                    </AccordionContent>
-                                </AccordionItem>
-                            ))}
-                        </Accordion> */}
-                    </div>
+                    <ProductosAdmin />
                 </TabsContent>
+
             </Tabs>
         </main>
     );
