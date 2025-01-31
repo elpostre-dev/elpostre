@@ -4,90 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { useState, useEffect } from "react";
-
-// Sample data structure
-const productCategories = [
-    {
-        category: "Electronics",
-        products: [
-            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
-            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
-            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
-            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
-            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
-            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
-            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
-            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
-            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
-            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
-            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
-            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
-            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
-            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
-            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
-        ],
-    },
-    {
-        category: "Clothing",
-        products: [
-            { name: "T-Shirt", price: 19.99, stock: 200, rating: 4.2 },
-            { name: "Jeans", price: 49.99, stock: 150, rating: 4.4 },
-        ],
-    },
-    {
-        category: "Home & Kitchen",
-        products: [
-            { name: "Coffee Maker", price: 89.99, stock: 60, rating: 4.1 },
-            { name: "Blender", price: 59.99, stock: 75, rating: 4.3 },
-        ],
-    },
-    {
-        category: "Electronics",
-        products: [
-            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
-            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
-            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
-            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
-            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
-            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
-            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
-            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
-            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
-        ],
-    },
-    {
-        category: "Clothing",
-        products: [
-            { name: "T-Shirt", price: 19.99, stock: 200, rating: 4.2 },
-            { name: "Jeans", price: 49.99, stock: 150, rating: 4.4 },
-            { name: "Sneakers", price: 79.99, stock: 80, rating: 4.6 },
-        ],
-    },
-    {
-        category: "Home & Kitchen",
-        products: [
-            { name: "Coffee Maker", price: 89.99, stock: 60, rating: 4.1 },
-            { name: "Blender", price: 59.99, stock: 75, rating: 4.3 },
-            { name: "Toaster", price: 29.99, stock: 100, rating: 4.0 },
-        ],
-    },
-    {
-        category: "Electronics",
-        products: [
-            { name: "Smartphone", price: 699, stock: 50, rating: 4.5 },
-            { name: "Laptop", price: 1299, stock: 30, rating: 4.7 },
-            { name: "Headphones", price: 199, stock: 100, rating: 4.3 },
-        ],
-    },
-    {
-        category: "Clothing",
-        products: [
-            { name: "T-Shirt", price: 19.99, stock: 200, rating: 4.2 },
-            { name: "Jeans", price: 49.99, stock: 150, rating: 4.4 },
-            { name: "Sneakers", price: 79.99, stock: 80, rating: 4.6 },
-        ],
-    },
-]
+import ProductosAdminItem from "./ProductosAdminItem";
 
 interface ProductVariation {
     id: number;
@@ -106,6 +23,7 @@ interface Product {
     fotos: string[];
     temporada: string;
     activo: boolean;
+    en_venta: boolean;
     variaciones: ProductVariation[]; // Include variations
 }
 
@@ -188,6 +106,7 @@ export default function ProductosAdmin() {
 
                                 <AccordionContent>
                                     <Table>
+
                                         {/* <TableHeader>
                                                 <TableRow>
                                                     <TableHead>Product Name</TableHead>
@@ -196,45 +115,13 @@ export default function ProductosAdmin() {
                                                     <TableHead>Rating</TableHead>
                                                 </TableRow>
                                             </TableHeader> */}
+
                                         <TableBody>
                                             {cat.productos.map((prod) => (
-                                                <TableRow key={prod.id}>
-
-                                                    {/* name and image */}
-                                                    <TableCell>
-                                                        <Link href={`/productos/${prod.id}`} className="text-blue-600 hover:underline flex items-center" target="_blank">
-                                                            <img
-                                                                src={prod.fotos[0]}
-                                                                alt={prod.nombre}
-                                                                className="mr-3 h-12 w-12 rounded object-cover object-center"
-                                                            />
-                                                            {prod.nombre}
-                                                        </Link>
-                                                    </TableCell>
-
-                                                    {/* variaciones */}
-                                                    <TableCell>{prod.variaciones.length} variaciones</TableCell>
-
-                                                    {/* activo */}
-                                                    <TableCell>
-                                                        <p className="text-sm font-medium leading-none">
-                                                            <Badge className={`text-xs ${prod.activo ? 'bg-green-500' : 'bg-red-500'}`}>
-                                                                {prod.activo ? 'Activo' : 'Inactivo'}
-                                                            </Badge>
-                                                        </p>
-                                                    </TableCell>
-
-                                                    {/* IF temporada */}
-                                                    {prod.temporada && <TableCell>{prod.temporada}</TableCell>}
-
-                                                    {/* acciones */}
-                                                    {/* <TableCell>
-                                                        <Link href={`/admin/productos/${prod.id}`} className="text-blue-600 hover:underline" target="_blank">Editar</Link>
-                                                    </TableCell> */}
-
-                                                </TableRow>
+                                                <ProductosAdminItem key={prod.id} p={prod} />
                                             ))}
                                         </TableBody>
+
                                     </Table>
                                 </AccordionContent>
 

@@ -18,6 +18,7 @@ interface Product {
     fotos: string[];
     temporada: string;
     activo: boolean;
+    en_venta: boolean;
     variaciones: ProductVariation[];
 }
 
@@ -27,7 +28,7 @@ export const revalidate = 0;
 export async function GET() {
     try {
         const result = await sql`
-            SELECT p.id, p.nombre, p.descripcion, p.categoria_id, p.categoria_nombre, p.fotos, p.temporada, p.activo,
+            SELECT p.id, p.nombre, p.descripcion, p.categoria_id, p.categoria_nombre, p.fotos, p.temporada, p.activo, p.en_venta,
                    pv.id AS variacion_id, pv.producto_id, pv.tamanio, pv.precio, pv.personas
             FROM productos p
             LEFT JOIN variaciones pv ON p.id = pv.producto_id;
@@ -64,6 +65,7 @@ export async function GET() {
                     fotos: productData.fotos,
                     temporada: productData.temporada,
                     activo: productData.activo,
+                    en_venta: productData.en_venta,
                     variaciones: variation.id ? [variation] : [], // Ensure variations array even if no variations exist
                 };
                 products.push(newProduct);
