@@ -37,6 +37,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { useRouter } from "next/navigation";
+import { set } from 'date-fns';
 
 interface ProductVariation {
     id: number;
@@ -59,13 +60,14 @@ interface Product {
     variaciones: ProductVariation[]; // Include variations
 }
 
-
 export default function ProductosAdminItem({ p }: { p: Product }) {
-    // const [isCompleted, setIsCompleted] = useState(order.completed);
+    const [updating, setUpdating] = useState(false);
+    const [uploadingImage, setUploadingImage] = useState(false);
 
+    const [currAddingId, setCurrAddingId] = useState(-1)
     const [addingVariation, setAddingVariation] = useState(false)
     const [newVariation, setNewVariation] = useState<ProductVariation>({
-        id: 0,
+        id: -1,
         producto_id: p.id,
         tamanio: "",
         personas: "",
@@ -125,14 +127,6 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
         setProduct((prev) => ({ ...prev, [name]: checked }))
     }
 
-    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files
-        if (files) {
-            const newImages = Array.from(files).map((file) => URL.createObjectURL(file))
-            setProduct((prev) => ({ ...prev, fotos: [...prev.fotos, ...newImages] }))
-        }
-    }
-
     const removeImage = (index: number) => {
         setProduct((prev) => ({
             ...prev,
@@ -155,28 +149,64 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
         }))
     }
 
-    const router = useRouter()
+    const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (!event.target.files) return;
 
-    // const handleCompleteOrder = async () => {
-    //     try {
-    //         const res = await fetch('/api/completeOrder', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify({ orderId: order.order_id }),
-    //         });
+        setUploadingImage(true);
+        const formData = new FormData();
+        for (const file of event.target.files) {
+            formData.append('files', file);
+        }
 
-    //         if (res.ok) {
-    //             setIsCompleted(true);
-    //             router.refresh()
-    //         } else {
-    //             console.error('Failed to complete the order');
-    //         }
-    //     } catch (error) {
-    //         console.error('Error completing the order:', error);
-    //     }
-    // };
+        try {
+            const res = await fetch('/api/uploadImage', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!res.ok) {
+                throw new Error('Error uploading image');
+            }
+
+            const { imageUrls } = await res.json();
+            console.log('Uploaded Image URLs:', imageUrls);
+
+            // Update the product state with new image URLs
+            setProduct((prev) => ({
+                ...prev,
+                fotos: [...prev.fotos, ...imageUrls], // Append new image URLs
+            }));
+            setUploadingImage(false);
+        } catch (error) {
+            console.error('Upload failed:', error);
+            setUploadingImage(false);
+        }
+
+    };
+
+    const handleUpdateProduct = async () => {
+        console.log('Updating product:', product)
+        setUpdating(true);
+        try {
+            const res = await fetch('/api/updateProductWithId', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(product), // 🔹 Send the product directly
+            });
+
+            if (res.ok) {
+                setUpdating(false);
+                window.location.reload();
+            } else {
+                console.error('Failed to update the product');
+            }
+        } catch (error) {
+            console.error('Error updating the product:', error);
+        }
+    };
+
 
     return (
         <TableRow key={p.id}>
@@ -220,11 +250,11 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
             {/* editar */}
             <Dialog onOpenChange={(isOpen) => isOpen && setProduct(originalProduct)}>
 
-                {/* <DialogTrigger asChild>
+                <DialogTrigger asChild>
                     <TableCell>
                         <a className="text-blue-600 hover:underline hover:cursor-pointer">Editar</a>
                     </TableCell>
-                </DialogTrigger> */}
+                </DialogTrigger>
 
                 <DialogContent style={{ width: '96%' }}>
 
@@ -249,7 +279,7 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
                                 <Label htmlFor="name" className="text-right">
                                     Nombre
                                 </Label>
-                                <Input id="name" name="name" value={product.nombre} onChange={handleInputChange} className="col-span-3" />
+                                <Input id="name" name="nombre" value={product.nombre} onChange={handleInputChange} className="col-span-3" />
                             </div>
 
                             {/* Descripcion */}
@@ -259,7 +289,7 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
                                 </Label>
                                 <Textarea
                                     id="description"
-                                    name="description"
+                                    name="descripcion"
                                     value={product.descripcion}
                                     onChange={handleInputChange}
                                     className="col-span-3"
@@ -320,39 +350,45 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
                                 <Label htmlFor="images" className="text-right">
                                     Fotos
                                 </Label>
-                                <div className="col-span-3">
-                                    <div className="flex flex-wrap gap-2 mb-2">
-                                        {product.fotos.map((image, index) => (
-                                            <div key={index} className="relative">
-                                                <img
-                                                    src={image || "/placeholder.svg"}
-                                                    alt={`Product ${index + 1}`}
-                                                    className="w-16 h-16 object-cover rounded"
-                                                />
-                                                <button
-                                                    onClick={() => removeImage(index)}
-                                                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
-                                                >
-                                                    <X className="w-4 h-4" />
-                                                </button>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <label htmlFor="image-upload" className="cursor-pointer">
-                                        <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <PlusCircle className="w-5 h-5" />
-                                            <span>Agregar foto</span>
+                                {uploadingImage ? (
+                                    <p className="col-span-3 text-gray-600">
+                                        Subiendo...
+                                    </p>
+                                ) : (
+                                    <div className="col-span-3">
+                                        <div className="flex flex-wrap gap-2 mb-2">
+                                            {product.fotos.map((image, index) => (
+                                                <div key={index} className="relative">
+                                                    <img
+                                                        src={image || "/placeholder.svg"}
+                                                        alt={`Product ${index + 1}`}
+                                                        className="w-16 h-16 object-cover rounded"
+                                                    />
+                                                    <button
+                                                        onClick={() => removeImage(index)}
+                                                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
+                                                    >
+                                                        <X className="w-4 h-4" />
+                                                    </button>
+                                                </div>
+                                            ))}
                                         </div>
-                                        <input
-                                            id="image-upload"
-                                            type="file"
-                                            accept="image/*"
-                                            multiple
-                                            onChange={handleImageUpload}
-                                            className="hidden"
-                                        />
-                                    </label>
-                                </div>
+                                        <label htmlFor="image-upload" className="cursor-pointer">
+                                            <div className="flex items-center gap-2 text-sm text-gray-600">
+                                                <PlusCircle className="w-5 h-5" />
+                                                <span>Agregar foto</span>
+                                            </div>
+                                            <input
+                                                id="image-upload"
+                                                type="file"
+                                                accept="image/*"
+                                                multiple
+                                                onChange={handleImageUpload}
+                                                className="hidden"
+                                            />
+                                        </label>
+                                    </div>
+                                )}
                             </div>
 
                             {/* Visible */}
@@ -433,12 +469,13 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
                                                 }))
                                                 setAddingVariation(false)
                                                 setNewVariation({
-                                                    id: 0,
+                                                    id: currAddingId - 1,
                                                     producto_id: product.id,
                                                     tamanio: "",
                                                     personas: "",
                                                     precio: 0,
                                                 })
+                                                setCurrAddingId((prev) => prev - 1)
                                             }}
                                             variant="default"
                                             size="sm"
@@ -505,7 +542,9 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
                         </div>
                     </ScrollArea>
 
-                    <Button onClick={() => console.log(product)}>Guardar cambios</Button>
+                    <Button onClick={handleUpdateProduct} disabled={updating}>
+                        {updating ? 'Guardando...' : 'Guardar'}
+                    </Button>
 
                 </DialogContent>
             </Dialog>
