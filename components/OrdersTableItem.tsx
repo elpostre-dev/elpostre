@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from "next/link";
 import { Order } from '@/types/types';
 import { formatCurrency } from "@/lib/utils";
@@ -36,6 +36,17 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { productos } from '@/data/productos';
 import { useRouter } from "next/navigation";
 
+async function fetchProductByName(name: string) {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getProductByName?productName=${encodeURIComponent(name)}`);
+        if (!res.ok) return null;
+        return await res.json();
+    } catch (error) {
+        console.error("Error fetching product by name:", error);
+        return null;
+    }
+}
+
 // Function to parse the date string
 function parseDate(dateString: string) {
     // Extract the date part (yyyy-MM-dd)
@@ -45,6 +56,27 @@ function parseDate(dateString: string) {
     const parsedDate = parse(datePart, 'yyyy-MM-dd', new Date());
 
     return parsedDate;
+}
+
+interface ProductVariation {
+    id: number;
+    producto_id: number;
+    tamanio: string;
+    precio: number;
+    personas: string;
+}
+
+interface Product {
+    id: number;
+    nombre: string;
+    descripcion: string;
+    categoria_id: number;
+    categoria_nombre: string;
+    fotos: string[];
+    temporada: string;
+    activo: boolean;
+    en_venta: boolean;
+    variaciones: ProductVariation[];
 }
 
 export default function OrdersTableItem({ order }: { order: Order }) {
@@ -72,6 +104,29 @@ export default function OrdersTableItem({ order }: { order: Order }) {
             console.error('Error completing the order:', error);
         }
     };
+
+    const [productsData, setProductsData] = useState<{ [key: string]: Product }>({});
+    useEffect(() => {
+        // Fetch all unique product names when the component mounts
+
+        if (!order) return;
+
+        const fetchProducts = async () => {
+            const uniqueProductNames = Array.from(new Set(order?.items.map(p => p.product_name)));
+            const productDataMap: { [key: string]: Product } = {};
+
+            for (const name of uniqueProductNames) {
+                const product = await fetchProductByName(name);
+                if (product) {
+                    productDataMap[name] = product;
+                }
+            }
+
+            setProductsData(productDataMap);
+        };
+
+        fetchProducts();
+    }, [order]);
 
     return (
         <tr key={order.order_id} className="bg-white border-b">
@@ -150,7 +205,7 @@ export default function OrdersTableItem({ order }: { order: Order }) {
                                     <div key={item.item_id} className="flex items-center justify-between py-2">
                                         <div className="flex flex-row items-center">
                                             <img
-                                                src={productos.find(p => p.nombre === item.product_name)?.fotos[0]}
+                                                src={productsData[item.product_name]?.fotos[0]}
                                                 alt={item.product_name}
                                                 className="mr-4 h-12 w-12 rounded object-cover object-center"
                                             />

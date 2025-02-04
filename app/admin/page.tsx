@@ -38,51 +38,58 @@ export default async function Admin() {
         // Run both queries in parallel
         const [ordersResult, statsResult] = await Promise.all([
             sql`
-                SELECT 
-                    orders.order_id,
-                    orders.client_id,
-                    orders.final_price,
-                    orders.discount_applied,
-                    orders.pickup_date,
-                    orders.pickup_hour,
-                    orders.pickup_person_name,
-                    orders.comments,
-                    orders.completed,
-                    orders.datetime_ordered,
-                    orders.total,
-                    orders.session_id,
-                    clients.name AS client_name, 
-                    clients.email AS client_email, 
-                    clients.phone AS client_phone, 
-                    json_agg(
-                        json_build_object(
-                            'item_id', order_items.item_id,
-                            'product_name', order_items.product_name,
-                            'size', order_items.size,
-                            'unit_price', order_items.unit_price,
-                            'quantity', order_items.quantity
-                        )
-                    ) AS items 
-                FROM orders 
-                JOIN clients ON orders.client_id = clients.client_id 
-                JOIN order_items ON orders.order_id = order_items.order_id 
-                GROUP BY 
-                    orders.order_id, 
-                    clients.client_id, 
-                    orders.final_price, 
-                    orders.discount_applied, 
-                    orders.pickup_date, 
-                    orders.pickup_hour, 
-                    orders.pickup_person_name, 
-                    orders.comments, 
-                    orders.completed, 
-                    orders.datetime_ordered, 
-                    orders.total, 
-                    orders.session_id, 
-                    clients.name, 
-                    clients.email, 
-                    clients.phone
-                ORDER BY orders.pickup_date ASC;
+                WITH recent_orders AS (
+        SELECT order_id 
+        FROM orders 
+        ORDER BY datetime_ordered DESC 
+        LIMIT 30
+    )
+    SELECT 
+        orders.order_id,
+        orders.client_id,
+        orders.final_price,
+        orders.discount_applied,
+        orders.pickup_date,
+        orders.pickup_hour,
+        orders.pickup_person_name,
+        orders.comments,
+        orders.completed,
+        orders.datetime_ordered,
+        orders.total,
+        orders.session_id,
+        clients.name AS client_name, 
+        clients.email AS client_email, 
+        clients.phone AS client_phone, 
+        json_agg(
+            json_build_object(
+                'item_id', order_items.item_id,
+                'product_name', order_items.product_name,
+                'size', order_items.size,
+                'unit_price', order_items.unit_price,
+                'quantity', order_items.quantity
+            )
+        ) AS items 
+    FROM orders 
+    JOIN recent_orders ON orders.order_id = recent_orders.order_id
+    JOIN clients ON orders.client_id = clients.client_id 
+    JOIN order_items ON orders.order_id = order_items.order_id 
+    GROUP BY 
+        orders.order_id, 
+        clients.client_id, 
+        orders.final_price, 
+        orders.discount_applied, 
+        orders.pickup_date, 
+        orders.pickup_hour, 
+        orders.pickup_person_name, 
+        orders.comments, 
+        orders.completed, 
+        orders.datetime_ordered, 
+        orders.total, 
+        orders.session_id, 
+        clients.name, 
+        clients.email, 
+        clients.phone
+    ORDER BY orders.pickup_date ASC;
             `,
             sql`
                 SELECT 

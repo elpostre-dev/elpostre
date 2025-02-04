@@ -21,18 +21,57 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 
-import { productos } from "@/data/productos";
 import { useState, useEffect } from "react";
-import { Producto } from "@/data/productos";
+
+interface ProductVariation {
+  id: number;
+  producto_id: number;
+  tamanio: string;
+  precio: number;
+  personas: string;
+}
+
+interface Product {
+  id: number;
+  nombre: string;
+  descripcion: string;
+  categoria_id: number;
+  categoria_nombre: string;
+  fotos: string[];
+  temporada: string;
+  activo: boolean;
+  en_venta: boolean;
+  variaciones: ProductVariation[]; // Include variations
+}
 
 
 export default function Home() {
 
-  // const bestsellerIds = [2, 29, 35, 16, 37, 38, 14];
-  const bestsellerIds = [2, 29, 35, 37];
-  const bestsellers: Producto[] = bestsellerIds
-    .map(id => productos.find(producto => producto.id === id))
-    .filter((producto): producto is Producto => producto !== undefined);
+  const bestsellerIds = [2, 29, 35, 37]; // IDs of bestsellers
+  const [bestsellers, setBestsellers] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchBestsellers = async () => {
+      try {
+        const fetchedProducts: Product[] = await Promise.all(
+          bestsellerIds.map(async (id) => {
+            const res = await fetch(`/api/getProductWithId?productId=${id}`);
+            if (!res.ok) throw new Error(`Failed to fetch product with ID: ${id}`);
+            return await res.json();
+          })
+        );
+
+        setBestsellers(fetchedProducts);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching bestsellers:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchBestsellers();
+  }, []);
 
 
   const plugin = React.useRef(
@@ -610,30 +649,38 @@ export default function Home() {
             <hr className="bg-mainRojo-100 h-1 my-5 mb-10 mx-auto" style={{ width: '10%' }} />
           </h2>
 
-          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          {
+            loading ? (
+              <div className="flex justify-center items-center h-96">
+                <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-mainRojo-100"></div>
+              </div>
+            )
+              :
+              <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
-            {bestsellers.map(producto => (
-              <>
-                <Link href={`/productos/${producto.id}`} className="group relative" key={producto.id}>
-                  <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-50 h-60 lg:h-80">
-                    <img src={producto.fotos[0]} alt="Front of men&#039;s Basic Tee in black." className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
-                  </div>
-                  <div className="mt-4 flex justify-between">
-                    <div>
-                      <h3 className="text-md text-gray-700 font-semibold">
-                        <span aria-hidden="true" className="absolute inset-0"></span>
-                        {producto.nombre}
-                      </h3>
-                      <p className="mt-1 text-sm font text-gray-500">{producto.categoriaNombre}</p>
+                {bestsellers.map((producto) => (
+                  <Link href={`/productos/${producto.id}`} className="group relative" key={producto.id}>
+                    <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-50 h-60 lg:h-80">
+                      <img
+                        src={producto.fotos[0] || "/placeholder.svg"}
+                        alt={producto.nombre}
+                        className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                      />
                     </div>
-                    {/* <p className="text-md font-medium text-gray-900">$500</p> */}
-                  </div>
-                </Link>
-              </>
+                    <div className="mt-4 flex justify-between">
+                      <div>
+                        <h3 className="text-md text-gray-700 font-semibold">
+                          <span aria-hidden="true" className="absolute inset-0"></span>
+                          {producto.nombre}
+                        </h3>
+                        <p className="mt-1 text-sm font text-gray-500">{producto.categoria_nombre}</p>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
 
-            ))}
-
-          </div>
+              </div>
+          }
 
         </div>
       </div>

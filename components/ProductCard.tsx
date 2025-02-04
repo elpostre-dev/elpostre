@@ -1,15 +1,34 @@
 import React from 'react';
-import { Producto } from "@/data/productos"
 import Link from 'next/link';
 import Image from 'next/image';
 
+interface ProductVariation {
+    id: number;
+    producto_id: number;
+    tamanio: string;
+    precio: number;
+    personas: string;
+}
+
+interface Product {
+    id: number;
+    nombre: string;
+    descripcion: string;
+    categoria_id: number;
+    categoria_nombre: string;
+    fotos: string[];
+    temporada: string;
+    activo: boolean;
+    en_venta: boolean;
+    variaciones: ProductVariation[];
+}
+
 interface ProductCardProps {
-    producto: Producto;
+    producto: Product;
 }
 
 // https://tailwindflex.com/@arya/responsive-products-grid
 const ProductCard: React.FC<ProductCardProps> = ({ producto }) => {
-
     const productURL = `/productos/${producto.id}`;
 
     return (
@@ -27,7 +46,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ producto }) => {
                 <div className="px-4 py-3 flex flex-col flex-grow xl:w-64 lg:w-72 md:w-80 w-80 text-center">
 
                     {/* categoría */}
-                    <p className="text-gray-400 mr-3 uppercase text-xs">{producto.categoriaNombre}</p>
+                    <p className="text-gray-400 mr-3 uppercase text-xs">{producto.categoria_nombre}</p>
 
                     {/* nombre */}
                     <p className="text-lg font-bold text-black block capitalize">{producto.nombre}</p>

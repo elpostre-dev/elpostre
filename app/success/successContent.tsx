@@ -70,6 +70,38 @@ type OrderResponse = {
     items: OrderItem[];
 };
 
+async function fetchProductByName(name: string) {
+    try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getProductByName?productName=${encodeURIComponent(name)}`);
+        if (!res.ok) return null;
+        return await res.json();
+    } catch (error) {
+        console.error("Error fetching product by name:", error);
+        return null;
+    }
+}
+
+interface ProductVariation {
+    id: number;
+    producto_id: number;
+    tamanio: string;
+    precio: number;
+    personas: string;
+}
+
+interface Product {
+    id: number;
+    nombre: string;
+    descripcion: string;
+    categoria_id: number;
+    categoria_nombre: string;
+    fotos: string[];
+    temporada: string;
+    activo: boolean;
+    en_venta: boolean;
+    variaciones: ProductVariation[];
+}
+
 const SuccessContent = () => {
     const searchParams = useSearchParams();
     const session_id = searchParams.get('session_id');
@@ -114,6 +146,7 @@ const SuccessContent = () => {
 
                         if (orderRes.ok) {
                             const result = await orderRes.json();
+                            console.log('Order result:', result);
                             setOrder(result);
                             // send email
                             const emailResult = await fetch('/api/email', {
@@ -150,6 +183,29 @@ const SuccessContent = () => {
 
         fetchOrder();
     }, [session_id]);
+
+    const [productsData, setProductsData] = useState<{ [key: string]: Product }>({});
+    useEffect(() => {
+        // Fetch all unique product names when the component mounts
+
+        if (!order) return;
+
+        const fetchProducts = async () => {
+            const uniqueProductNames = Array.from(new Set(order?.items.map(p => p.product_name)));
+            const productDataMap: { [key: string]: Product } = {};
+
+            for (const name of uniqueProductNames) {
+                const product = await fetchProductByName(name);
+                if (product) {
+                    productDataMap[name] = product;
+                }
+            }
+
+            setProductsData(productDataMap);
+        };
+
+        fetchProducts();
+    }, [order]);
 
     if (loading) {
         return (
@@ -298,7 +354,7 @@ const SuccessContent = () => {
                                             <td className="py-6 pr-8">
                                                 <div className="flex items-center">
                                                     <img
-                                                        src={productos.find(p => p.nombre === product.product_name)?.fotos[0]}
+                                                        src={productsData[product.product_name]?.fotos[0]}
                                                         alt={product.product_name}
                                                         className="mr-6 h-16 w-16 rounded object-cover object-center"
                                                     />
@@ -311,7 +367,7 @@ const SuccessContent = () => {
                                             <td className="hidden py-6 pr-8 sm:table-cell">{formatCurrency(product.unit_price)}</td>
                                             <td className="hidden py-6 pr-8 sm:table-cell">{product.quantity}</td>
                                             <td className="whitespace-nowrap py-6 text-right font-medium">
-                                                <a href={`/productos/${productos.find(p => p.nombre === product.product_name)?.id}`}
+                                                <a href={`/productos/${productsData[product.product_name]?.id}`}
                                                     className="text-mainRojo-100 border p-3 rounded-md hover:bg-mainRojo-100 hover:text-white transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-mainRojo-100 focus:ring-offset-2"
                                                 >
                                                     Ver<span className="hidden lg:inline"> Producto</span>

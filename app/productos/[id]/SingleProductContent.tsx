@@ -1,8 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
-import { Producto } from '../../../data/productos'; // Asegúrate de que la ruta es correcta
-import { productos } from '../../../data/productos';
 import Link from "next/link";
 import {
     Breadcrumb,
@@ -25,7 +23,6 @@ import {
 } from "@/components/ui/select"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import {
     Dialog,
     DialogClose,
@@ -36,17 +33,37 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-
 import { useCart } from '@/lib/CartContext';
 import Modal from '@/components/Modal';
 
-export default function SingleProduct({ id }: { id: string }) {
+interface ProductVariation {
+    id: number;
+    producto_id: number;
+    tamanio: string;
+    precio: number;
+    personas: string;
+}
 
-    const [producto, setProducto] = useState<Producto | null>(null);
+interface Product {
+    id: number;
+    nombre: string;
+    descripcion: string;
+    categoria_id: number;
+    categoria_nombre: string;
+    fotos: string[];
+    temporada: string;
+    activo: boolean;
+    en_venta: boolean;
+    variaciones: ProductVariation[];
+}
+
+export default function SingleProduct({ originalProduct }: { originalProduct: Product | null }) {
+
+    const [producto, setProducto] = useState<Product | null>(null);
     const [currentImage, setCurrentImage] = useState<string>("");
     const [tamanio, setTamanio] = useState<any>("");
     const [categoria, setCategoria] = useState<string>("");
-    const [productoCargado, serProductoCargado] = useState<Boolean>(false);
+    const [productoCargado, setProductoCargado] = useState<Boolean>(false);
 
     const [cartImage, setCartImage] = useState<string>("");
     const [variacion, setVariacion] = useState<any>(null);
@@ -59,37 +76,37 @@ export default function SingleProduct({ id }: { id: string }) {
     const closeModal = () => setIsModalOpen(false);
 
     useEffect(() => {
-        const productoEncontrado = productos.find((p) => p.id === Number(id));
-        if (productoEncontrado) {
-            serProductoCargado(true);
-            setProducto(productoEncontrado);
-            setCartImage(productoEncontrado.fotos[0]);
-            setCurrentImage(productoEncontrado.fotos[0]);
-            setTamanio(productoEncontrado.variaciones[0].tamanio);
-            setVariacion(productoEncontrado.variaciones[0]);
-            setProductName(productoEncontrado.nombre);
-            if (productoEncontrado.categoriaId == 1) {
+        console.log("originalProduct", originalProduct);
+        if (originalProduct) {
+            setProductoCargado(true);
+            setProducto(originalProduct);
+            setCartImage(originalProduct.fotos[0]);
+            setCurrentImage(originalProduct.fotos[0]);
+            setTamanio(originalProduct.variaciones[0].tamanio);
+            setVariacion(originalProduct.variaciones[0]);
+            setProductName(originalProduct.nombre);
+            if (originalProduct.categoria_id == 1) {
                 setCategoria("pasteles");
-            } else if (productoEncontrado.categoriaId == 2) {
+            } else if (originalProduct.categoria_id == 2) {
                 setCategoria("pays");
-            } else if (productoEncontrado.categoriaId == 3) {
+            } else if (originalProduct.categoria_id == 3) {
                 setCategoria("brownies");
-            } else if (productoEncontrado.categoriaId == 4) {
+            } else if (originalProduct.categoria_id == 4) {
                 setCategoria("galletas");
-            } else if (productoEncontrado.categoriaId == 5) {
+            } else if (originalProduct.categoria_id == 5) {
                 setCategoria("keto");
-            } else if (productoEncontrado.categoriaId == 6) {
+            } else if (originalProduct.categoria_id == 6) {
                 setCategoria("muffins-panques");
-            } else if (productoEncontrado.categoriaId == 7) {
+            } else if (originalProduct.categoria_id == 7) {
                 setCategoria("individuales");
-            } else if (productoEncontrado.categoriaId == 8) {
+            } else if (originalProduct.categoria_id == 8) {
                 setCategoria("temporada");
             }
         } else {
-            serProductoCargado(true);
+            setProductoCargado(true);
             setProducto(null);
         }
-    }, [id]);
+    }, [originalProduct]);
 
     useEffect(() => {
         const variacionNueva = producto?.variaciones.find((v) => v.tamanio === tamanio);
@@ -100,7 +117,7 @@ export default function SingleProduct({ id }: { id: string }) {
 
     const handleAddToCart = () => {
         addToCart({
-            productId: Number(id),
+            productId: Number(producto?.id),
             nombre: productName,
             cantidad: cantidad,
             photo: cartImage,
@@ -192,7 +209,7 @@ export default function SingleProduct({ id }: { id: string }) {
                                     <BreadcrumbSeparator />
                                     <BreadcrumbItem>
                                         <BreadcrumbLink asChild>
-                                            <Link href={`/productos/${categoria}`}>{producto.categoriaNombre}</Link>
+                                            <Link href={`/productos/${categoria}`}>{producto.categoria_nombre}</Link>
                                         </BreadcrumbLink>
                                     </BreadcrumbItem>
                                     <BreadcrumbSeparator />
@@ -227,7 +244,7 @@ export default function SingleProduct({ id }: { id: string }) {
                                         {/* nombre */}
                                         <div>
                                             <h2 className="text-2xl font-extrabold text-mainRojo-100 uppercase">{producto.nombre}</h2>
-                                            <p className="text-md text-gray-400 mt-2">{producto.categoriaNombre}</p>
+                                            <p className="text-md text-gray-400 mt-2">{producto.categoria_nombre}</p>
                                         </div>
 
                                         <hr className="my-8" />
@@ -239,7 +256,7 @@ export default function SingleProduct({ id }: { id: string }) {
                                                 {producto.descripcion}
                                             </p>
                                             {
-                                                producto.categoriaId == 1 || producto.id == 37 || producto.id == 38 ?
+                                                producto.categoria_id == 1 || producto.id == 37 || producto.id == 38 ?
                                                     <div className="flex flex-wrap gap-4">
                                                         <button
                                                             type="button"
@@ -252,7 +269,7 @@ export default function SingleProduct({ id }: { id: string }) {
                                                             isOpen={isModalOpen}
                                                             onClose={closeModal}
                                                             title={"Referencia de tamaños"}
-                                                            imageSrc={producto.categoriaId == 1 ? "/Pasteles/tamanios_pasteles.jpg" : "/Galletas/tamanios_galletas.jpg"}
+                                                            imageSrc={producto.categoria_id == 1 ? "/Pasteles/tamanios_pasteles.jpg" : "/Galletas/tamanios_galletas.jpg"}
                                                         />
                                                     </div>
                                                     :
@@ -328,7 +345,7 @@ export default function SingleProduct({ id }: { id: string }) {
                                         <hr className="my-8" />
 
                                         {/* Boton agregar - dialog success */}
-                                        {producto?.temporada !== "Bodas, Comuniones y Bautizos" && producto?.temporada !== "Navidad" && producto?.categoriaId !== 5 && producto?.categoriaId !== 7 && producto?.id !== 54 ?
+                                        {producto?.en_venta ?
                                             <Dialog>
                                                 <DialogTrigger asChild>
                                                     <div className="flex flex-wrap gap-4">
