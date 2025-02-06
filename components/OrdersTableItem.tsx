@@ -36,16 +36,16 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { productos } from '@/data/productos';
 import { useRouter } from "next/navigation";
 
-async function fetchProductByName(name: string) {
-    try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getProductByName?productName=${encodeURIComponent(name)}`);
-        if (!res.ok) return null;
-        return await res.json();
-    } catch (error) {
-        console.error("Error fetching product by name:", error);
-        return null;
-    }
-}
+// async function fetchProductByName(name: string) {
+//     try {
+//         const res = await fetch(`/api/getProductByName?productName=${encodeURIComponent(name)}`);
+//         if (!res.ok) return null;
+//         return await res.json();
+//     } catch (error) {
+//         console.error("Error fetching product by name:", error);
+//         return null;
+//     }
+// }
 
 // Function to parse the date string
 function parseDate(dateString: string) {
@@ -81,6 +81,7 @@ interface Product {
 
 export default function OrdersTableItem({ order }: { order: Order }) {
     const [isCompleted, setIsCompleted] = useState(order.completed);
+    const [loading, setLoading] = useState(true);
 
     const router = useRouter()
 
@@ -107,22 +108,34 @@ export default function OrdersTableItem({ order }: { order: Order }) {
 
     const [productsData, setProductsData] = useState<{ [key: string]: Product }>({});
     useEffect(() => {
-        // Fetch all unique product names when the component mounts
-
-        if (!order) return;
+        if (!order) {
+            setLoading(false);
+            return;
+        }
 
         const fetchProducts = async () => {
-            const uniqueProductNames = Array.from(new Set(order?.items.map(p => p.product_name)));
-            const productDataMap: { [key: string]: Product } = {};
+            try {
+                const uniqueProductNames = Array.from(new Set(order.items.map(p => p.product_name)));
 
-            for (const name of uniqueProductNames) {
-                const product = await fetchProductByName(name);
-                if (product) {
-                    productDataMap[name] = product;
-                }
+                const fetchedProducts = await Promise.all(
+                    uniqueProductNames.map(async (name) => {
+                        const res = await fetch(`/api/getProductByName?productName=${encodeURIComponent(name)}`);
+                        if (!res.ok) throw new Error(`Failed to fetch product with name: ${name}`);
+                        return await res.json();
+                    })
+                );
+
+                const productDataMap = uniqueProductNames.reduce((acc, name, index) => {
+                    acc[name] = fetchedProducts[index];
+                    return acc;
+                }, {} as { [key: string]: Product });
+
+                setProductsData(productDataMap);
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            } finally {
+                setLoading(false);
             }
-
-            setProductsData(productDataMap);
         };
 
         fetchProducts();
@@ -178,7 +191,9 @@ export default function OrdersTableItem({ order }: { order: Order }) {
                     </DialogHeader>
                     <ScrollArea className="max-h-[500px] w-full p-2">
                         <div className="mb-4">
+
                             <h1 className="text-xl font-bold">Orden</h1>
+
                             <ResizablePanelGroup direction="horizontal" className="items-center border rounded-lg border-black bg-gray-200 my-3">
                                 <ResizablePanel defaultSize={33} className="text-center border-r py-1 border-black">
                                     <div className="flex items-center justify-center text-xs sm:text-sm mb-[-5px]">
@@ -199,26 +214,34 @@ export default function OrdersTableItem({ order }: { order: Order }) {
                                     <span className="text-slate-500 font-semibold text-xs">Precio final</span>
                                 </ResizablePanel>
                             </ResizablePanelGroup>
-                            {order.items.map(item => (
-                                <div key={item.item_id}>
-                                    <hr />
-                                    <div key={item.item_id} className="flex items-center justify-between py-2">
-                                        <div className="flex flex-row items-center">
-                                            <img
-                                                src={productsData[item.product_name]?.fotos[0]}
-                                                alt={item.product_name}
-                                                className="mr-4 h-12 w-12 rounded object-cover object-center"
-                                            />
-                                            <div className="flex flex-col">
-                                                <p className="font-semibold">{item.product_name}</p>
-                                                <p className="text-gray-500 text-sm">{item.size}</p>
+
+                            {/* items */}
+                            {productsData && order.items && order.items.length > 0 && !loading && (
+                                <>
+                                    {order.items.map(item => (
+                                        <div key={item.item_id}>
+                                            <hr />
+                                            <div key={item.item_id} className="flex items-center justify-between py-2">
+                                                <div className="flex flex-row items-center">
+                                                    <img
+                                                        src={productsData[item.product_name]?.fotos[0]}
+                                                        alt={item.product_name}
+                                                        className="mr-6 h-16 w-16 rounded object-cover object-center"
+                                                    />
+                                                    <div className="flex flex-col">
+                                                        <p className="font-semibold">{item.product_name}</p>
+                                                        <p className="text-gray-500 text-sm">{item.size}</p>
+                                                    </div>
+                                                </div>
+                                                <p><span className="">{item.quantity}</span> x {formatCurrency(item.unit_price)}</p>
                                             </div>
                                         </div>
-                                        <p><span className="">{item.quantity}</span> x {formatCurrency(item.unit_price)}</p>
-                                    </div>
-                                </div>
-                            ))}
+                                    ))}
+                                </>
+                            )}
+
                             <hr />
+                            {/* comentarios */}
                             <div className="grid w-full gap-1.5 my-4">
                                 <Label htmlFor="message">Comentarios del cliente</Label>
                                 <div>
@@ -233,6 +256,7 @@ export default function OrdersTableItem({ order }: { order: Order }) {
                             <p className="text-sm">Numero de productos: {order.items.reduce((acc, item) => acc + item.quantity, 0)}</p>
                             <p className="text-sm">Ordenado el {format(parseDate(order.datetime_ordered), "EEEE d 'de' MMMM, yyyy", { locale: es })}</p>
                         </div>
+
                         <div>
                             <h1 className="text-xl font-bold">Recogida</h1>
                             <ResizablePanelGroup direction="vertical" className="min-h-[110px] border border-black rounded-lg mb-4 mt-2">
@@ -266,6 +290,8 @@ export default function OrdersTableItem({ order }: { order: Order }) {
                                 </ResizablePanel>
                             </ResizablePanelGroup>
                         </div>
+
+                        {/* cliente */}
                         <div>
                             <h1 className="text-xl font-bold">Cliente</h1>
                             <p className="flex items-center">
@@ -287,6 +313,7 @@ export default function OrdersTableItem({ order }: { order: Order }) {
                                 {order.client_phone}
                             </p>
                         </div>
+
                     </ScrollArea>
                 </DialogContent>
             </Dialog>
