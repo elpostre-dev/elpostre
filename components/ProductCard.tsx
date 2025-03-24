@@ -39,8 +39,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ producto }) => {
                     src={producto.fotos[0]}
                     alt={producto.nombre}
                     className="xl:h-72 h-80 xl:w-64 lg:w-72 md:w-80 w-80 object-cover rounded-t-xl"
-                    width={200}
-                    height={200}
+                    width={320}  // Larger value to match your container width
+                    height={320} // Larger value to match your container height
+                    unoptimized={process.env.NODE_ENV === 'development'} // Optional for testing
                 />
 
                 <div className="px-4 py-3 flex flex-col flex-grow xl:w-64 lg:w-72 md:w-80 w-80 text-center">
