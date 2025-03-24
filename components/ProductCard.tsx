@@ -34,14 +34,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ producto }) => {
     return (
         <div className="flex flex-col xl:w-64 lg:w-72 md:w-80 w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl" key={producto.id}>
             <Link href={productURL} className="flex h-full flex-col">
+
                 {/* foto */}
                 <Image
                     src={producto.fotos[0]}
                     alt={producto.nombre}
                     className="xl:h-72 h-80 xl:w-64 lg:w-72 md:w-80 w-80 object-cover rounded-t-xl"
-                    width={320}  // Larger value to match your container width
-                    height={320} // Larger value to match your container height
-                    unoptimized={process.env.NODE_ENV === 'development'} // Optional for testing
+                    width={320}
+                    height={320}
+                    unoptimized={true}  // Skip image optimization
                 />
 
                 <div className="px-4 py-3 flex flex-col flex-grow xl:w-64 lg:w-72 md:w-80 w-80 text-center">
