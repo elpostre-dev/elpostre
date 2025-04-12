@@ -548,12 +548,19 @@ export default function Carrito() {
                                                                     formatInTimeZone(endDate, 'America/Monterrey', 'yyyy-MM-dd HH:mm:ss zzz');
 
                                                                     // Disable specific dates (24, 25, 26, 27, 28 December)
+                                                                    // const blockedDates = [
+                                                                    //     new Date(today.getFullYear(), 11, 24), // December 24
+                                                                    //     new Date(today.getFullYear(), 11, 25), // December 25
+                                                                    //     new Date(today.getFullYear(), 11, 26), // December 26
+                                                                    //     new Date(today.getFullYear(), 11, 27), // December 27
+                                                                    //     new Date(today.getFullYear(), 11, 28), // December 28
+                                                                    // ];
+
                                                                     const blockedDates = [
-                                                                        new Date(today.getFullYear(), 11, 24), // December 24
-                                                                        new Date(today.getFullYear(), 11, 25), // December 25
-                                                                        new Date(today.getFullYear(), 11, 26), // December 26
-                                                                        new Date(today.getFullYear(), 11, 27), // December 27
-                                                                        new Date(today.getFullYear(), 11, 28), // December 28
+                                                                        new Date(today.getFullYear(), 3, 17), // April 17
+                                                                        new Date(today.getFullYear(), 3, 18), // April 18
+                                                                        new Date(today.getFullYear(), 3, 19), // April 19
+                                                                        new Date(today.getFullYear(), 3, 20), // April 20
                                                                     ];
 
                                                                     const isBlocked = blockedDates.some(
