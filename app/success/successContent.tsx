@@ -260,7 +260,7 @@ const SuccessContent = () => {
                             ¡Gracias por tu compra!
                         </h1>
                         <p className="mt-2 text-md text-gray-500">
-                            Tu pedido ha sido recibido y está siendo procesado. Recibirás un correo electrónico con la confirmación del pedido.
+                            Tu pedido ha sido recibido y está siendo procesado. Recibirás un correo electrónico con la confirmación del pedido (revisar spam).
                         </p>
                     </div>
 
