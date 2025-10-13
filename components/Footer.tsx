@@ -111,7 +111,7 @@ export default function Footer() {
 
                 </div>
 
-                <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 El Postre. All Rights Reserved.</span>
+                <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 El Postre. Sitio creado por <a href="https://pacoguerraq.com" target="_blank" className="font-bold hover:text-gray-700" rel="noopener noreferrer">Pacoguerraq</a>.</span>
 
             </div>
         </footer>
