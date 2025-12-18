@@ -329,6 +329,13 @@ export default function Carrito() {
 
                                 <div className="col-span-12 xl:col-span-8 lg:pr-8 pt-14 pb-8 lg:py-20 w-full max-xl:max-w-3xl max-xl:mx-auto">
 
+                                    {/* banner indicating online purchases will be disabled on holidays */}
+                                    <div className="col-span-12 xl:col-span-4 bg-mainRojo-100 rounded-lg p-4 mb-8 max-xl:mx-auto max-xl:max-w-3xl">
+                                        <p className="text-white font-semibold text-lg text-center">
+                                            Las compras en línea estarán deshabilitadas del 23 de diciembre al 4 de enero. ¡Felices fiestas!
+                                        </p>
+                                    </div>
+
                                     {/* CARRITO */}
                                     <Collapsible
                                         open={isCarritoOpen}
@@ -557,10 +564,19 @@ export default function Carrito() {
                                                                     // ];
 
                                                                     const blockedDates = [
-                                                                        new Date(today.getFullYear(), 3, 17), // April 17
-                                                                        new Date(today.getFullYear(), 3, 18), // April 18
-                                                                        new Date(today.getFullYear(), 3, 19), // April 19
-                                                                        new Date(today.getFullYear(), 3, 20), // April 20
+                                                                        new Date(today.getFullYear(), 11, 23), // December 23
+                                                                        new Date(today.getFullYear(), 11, 24), // December 24
+                                                                        new Date(today.getFullYear(), 11, 25), // December 25
+                                                                        new Date(today.getFullYear(), 11, 26), // December 26
+                                                                        new Date(today.getFullYear(), 11, 27), // December 27
+                                                                        new Date(today.getFullYear(), 11, 28), // December 28
+                                                                        new Date(today.getFullYear(), 11, 29), // December 29
+                                                                        new Date(today.getFullYear(), 11, 30), // December 30
+                                                                        new Date(today.getFullYear(), 11, 31), // December 31
+                                                                        new Date(today.getFullYear(), 0, 1),   // January 1
+                                                                        new Date(today.getFullYear(), 0, 2),   // January 2
+                                                                        new Date(today.getFullYear(), 0, 3),   // January 3
+                                                                        new Date(today.getFullYear(), 0, 4),   // January 4
                                                                     ];
 
                                                                     const isBlocked = blockedDates.some(
