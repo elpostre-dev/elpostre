@@ -36,7 +36,7 @@ export default function Contacto() {
                                 <div className="border-t border-gray-200 px-6 py-4">
                                     <h3 className="text-lg font-medium text-gray-900">Horarios</h3>
                                     <p className="mt-1 text-gray-600">Lunes - Viernes: 9am - 8pm</p>
-                                    <p className="mt-1 text-gray-600">Sábado: 9am - 7pm</p>
+                                    <p className="mt-1 text-gray-600">Sábado: 10am - 7pm</p>
                                     <p className="mt-1 text-gray-600">Domingo: 11am - 4pm</p>
                                 </div>
                                 <div className="border-t border-gray-200 px-6 py-4">
