@@ -573,10 +573,10 @@ export default function Carrito() {
                                                                         new Date(today.getFullYear(), 11, 29), // December 29
                                                                         new Date(today.getFullYear(), 11, 30), // December 30
                                                                         new Date(today.getFullYear(), 11, 31), // December 31
-                                                                        new Date(today.getFullYear(), 0, 1),   // January 1
-                                                                        new Date(today.getFullYear(), 0, 2),   // January 2
-                                                                        new Date(today.getFullYear(), 0, 3),   // January 3
-                                                                        new Date(today.getFullYear(), 0, 4),   // January 4
+                                                                        new Date(2026, 0, 1),   // January 1
+                                                                        new Date(2026, 0, 2),   // January 2
+                                                                        new Date(2026, 0, 3),   // January 3
+                                                                        new Date(2026, 0, 4),   // January 4
                                                                     ];
 
                                                                     const isBlocked = blockedDates.some(
