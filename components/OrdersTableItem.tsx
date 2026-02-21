@@ -34,7 +34,6 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { productos } from '@/data/productos';
 import { useRouter } from "next/navigation";
 
 // async function fetchProductByName(name: string) {

@@ -1,57 +1,68 @@
 import { MetadataRoute } from "next";
-import { productos } from "@/data/productos";
-import { Producto, Variacion } from "@/data/productos";
+import { sql } from "@vercel/postgres";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const host = process.env.NEXT_PUBLIC_HOST ?? "";
+    const now = new Date();
+    let productUrls: MetadataRoute.Sitemap = [];
 
-    const productUrls = productos.map((p: Producto) => {
-        return {
-            url: `${process.env.NEXT_PUBLIC_HOST}/productos/${p.id}`,
-            lastModified: new Date(),
-        }
-    });
+    try {
+        const result = await sql<{ id: number }>`
+            SELECT id
+            FROM productos
+            WHERE activo = true
+            ORDER BY id ASC;
+        `;
+
+        productUrls = result.rows.map((product) => ({
+            url: `${host}/productos/${product.id}`,
+            lastModified: now,
+        }));
+    } catch (error) {
+        console.error("Error building sitemap product URLs:", error);
+    }
 
 
     return [
         {
-            url: `${process.env.NEXT_PUBLIC_HOST}`,
-            lastModified: new Date(),
+            url: `${host}`,
+            lastModified: now,
         },
         {
-            url: `${process.env.NEXT_PUBLIC_HOST}/productos/pasteles`,
-            lastModified: new Date(),
+            url: `${host}/productos/pasteles`,
+            lastModified: now,
         },
         {
-            url: `${process.env.NEXT_PUBLIC_HOST}/productos/pays`,
-            lastModified: new Date(),
+            url: `${host}/productos/pays`,
+            lastModified: now,
         },
         {
-            url: `${process.env.NEXT_PUBLIC_HOST}/productos/brownies`,
-            lastModified: new Date(),
+            url: `${host}/productos/brownies`,
+            lastModified: now,
         },
         {
-            url: `${process.env.NEXT_PUBLIC_HOST}/productos/galletas`,
-            lastModified: new Date(),
+            url: `${host}/productos/galletas`,
+            lastModified: now,
         },
         {
-            url: `${process.env.NEXT_PUBLIC_HOST}/productos/keto`,
-            lastModified: new Date(),
+            url: `${host}/productos/keto`,
+            lastModified: now,
         },
         {
-            url: `${process.env.NEXT_PUBLIC_HOST}/productos/muffins-panques`,
-            lastModified: new Date(),
+            url: `${host}/productos/muffins-panques`,
+            lastModified: now,
         },
         {
-            url: `${process.env.NEXT_PUBLIC_HOST}/productos/individuales`,
-            lastModified: new Date(),
+            url: `${host}/productos/individuales`,
+            lastModified: now,
         },
         {
-            url: `${process.env.NEXT_PUBLIC_HOST}/productos/temporada`,
-            lastModified: new Date(),
+            url: `${host}/productos/temporada`,
+            lastModified: now,
         },
         {
-            url: `${process.env.NEXT_PUBLIC_HOST}/carrito`,
-            lastModified: new Date(),
+            url: `${host}/carrito`,
+            lastModified: now,
         },
         ...productUrls,
     ]

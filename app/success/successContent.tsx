@@ -7,8 +7,6 @@ import { formatCurrency } from '@/lib/utils';
 import Link from 'next/link';
 import Image from "next/image";
 
-import { productos } from '@/data/productos';
-
 import { Button } from "@/components/ui/button"
 import {
     Dialog,

@@ -286,7 +286,7 @@ export default function SingleProduct({ originalProduct }: { originalProduct: Pr
                                                             isOpen={isModalOpen}
                                                             onClose={closeModal}
                                                             title={"Referencia de tamaños"}
-                                                            imageSrc={producto.categoria_id == 1 ? "/Pasteles/tamanios_pasteles.jpg" : "/Galletas/tamanios_galletas.jpg"}
+                                                            imageSrc={producto.categoria_id == 1 ? "/tamanios/tamanios_pasteles.jpg" : "/tamanios/tamanios_galletas.jpg"}
                                                         />
                                                     </div>
                                                     :
