@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from "next/image";
 
 type ModalProps = {
     isOpen: boolean;
@@ -22,7 +23,14 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, imageSrc }) => {
                 </div>
                 <hr className='my-2' />
                 <div className=''>
-                    <img src={imageSrc} alt={title} className="w-full h-auto object-contain" />
+                    <Image
+                        src={imageSrc}
+                        alt={title}
+                        className="w-full h-auto object-contain"
+                        width={1200}
+                        height={800}
+                        sizes="95vw"
+                    />
                 </div>
             </div>
         </div>

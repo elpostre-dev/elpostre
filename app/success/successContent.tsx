@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { useCart } from "@/lib/CartContext";
 import { formatCurrency } from '@/lib/utils';
 import Link from 'next/link';
+import Image from "next/image";
 
 import { productos } from '@/data/productos';
 
@@ -353,10 +354,13 @@ const SuccessContent = () => {
                                         <tr key={product.item_id}>
                                             <td className="py-6 pr-8">
                                                 <div className="flex items-center">
-                                                    <img
-                                                        src={productsData[product.product_name]?.fotos[0]}
+                                                    <Image
+                                                        src={productsData[product.product_name]?.fotos[0] || "/placeholder.svg"}
                                                         alt={product.product_name}
                                                         className="mr-6 h-16 w-16 rounded object-cover object-center"
+                                                        width={64}
+                                                        height={64}
+                                                        sizes="64px"
                                                     />
                                                     <div>
                                                         <div className="font-medium text-gray-900">{product.product_name} - {product.size}</div>

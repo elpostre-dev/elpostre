@@ -271,8 +271,22 @@ export default function Home() {
             {/* <p>We are strategists, designers and developers. Innovators and problem solvers. Small enough to be simple and quick.</p> */}
           </div>
           <div className="grid grid-cols-2 gap-4 my-8">
-            <img className="w-full rounded-lg" src="/sucursal2.jpg" alt="sucursal" />
-            <img className="mt-4 w-full lg:mt-10 rounded-lg" src="/galletas.png" alt="galletas" />
+            <Image
+              className="w-full rounded-lg"
+              src="/sucursal2.jpg"
+              alt="sucursal"
+              width={704}
+              height={1024}
+              sizes="50vw"
+            />
+            <Image
+              className="mt-4 w-full lg:mt-10 rounded-lg"
+              src="/galletas.png"
+              alt="galletas"
+              width={704}
+              height={1024}
+              sizes="50vw"
+            />
           </div>
         </div>
       </section>
@@ -355,8 +369,14 @@ export default function Home() {
 
             <div className="mb-12 md:mb-0">
               <div className="mb-6 flex justify-center">
-                <img src="/logos/logo_rojo.jpg"
-                  className="w-20 rounded-full shadow-lg" />
+                <Image
+                  src="/logos/logo_rojo.jpg"
+                  alt="logo"
+                  className="w-20 rounded-full shadow-lg"
+                  width={80}
+                  height={80}
+                  sizes="80px"
+                />
               </div>
               <h6 className="mb-4 font-medium text-slate-800">
                 Opiniones de Google
@@ -403,8 +423,14 @@ export default function Home() {
 
             <div className="mb-12 md:mb-0">
               <div className="mb-6 flex justify-center">
-                <img src="/logos/logo_rojo.jpg"
-                  className="w-20 rounded-full shadow-lg" />
+                <Image
+                  src="/logos/logo_rojo.jpg"
+                  alt="logo"
+                  className="w-20 rounded-full shadow-lg"
+                  width={80}
+                  height={80}
+                  sizes="80px"
+                />
               </div>
               <h6 className="mb-4 font-medium text-slate-800">
                 Opiniones de Google
@@ -451,8 +477,14 @@ export default function Home() {
 
             <div className="mb-0">
               <div className="mb-6 flex justify-center">
-                <img src="/logos/logo_rojo.jpg"
-                  className="w-20 rounded-full shadow-lg" />
+                <Image
+                  src="/logos/logo_rojo.jpg"
+                  alt="logo"
+                  className="w-20 rounded-full shadow-lg"
+                  width={80}
+                  height={80}
+                  sizes="80px"
+                />
               </div>
               <h6 className="mb-4 font-medium text-slate-800">
                 Opiniones de Google
@@ -510,8 +542,15 @@ export default function Home() {
             <div className="w-full md:w-4/12 lg:w-3/12 mb-6 px-6 sm:px-6 lg:px-4">
               <div className="flex flex-col">
                 <a className="mx-auto">
-                  <img className="rounded-2xl drop-shadow-md hover:drop-shadow-xl transition-all duration-200 delay-100 shadow p-10 object-contain"
-                    src="logos/sucursal.png" style={{ height: '200px' }} />
+                  <Image
+                    className="rounded-2xl drop-shadow-md hover:drop-shadow-xl transition-all duration-200 delay-100 shadow p-10 object-contain"
+                    src="logos/sucursal.png"
+                    alt="Sucursal"
+                    width={400}
+                    height={400}
+                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    style={{ height: '200px' }}
+                  />
                 </a>
 
                 <div className="text-center mt-6">
@@ -544,8 +583,15 @@ export default function Home() {
             <div className="w-full md:w-4/12 lg:w-3/12 mb-6 px-6 sm:px-6 lg:px-4">
               <div className="flex flex-col">
                 <a className="mx-auto">
-                  <img className="rounded-2xl drop-shadow-md hover:drop-shadow-xl transition-all duration-200 delay-100 shadow p-10 object-contain"
-                    src="logos/rappi_2.png" style={{ height: '200px' }} />
+                  <Image
+                    className="rounded-2xl drop-shadow-md hover:drop-shadow-xl transition-all duration-200 delay-100 shadow p-10 object-contain"
+                    src="logos/rappi_2.png"
+                    alt="Rappi"
+                    width={400}
+                    height={400}
+                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    style={{ height: '200px' }}
+                  />
                 </a>
 
                 <div className="text-center mt-6">
@@ -578,8 +624,15 @@ export default function Home() {
             <div className="w-full md:w-4/12 lg:w-3/12 mb-6 px-6 sm:px-6 lg:px-4">
               <div className="flex flex-col">
                 <a className="mx-auto">
-                  <img className="rounded-2xl drop-shadow-md hover:drop-shadow-xl transition-all duration-200 delay-100 shadow p-10 object-contain"
-                    src="logos/devices.png" style={{ height: '200px' }} />
+                  <Image
+                    className="rounded-2xl drop-shadow-md hover:drop-shadow-xl transition-all duration-200 delay-100 shadow p-10 object-contain"
+                    src="logos/devices.png"
+                    alt="Devices"
+                    width={400}
+                    height={400}
+                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    style={{ height: '200px' }}
+                  />
                 </a>
 
                 <div className="text-center mt-6">
@@ -629,12 +682,13 @@ export default function Home() {
               Contamos con una amplia variedad de tamaños de pasteles, desde individuales hasta pasteles para grandes eventos.
             </p>
           </div>
-          <img
+          <Image
             src="/tamanios_pasteles.jpg"
             alt="Hero Image"
             width={1113}
             height={846}
             className="w-full max-w-3xl rounded-xl"
+            sizes="(min-width: 1024px) 768px, 100vw"
           />
         </div>
       </section>
@@ -661,10 +715,13 @@ export default function Home() {
                 {bestsellers.map((producto) => (
                   <Link href={`/productos/${producto.id}`} className="group relative" key={producto.id}>
                     <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-50 h-60 lg:h-80">
-                      <img
+                      <Image
                         src={producto.fotos[0] || "/placeholder.svg"}
                         alt={producto.nombre}
                         className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                        width={600}
+                        height={600}
+                        sizes="(min-width: 1024px) 25vw, 50vw"
                       />
                     </div>
                     <div className="mt-4 flex justify-between">

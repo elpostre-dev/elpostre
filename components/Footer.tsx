@@ -92,11 +92,12 @@ export default function Footer() {
                         href="https://www.rappi.com.mx/restaurantes/1306704483-el-postre"
                         target="blank"
                     >
-                        <img
+                        <Image
                             src="/logos/bigote.png"  // Update the path to where your PNG is stored
                             alt="Rappi"  // Descriptive alternative text for accessibility
-                            width="25"
-                            height="25"
+                            width={25}
+                            height={25}
+                            sizes="25px"
                             style={{ display: 'block' }} // Ensures the image does not have extra space around it
                         />
                     </Link>

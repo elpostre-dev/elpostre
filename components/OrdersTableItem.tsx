@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Link from "next/link";
+import Image from "next/image";
 import { Order } from '@/types/types';
 import { formatCurrency } from "@/lib/utils";
 import { format, parse } from 'date-fns';
@@ -223,10 +224,13 @@ export default function OrdersTableItem({ order }: { order: Order }) {
                                             <hr />
                                             <div key={item.item_id} className="flex items-center justify-between py-2">
                                                 <div className="flex flex-row items-center">
-                                                    <img
-                                                        src={productsData[item.product_name]?.fotos[0]}
+                                                    <Image
+                                                        src={productsData[item.product_name]?.fotos[0] || "/placeholder.svg"}
                                                         alt={item.product_name}
                                                         className="mr-6 h-16 w-16 rounded object-cover object-center"
+                                                        width={64}
+                                                        height={64}
+                                                        sizes="64px"
                                                     />
                                                     <div className="flex flex-col">
                                                         <p className="font-semibold">{item.product_name}</p>

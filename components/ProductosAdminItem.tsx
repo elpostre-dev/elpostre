@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Link from "next/link";
+import Image from "next/image";
 import { formatCurrency } from "@/lib/utils";
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -214,10 +215,13 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
             {/* name and image */}
             <TableCell>
                 <Link href={`/productos/${p.id}`} className="text-blue-600 hover:underline flex items-center" target="_blank">
-                    <img
-                        src={p.fotos[0]}
+                    <Image
+                        src={p.fotos[0] || "/placeholder.svg"}
                         alt={p.nombre}
                         className="mr-3 h-12 w-12 rounded object-cover object-center"
+                        width={48}
+                        height={48}
+                        sizes="48px"
                     />
                     {p.nombre}
                 </Link>
@@ -359,10 +363,13 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
                                         <div className="flex flex-wrap gap-2 mb-2">
                                             {product.fotos.map((image, index) => (
                                                 <div key={index} className="relative">
-                                                    <img
+                                                    <Image
                                                         src={image || "/placeholder.svg"}
                                                         alt={`Product ${index + 1}`}
                                                         className="w-16 h-16 object-cover rounded"
+                                                        width={64}
+                                                        height={64}
+                                                        sizes="64px"
                                                     />
                                                     <button
                                                         onClick={() => removeImage(index)}

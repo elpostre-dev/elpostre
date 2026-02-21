@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from "next/link";
+import Image from "next/image";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -228,11 +229,27 @@ export default function SingleProduct({ originalProduct }: { originalProduct: Pr
                                     {/* Fotos */}
                                     <div className="w-full lg:sticky top-0 text-center">
                                         <div style={{ height: "420px" }} className='border my-auto rounded-xl flex items-center justify-center'>
-                                            <img src={currentImage} alt="Product" className="rounded-xl object-contain max-h-[420px]" />
+                                            <Image
+                                                src={currentImage || "/placeholder.svg"}
+                                                alt="Product"
+                                                className="rounded-xl object-contain max-h-[420px]"
+                                                width={900}
+                                                height={900}
+                                                sizes="(min-width: 1024px) 50vw, 100vw"
+                                            />
                                         </div>
                                         <div className="flex flex-wrap gap-x-8 gap-y-6 justify-center mx-auto mt-6">
                                             {producto.fotos.map((foto, index) => (
-                                                <img key={index} src={foto} alt="Product" className="w-20 cursor-pointer rounded-xl object-contain border" onClick={() => setCurrentImage(foto)} />
+                                                <Image
+                                                    key={index}
+                                                    src={foto || "/placeholder.svg"}
+                                                    alt="Product"
+                                                    className="w-20 cursor-pointer rounded-xl object-contain border"
+                                                    onClick={() => setCurrentImage(foto)}
+                                                    width={80}
+                                                    height={80}
+                                                    sizes="80px"
+                                                />
                                             ))}
                                         </div>
                                     </div>
@@ -367,7 +384,14 @@ export default function SingleProduct({ originalProduct }: { originalProduct: Pr
                                                     <div className="flex my-4">
                                                         {/* Product Image */}
                                                         <div className="w-1/3">
-                                                            <img src={cartImage} alt={producto.nombre} className="rounded-lg shadow-lg" />
+                                                            <Image
+                                                                src={cartImage || "/placeholder.svg"}
+                                                                alt={producto.nombre}
+                                                                className="rounded-lg shadow-lg"
+                                                                width={600}
+                                                                height={600}
+                                                                sizes="33vw"
+                                                            />
                                                         </div>
                                                         {/* Product Details */}
                                                         <div className="w-2/3 ml-4">

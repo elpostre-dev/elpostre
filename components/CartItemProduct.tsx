@@ -1,6 +1,7 @@
 import { CartItem } from "@/lib/CartContext";
 import { formatCurrency } from "@/lib/utils";
 import { useCart } from "@/lib/CartContext";
+import Image from "next/image";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,7 +38,14 @@ export default function CartItemProduct({ item }: { item: CartItem }) {
 
                 {/* photo */}
                 <div className="w-full md:max-w-[126px]">
-                    <img src={item.photo} alt="perfume bottle image" className="mx-auto w-full md:h-[100px] h-[200px] rounded object-cover" />
+                    <Image
+                        src={item.photo}
+                        alt="perfume bottle image"
+                        className="mx-auto w-full md:h-[100px] h-[200px] rounded object-cover"
+                        width={400}
+                        height={400}
+                        sizes="(min-width: 768px) 126px, 100vw"
+                    />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-7 w-full">

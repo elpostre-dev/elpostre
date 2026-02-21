@@ -4,6 +4,7 @@ import NavBar from "../../components/Navbar";
 import { useCart } from "@/lib/CartContext";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import Image from "next/image";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -297,9 +298,14 @@ export default function Carrito() {
                             <div className="flex flex-1 items-center justify-center">
                                 <div className="mx-auto max-w-xl px-4 text-center">
                                     <div className="flex justify-center items-center">
-                                        <img className="w-32 h-32 mb-8 rounded-full object-cover"
+                                        <Image
+                                            className="w-32 h-32 mb-8 rounded-full object-cover"
                                             src="/logos/logo_rojo.jpg"
-                                            alt="image empty states" />
+                                            alt="image empty states"
+                                            width={128}
+                                            height={128}
+                                            sizes="128px"
+                                        />
                                     </div>
                                     <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                                         Tu carrito esta vacío

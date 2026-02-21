@@ -2,6 +2,7 @@
 
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
+import Image from "next/image";
 
 export default function SignIn() {
     const [email, setEmail] = useState('');
@@ -17,7 +18,14 @@ export default function SignIn() {
     return (
         <>
             <div className="min-h-screen flex items-center justify-center bg-gray-100 flex-col">
-                <img src="/logos/logo_dorado.png" alt="Logo" className="h-20 mb-8" />
+                <Image
+                    src="/logos/logo_dorado.png"
+                    alt="Logo"
+                    className="h-20 mb-8 w-auto"
+                    width={320}
+                    height={160}
+                    sizes="80px"
+                />
                 <div className="max-w-md bg-white p-8 rounded-lg shadow-md" style={{ width: '90%' }}>
                     {/* <h2 className="text-2xl font-semibold text-center mb-4">Entrar como administrador</h2> */}
                     <form onSubmit={handleSubmit}>
