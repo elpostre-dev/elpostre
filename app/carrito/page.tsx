@@ -336,11 +336,11 @@ export default function Carrito() {
                                 <div className="col-span-12 xl:col-span-8 lg:pr-8 pt-14 pb-8 lg:py-20 w-full max-xl:max-w-3xl max-xl:mx-auto">
 
                                     {/* banner indicating online purchases will be disabled on holidays */}
-                                    <div className="col-span-12 xl:col-span-4 bg-mainRojo-100 rounded-lg p-4 mb-8 max-xl:mx-auto max-xl:max-w-3xl">
+                                    {/* <div className="col-span-12 xl:col-span-4 bg-mainRojo-100 rounded-lg p-4 mb-8 max-xl:mx-auto max-xl:max-w-3xl">
                                         <p className="text-white font-semibold text-lg text-center">
                                             Las compras en línea estarán deshabilitadas del 23 de diciembre al 4 de enero. ¡Felices fiestas!
                                         </p>
-                                    </div>
+                                    </div> */}
 
                                     {/* CARRITO */}
                                     <Collapsible
