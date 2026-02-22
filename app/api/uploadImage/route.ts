@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { requireAdminSession } from "@/lib/auth";
 
 // Initialize Supabase Client
 const supabase = createClient(
@@ -8,6 +9,9 @@ const supabase = createClient(
 );
 
 export async function POST(req: NextRequest) {
+    const unauthorized = await requireAdminSession();
+    if (unauthorized) return unauthorized;
+
     try {
         const formData = await req.formData();
         const files = formData.getAll('files') as File[];

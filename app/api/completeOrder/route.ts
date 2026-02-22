@@ -1,8 +1,12 @@
 // app/api/orders/complete.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { sql } from "@vercel/postgres";
+import { requireAdminSession } from "@/lib/auth";
 
 export async function POST(request: NextRequest) {
+    const unauthorized = await requireAdminSession();
+    if (unauthorized) return unauthorized;
+
     try {
         const { orderId } = await request.json();
 

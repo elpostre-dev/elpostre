@@ -1,23 +1,21 @@
-import { useState, useEffect } from 'react';
-import Link from "next/link";
+'use client';
+
+import { useState } from 'react';
 import Image from "next/image";
 import { Order } from '@/types/types';
 import { formatCurrency } from "@/lib/utils";
-import { format, parse } from 'date-fns';
+import { format, isValid, parse, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 
 import {
-    ResizableHandle,
-    ResizablePanel,
-    ResizablePanelGroup,
-} from "@/components/ui/resizable"
+    Badge
+} from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import {
     Dialog,
     DialogContent,
     DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -33,57 +31,52 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { ScrollArea } from "@/components/ui/scroll-area"
 import { useRouter } from "next/navigation";
-
-// async function fetchProductByName(name: string) {
-//     try {
-//         const res = await fetch(`/api/getProductByName?productName=${encodeURIComponent(name)}`);
-//         if (!res.ok) return null;
-//         return await res.json();
-//     } catch (error) {
-//         console.error("Error fetching product by name:", error);
-//         return null;
-//     }
-// }
-
-// Function to parse the date string
-function parseDate(dateString: string) {
-    // Extract the date part (yyyy-MM-dd)
-    const datePart = dateString.split(' ')[0];
-
-    // Parse the extracted date part
-    const parsedDate = parse(datePart, 'yyyy-MM-dd', new Date());
-
-    return parsedDate;
-}
-
-interface ProductVariation {
-    id: number;
-    producto_id: number;
-    tamanio: string;
-    precio: number;
-    personas: string;
-}
 
 interface Product {
     id: number;
-    nombre: string;
-    descripcion: string;
-    categoria_id: number;
-    categoria_nombre: string;
     fotos: string[];
-    temporada: string;
-    activo: boolean;
-    en_venta: boolean;
-    variaciones: ProductVariation[];
 }
 
-export default function OrdersTableItem({ order }: { order: Order }) {
-    const [isCompleted, setIsCompleted] = useState(order.completed);
-    const [loading, setLoading] = useState(true);
+const productCache = new Map<string, Product | null>();
 
-    const router = useRouter()
+function parseDateValue(dateString: string) {
+    if (!dateString) return null;
+
+    if (dateString.includes("T")) {
+        const parsedIso = parseISO(dateString);
+        if (isValid(parsedIso)) return parsedIso;
+    }
+
+    const datePart = dateString.split(' ')[0];
+    const parsedDate = parse(datePart, 'yyyy-MM-dd', new Date());
+    if (isValid(parsedDate)) return parsedDate;
+
+    const fallbackDate = new Date(dateString);
+    if (isValid(fallbackDate)) return fallbackDate;
+
+    return null;
+}
+
+function formatDateText(rawDate: string, datePattern: string) {
+    const parsedDate = parseDateValue(rawDate);
+    if (!parsedDate) return rawDate;
+    return format(parsedDate, datePattern, { locale: es });
+}
+
+export default function OrdersTableItem({
+    order,
+    onOrderCompleted,
+}: {
+    order: Order;
+    onOrderCompleted?: () => void;
+}) {
+    const [isCompleted, setIsCompleted] = useState(order.completed);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [loadingProducts, setLoadingProducts] = useState(false);
+    const [productsData, setProductsData] = useState<{ [key: string]: Product | null }>({});
+
+    const router = useRouter();
 
     const handleCompleteOrder = async () => {
         try {
@@ -97,7 +90,8 @@ export default function OrdersTableItem({ order }: { order: Order }) {
 
             if (res.ok) {
                 setIsCompleted(true);
-                router.refresh()
+                onOrderCompleted?.();
+                router.refresh();
             } else {
                 console.error('Failed to complete the order');
             }
@@ -106,40 +100,40 @@ export default function OrdersTableItem({ order }: { order: Order }) {
         }
     };
 
-    const [productsData, setProductsData] = useState<{ [key: string]: Product }>({});
-    useEffect(() => {
-        if (!order) {
-            setLoading(false);
-            return;
-        }
+    const loadProductsData = async () => {
+        if (loadingProducts) return;
 
-        const fetchProducts = async () => {
+        const uniqueProductNames = Array.from(new Set(order.items.map((item) => item.product_name)));
+        const missingNames = uniqueProductNames.filter((name) => !productCache.has(name));
+
+        if (missingNames.length > 0) {
+            setLoadingProducts(true);
             try {
-                const uniqueProductNames = Array.from(new Set(order.items.map(p => p.product_name)));
-
-                const fetchedProducts = await Promise.all(
-                    uniqueProductNames.map(async (name) => {
-                        const res = await fetch(`/api/getProductByName?productName=${encodeURIComponent(name)}`);
-                        if (!res.ok) throw new Error(`Failed to fetch product with name: ${name}`);
-                        return await res.json();
+                await Promise.all(
+                    missingNames.map(async (name) => {
+                        const response = await fetch(`/api/getProductByName?productName=${encodeURIComponent(name)}`);
+                        if (!response.ok) {
+                            productCache.set(name, null);
+                            return;
+                        }
+                        const product = (await response.json()) as Product;
+                        productCache.set(name, product);
                     })
                 );
-
-                const productDataMap = uniqueProductNames.reduce((acc, name, index) => {
-                    acc[name] = fetchedProducts[index];
-                    return acc;
-                }, {} as { [key: string]: Product });
-
-                setProductsData(productDataMap);
             } catch (error) {
                 console.error("Error fetching products:", error);
             } finally {
-                setLoading(false);
+                setLoadingProducts(false);
             }
-        };
+        }
 
-        fetchProducts();
-    }, [order]);
+        const mappedProducts = uniqueProductNames.reduce((acc, name) => {
+            acc[name] = productCache.get(name) ?? null;
+            return acc;
+        }, {} as Record<string, Product | null>);
+
+        setProductsData(mappedProducts);
+    };
 
     return (
         <tr key={order.order_id} className="bg-white border-b">
@@ -147,29 +141,41 @@ export default function OrdersTableItem({ order }: { order: Order }) {
                 {order.client_name}
             </th>
             <td className="px-4 py-4 hidden sm:table-cell">{formatCurrency(order.final_price)} MXN</td>
-            <td className="px-4 py-4 hidden md:table-cell">{format(parseDate(order.datetime_ordered), "EEEE d 'de' MMMM, yyyy", { locale: es })}</td>
-            <td className="px-4 py-4 bg-gray-100">{format(order.pickup_date, "EEEE d 'de' MMMM, yyyy", { locale: es })}</td>
+            <td className="px-4 py-4 hidden md:table-cell">{formatDateText(order.datetime_ordered, "EEEE d 'de' MMMM, yyyy")}</td>
+            <td className="px-4 py-4 bg-gray-100">{formatDateText(order.pickup_date, "EEEE d 'de' MMMM, yyyy")}</td>
             <td className="px-4 py-4 bg-gray-100 hidden sm:table-cell">{order.pickup_hour}</td>
-            <Dialog>
-                <DialogTrigger asChild>
-                    <td className="px-4 py-4 text-center">
-                        <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Detalles</a>
-                    </td>
-                </DialogTrigger>
-                <DialogContent style={{ width: '96%' }}>
-                    <DialogHeader className="">
-                        <DialogTitle>Detalles de la orden</DialogTitle>
-                        <DialogDescription>
-                            Aquí puedes ver los detalles de la orden.
-                        </DialogDescription>
-                        {isCompleted ? (
-                            <div className="text-green-600 font-bold">COMPLETADA</div>
-                        ) : (
+            <td className="px-4 py-4 text-center">
+                <Dialog
+                    open={isDialogOpen}
+                    onOpenChange={(open) => {
+                        setIsDialogOpen(open);
+                        if (open) {
+                            void loadProductsData();
+                        }
+                    }}
+                >
+                    <DialogTrigger asChild>
+                        <button type="button" className="font-medium text-blue-600 hover:underline">
+                            Ver detalles
+                        </button>
+                    </DialogTrigger>
+                    <DialogContent className="w-[96vw] max-w-5xl h-[88vh] p-0 overflow-hidden flex flex-col [&>button]:opacity-100 [&>button]:z-30 [&>button]:text-gray-800 [&>button]:border [&>button]:rounded-full [&>button]:bg-white [&>button]:p-1.5 [&>button]:top-5 [&>button]:right-5 [&>button]:shadow-sm">
+                    <DialogHeader className="border-b px-6 py-5 pr-16 shrink-0 bg-white">
+                        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                            <div>
+                                <DialogTitle className="text-2xl">Detalle de orden</DialogTitle>
+                                <DialogDescription className="pt-1 text-base">
+                                    Recogida: {formatDateText(order.pickup_date, "EEEE d 'de' MMMM, yyyy")} - {order.pickup_hour}
+                                </DialogDescription>
+                            </div>
+                            <Badge className={isCompleted ? "bg-green-600 hover:bg-green-600" : "bg-amber-500 hover:bg-amber-500"}>
+                                {isCompleted ? "Completada" : "Pendiente"}
+                            </Badge>
+                        </div>
+                        {!isCompleted && (
                             <AlertDialog>
                                 <AlertDialogTrigger asChild>
-                                    <button
-                                        className="bg-blue-500 hover:bg-blue-300 text-white py-2 px-4 rounded mx-auto sm:mx-0 w-4/6"
-                                    >
+                                    <button className="bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded w-full sm:w-auto">
                                         Marcar como completada
                                     </button>
                                 </AlertDialogTrigger>
@@ -177,7 +183,7 @@ export default function OrdersTableItem({ order }: { order: Order }) {
                                     <AlertDialogHeader>
                                         <AlertDialogTitle>¿Marcar como completada?</AlertDialogTitle>
                                         <AlertDialogDescription>
-                                            ¿Estás seguro de que deseas marcar esta orden como completada?
+                                            Esta acción moverá la orden a órdenes anteriores.
                                         </AlertDialogDescription>
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>
@@ -187,139 +193,91 @@ export default function OrdersTableItem({ order }: { order: Order }) {
                                 </AlertDialogContent>
                             </AlertDialog>
                         )}
-                        <hr />
                     </DialogHeader>
-                    <ScrollArea className="max-h-[500px] w-full p-2">
-                        <div className="mb-4">
-
-                            <h1 className="text-xl font-bold">Orden</h1>
-
-                            <ResizablePanelGroup direction="horizontal" className="items-center border rounded-lg border-black bg-gray-200 my-3">
-                                <ResizablePanel defaultSize={33} className="text-center border-r py-1 border-black">
-                                    <div className="flex items-center justify-center text-xs sm:text-sm mb-[-5px]">
-                                        {formatCurrency(order.total)}
-                                    </div>
-                                    <span className="text-slate-500 font-semibold text-xs">Total</span>
-                                </ResizablePanel>
-                                <ResizablePanel defaultSize={33} className="text-center border-r py-1 border-black">
-                                    <div className="flex items-center justify-center text-xs sm:text-sm mb-[-5px]">
-                                        {order.discount_applied ? formatCurrency(order.total - order.final_price) : formatCurrency(0)}
-                                    </div>
-                                    <span className="text-slate-500 font-semibold text-xs">Descuento</span>
-                                </ResizablePanel>
-                                <ResizablePanel defaultSize={33} className="text-center py-1">
-                                    <div className="flex items-center justify-center text-xs sm:text-sm mb-[-5px]">
-                                        {formatCurrency(order.final_price)}
-                                    </div>
-                                    <span className="text-slate-500 font-semibold text-xs">Precio final</span>
-                                </ResizablePanel>
-                            </ResizablePanelGroup>
-
-                            {/* items */}
-                            {productsData && order.items && order.items.length > 0 && !loading && (
-                                <>
-                                    {order.items.map(item => (
-                                        <div key={item.item_id}>
-                                            <hr />
-                                            <div key={item.item_id} className="flex items-center justify-between py-2">
-                                                <div className="flex flex-row items-center">
-                                                    <Image
-                                                        src={productsData[item.product_name]?.fotos[0] || "/placeholder.svg"}
-                                                        alt={item.product_name}
-                                                        className="mr-6 h-16 w-16 rounded object-cover object-center"
-                                                        width={64}
-                                                        height={64}
-                                                        sizes="64px"
-                                                    />
-                                                    <div className="flex flex-col">
-                                                        <p className="font-semibold">{item.product_name}</p>
-                                                        <p className="text-gray-500 text-sm">{item.size}</p>
-                                                    </div>
-                                                </div>
-                                                <p><span className="">{item.quantity}</span> x {formatCurrency(item.unit_price)}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </>
-                            )}
-
-                            <hr />
-                            {/* comentarios */}
-                            <div className="grid w-full gap-1.5 my-4">
-                                <Label htmlFor="message">Comentarios del cliente</Label>
-                                <div>
-                                    <Textarea
-                                        id="message"
-                                        value={order.comments || "Sin comentarios"}
-                                        className="bg-gray-100 w-full p-2 rounded-lg border border-gray-300"
-                                        disabled
-                                    />
+                    <div className="flex-1 overflow-y-auto px-6 py-6 pb-10">
+                        <div className="mb-8 rounded-xl border bg-white p-5">
+                            <h3 className="mb-3 text-2xl font-bold">Orden</h3>
+                            <div className="grid gap-4 md:grid-cols-3">
+                                <div className="rounded-lg border bg-gray-50 p-4 text-center">
+                                    <p className="text-sm text-gray-500">Total</p>
+                                    <p className="font-semibold">{formatCurrency(order.total)}</p>
+                                </div>
+                                <div className="rounded-lg border bg-gray-50 p-4 text-center">
+                                    <p className="text-sm text-gray-500">Descuento</p>
+                                    <p className="font-semibold">{order.discount_applied ? formatCurrency(order.total - order.final_price) : formatCurrency(0)}</p>
+                                </div>
+                                <div className="rounded-lg border bg-gray-50 p-4 text-center">
+                                    <p className="text-sm text-gray-500">Precio final</p>
+                                    <p className="font-semibold">{formatCurrency(order.final_price)}</p>
                                 </div>
                             </div>
-                            <p className="text-sm">Numero de productos: {order.items.reduce((acc, item) => acc + item.quantity, 0)}</p>
-                            <p className="text-sm">Ordenado el {format(parseDate(order.datetime_ordered), "EEEE d 'de' MMMM, yyyy", { locale: es })}</p>
-                        </div>
 
-                        <div>
-                            <h1 className="text-xl font-bold">Recogida</h1>
-                            <ResizablePanelGroup direction="vertical" className="min-h-[110px] border border-black rounded-lg mb-4 mt-2">
-                                <ResizablePanel defaultSize={50} className="border-b border-black">
-                                    <ResizablePanelGroup direction="horizontal" className="items-center">
-                                        <ResizablePanel defaultSize={50} className="text-center border-r py-4 border-black">
-                                            <div className="flex items-center justify-center text-xs sm:text-sm mb-[-5px]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5 mr-1">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
-                                                </svg>
-                                                {format(order.pickup_date, "EEEE d 'de' MMMM", { locale: es })}
+                            <div className="my-6">
+                                <h4 className="text-lg font-semibold mb-2">Productos</h4>
+                                {loadingProducts ? (
+                                    <p className="text-sm text-gray-500">Cargando productos...</p>
+                                ) : (
+                                    <div className="space-y-2">
+                                        {order.items.map((item) => (
+                                            <div key={item.item_id} className="flex items-center justify-between rounded-lg border p-3">
+                                                <div className="flex items-center gap-3">
+                                                    <Image
+                                                        src={productsData[item.product_name]?.fotos?.[0] || "/placeholder.svg"}
+                                                        alt={item.product_name}
+                                                        className="h-14 w-14 rounded object-cover"
+                                                        width={56}
+                                                        height={56}
+                                                        sizes="56px"
+                                                    />
+                                                    <div>
+                                                        <p className="font-medium">{item.product_name}</p>
+                                                        <p className="text-xs text-gray-500">{item.size}</p>
+                                                    </div>
+                                                </div>
+                                                <p className="text-sm">
+                                                    {item.quantity} x {formatCurrency(item.unit_price)}
+                                                </p>
                                             </div>
-                                            <span className="text-slate-500 font-semibold text-xs">Fecha</span>
-                                        </ResizablePanel>
-                                        <ResizablePanel defaultSize={50} className="text-center py-4">
-                                            <div className="flex items-center justify-center text-xs sm:text-sm mb-[-5px]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5 mr-1">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                                </svg>
-                                                {order.pickup_hour}
-                                            </div>
-                                            <span className="text-slate-500 font-semibold text-xs">Hora</span>
-                                        </ResizablePanel>
-                                    </ResizablePanelGroup>
-                                </ResizablePanel>
-                                <ResizablePanel defaultSize={50} className="flex items-center justify-center">
-                                    <div className="flex flex-col items-center justify-center text-xs sm:text-sm text-center">
-                                        {order.pickup_person_name}
-                                        <span className="text-slate-500 font-semibold text-xs">Persona que recoge</span>
+                                        ))}
                                     </div>
-                                </ResizablePanel>
-                            </ResizablePanelGroup>
+                                )}
+                            </div>
+
+                            <div className="grid w-full gap-1.5 mt-6">
+                                <Label htmlFor={`comments-${order.order_id}`}>Comentarios del cliente</Label>
+                                <Textarea
+                                    id={`comments-${order.order_id}`}
+                                    value={order.comments || "Sin comentarios"}
+                                    className="bg-gray-100 w-full rounded-lg border border-gray-300"
+                                    disabled
+                                />
+                            </div>
+
+                            <p className="mt-4 text-sm">Cantidad total: {order.items.reduce((acc, item) => acc + item.quantity, 0)}</p>
+                            <p className="text-sm">Ordenado el {formatDateText(order.datetime_ordered, "EEEE d 'de' MMMM, yyyy")}</p>
                         </div>
 
-                        {/* cliente */}
-                        <div>
-                            <h1 className="text-xl font-bold">Cliente</h1>
-                            <p className="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5 mr-2">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                                </svg>
-                                {order.client_name}
-                            </p>
-                            <p className="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5 mr-2">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-                                </svg>
-                                {order.client_email}
-                            </p>
-                            <p className="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-5 mr-2">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-                                </svg>
-                                {order.client_phone}
-                            </p>
+                        <div className="mb-8 rounded-xl border bg-white p-5">
+                            <h3 className="mb-3 text-2xl font-bold">Recogida</h3>
+                            <div className="rounded-lg border bg-gray-50 p-5">
+                                <p className="text-sm">Fecha: {formatDateText(order.pickup_date, "EEEE d 'de' MMMM, yyyy")}</p>
+                                <p className="text-sm">Hora: {order.pickup_hour}</p>
+                                <p className="text-sm">Persona que recoge: {order.pickup_person_name}</p>
+                            </div>
                         </div>
 
-                    </ScrollArea>
+                        <div className="rounded-xl border bg-white p-5">
+                            <h3 className="mb-3 text-2xl font-bold">Cliente</h3>
+                            <div className="rounded-lg border bg-gray-50 p-5">
+                                <p className="text-sm">{order.client_name}</p>
+                                <p className="text-sm">{order.client_email}</p>
+                                <p className="text-sm">{order.client_phone}</p>
+                            </div>
+                        </div>
+                    </div>
                 </DialogContent>
-            </Dialog>
+                </Dialog>
+            </td>
         </tr>
-    )
+    );
 }

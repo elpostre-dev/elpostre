@@ -260,172 +260,177 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
                     </TableCell>
                 </DialogTrigger>
 
-                <DialogContent style={{ width: '96%' }}>
+                <DialogContent className="w-[96vw] max-w-5xl h-[88vh] p-0 overflow-hidden flex flex-col [&>button]:opacity-100 [&>button]:z-30 [&>button]:text-gray-800 [&>button]:border [&>button]:rounded-full [&>button]:bg-white [&>button]:p-1.5 [&>button]:top-5 [&>button]:right-5 [&>button]:shadow-sm">
 
-                    <DialogHeader>
+                    <DialogHeader className="shrink-0 border-b px-6 py-5 pr-16 bg-white">
                         <DialogTitle>Editar Producto</DialogTitle>
                         <DialogDescription>Aquí puedes editar la información del produto.</DialogDescription>
                     </DialogHeader>
 
-                    <hr />
-
                     {/* warning message */}
-                    <div className="bg-red-100 border-l-4 border-red-500 p-4">
+                    <div className="mx-6 mt-4 rounded-md bg-red-100 border-l-4 border-red-500 p-4 shrink-0">
                         <p className="text-red-700">Todos los campos son obligatorios.</p>
                     </div>
 
-                    <ScrollArea className="max-h-[500px] w-full p-2">
+                    <div className="flex-1 overflow-y-auto px-6 py-5 pb-8">
+                        <div className="space-y-6">
+                            <div className="grid gap-6 lg:grid-cols-2">
+                                <section className="rounded-xl border bg-white p-4">
+                                    <h3 className="text-lg font-semibold mb-4">Detalles</h3>
 
-                        <div className="grid gap-4 p-2">
-
-                            {/* Nombre */}
-                            <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="name" className="text-right">
-                                    Nombre
-                                </Label>
-                                <Input id="name" name="nombre" value={product.nombre} onChange={handleInputChange} className="col-span-3" />
-                            </div>
-
-                            {/* Descripcion */}
-                            <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="description" className="text-right">
-                                    Descripción <span className="text-red-500">*</span>
-                                </Label>
-                                <Textarea
-                                    id="description"
-                                    name="descripcion"
-                                    value={product.descripcion}
-                                    onChange={handleInputChange}
-                                    className="col-span-3"
-                                />
-                            </div>
-
-                            {/* Categoria */}
-                            <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="category" className="text-right">
-                                    Categoría
-                                </Label>
-                                <Select
-                                    onValueChange={(value) => handleSelectChange("categoria_nombre", value)}
-                                    value={product.categoria_nombre}
-                                    defaultValue={p.categoria_nombre}
-                                >
-                                    <SelectTrigger className="col-span-3">
-                                        <SelectValue placeholder="Select a category" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem className='hover:bg-gray-100' value="Pasteles">Pasteles</SelectItem>
-                                        <SelectItem className='hover:bg-gray-100' value="Pays">Pays</SelectItem>
-                                        <SelectItem className='hover:bg-gray-100' value="Brownies">Brownies</SelectItem>
-                                        <SelectItem className='hover:bg-gray-100' value="Galletas">Galletas</SelectItem>
-                                        <SelectItem className='hover:bg-gray-100' value="Keto">Keto</SelectItem>
-                                        <SelectItem className='hover:bg-gray-100' value="Muffins y Panqués">Muffins y Panqués</SelectItem>
-                                        <SelectItem className='hover:bg-gray-100' value="Individuales">Individuales</SelectItem>
-                                        <SelectItem className='hover:bg-gray-100' value="Temporada">Temporada</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </div>
-
-                            {/* Temporada */}
-                            {product.categoria_nombre === 'Temporada' &&
-                                <div className="grid grid-cols-4 items-center gap-4">
-                                    <Label htmlFor="season" className="text-right">
-                                        Temporada
-                                    </Label>
-                                    <Select
-                                        onValueChange={(value) => handleSelectChange("temporada", value)}
-                                        value={product.temporada}
-                                        defaultValue={p.temporada}
-                                    >
-                                        <SelectTrigger className="col-span-3">
-                                            <SelectValue placeholder="Select a season" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem className='hover:bg-gray-100' value="Navidad">Navidad</SelectItem>
-                                            <SelectItem className='hover:bg-gray-100' value="San Valentín">San Valentín</SelectItem>
-                                            <SelectItem className='hover:bg-gray-100' value="Bodas, Comuniones y Bautizos">Bodas, Comuniones y Bautizos</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                            }
-
-                            {/* Fotos */}
-                            <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="images" className="text-right">
-                                    Fotos
-                                </Label>
-                                {uploadingImage ? (
-                                    <p className="col-span-3 text-gray-600">
-                                        Subiendo...
-                                    </p>
-                                ) : (
-                                    <div className="col-span-3">
-                                        <div className="flex flex-wrap gap-2 mb-2">
-                                            {product.fotos.map((image, index) => (
-                                                <div key={index} className="relative">
-                                                    <Image
-                                                        src={image || "/placeholder.svg"}
-                                                        alt={`Product ${index + 1}`}
-                                                        className="w-16 h-16 object-cover rounded"
-                                                        width={64}
-                                                        height={64}
-                                                        sizes="64px"
-                                                    />
-                                                    <button
-                                                        onClick={() => removeImage(index)}
-                                                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
-                                                    >
-                                                        <X className="w-4 h-4" />
-                                                    </button>
-                                                </div>
-                                            ))}
-                                        </div>
-                                        <label htmlFor="image-upload" className="cursor-pointer">
-                                            <div className="flex items-center gap-2 text-sm text-gray-600">
-                                                <PlusCircle className="w-5 h-5" />
-                                                <span>Agregar foto</span>
-                                            </div>
-                                            <input
-                                                id="image-upload"
-                                                type="file"
-                                                accept="image/*"
-                                                multiple
-                                                onChange={handleImageUpload}
-                                                className="hidden"
-                                            />
-                                        </label>
+                                    {/* Nombre */}
+                                    <div className="grid grid-cols-4 items-center gap-4 mb-4">
+                                        <Label htmlFor="name" className="text-right">
+                                            Nombre
+                                        </Label>
+                                        <Input id="name" name="nombre" value={product.nombre} onChange={handleInputChange} className="col-span-3" />
                                     </div>
-                                )}
-                            </div>
 
-                            {/* Visible */}
-                            <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="active" className="text-right">
-                                    Visible
-                                </Label>
-                                <Switch
-                                    id="activo"
-                                    checked={product.activo}
-                                    onCheckedChange={(checked) => handleSwitchChange("activo", checked)}
-                                />
-                            </div>
+                                    {/* Descripcion */}
+                                    <div className="grid grid-cols-4 items-start gap-4 mb-4">
+                                        <Label htmlFor="description" className="text-right pt-2">
+                                            Descripción <span className="text-red-500">*</span>
+                                        </Label>
+                                        <Textarea
+                                            id="description"
+                                            name="descripcion"
+                                            value={product.descripcion}
+                                            onChange={handleInputChange}
+                                            className="col-span-3 min-h-28"
+                                        />
+                                    </div>
 
-                            {/* En venta */}
-                            <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="onSale" className="text-right">
-                                    En venta
-                                </Label>
-                                <Switch
-                                    id="en_venta"
-                                    checked={product.en_venta}
-                                    onCheckedChange={(checked) => handleSwitchChange("en_venta", checked)}
-                                />
+                                    {/* Categoria */}
+                                    <div className="grid grid-cols-4 items-center gap-4 mb-4">
+                                        <Label htmlFor="category" className="text-right">
+                                            Categoría
+                                        </Label>
+                                        <Select
+                                            onValueChange={(value) => handleSelectChange("categoria_nombre", value)}
+                                            value={product.categoria_nombre}
+                                            defaultValue={p.categoria_nombre}
+                                        >
+                                            <SelectTrigger className="col-span-3">
+                                                <SelectValue placeholder="Select a category" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem className='hover:bg-gray-100' value="Pasteles">Pasteles</SelectItem>
+                                                <SelectItem className='hover:bg-gray-100' value="Pays">Pays</SelectItem>
+                                                <SelectItem className='hover:bg-gray-100' value="Brownies">Brownies</SelectItem>
+                                                <SelectItem className='hover:bg-gray-100' value="Galletas">Galletas</SelectItem>
+                                                <SelectItem className='hover:bg-gray-100' value="Keto">Keto</SelectItem>
+                                                <SelectItem className='hover:bg-gray-100' value="Muffins y Panqués">Muffins y Panqués</SelectItem>
+                                                <SelectItem className='hover:bg-gray-100' value="Individuales">Individuales</SelectItem>
+                                                <SelectItem className='hover:bg-gray-100' value="Temporada">Temporada</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+
+                                    {/* Temporada */}
+                                    {product.categoria_nombre === 'Temporada' &&
+                                        <div className="grid grid-cols-4 items-center gap-4">
+                                            <Label htmlFor="season" className="text-right">
+                                                Temporada
+                                            </Label>
+                                            <Select
+                                                onValueChange={(value) => handleSelectChange("temporada", value)}
+                                                value={product.temporada}
+                                                defaultValue={p.temporada}
+                                            >
+                                                <SelectTrigger className="col-span-3">
+                                                    <SelectValue placeholder="Select a season" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem className='hover:bg-gray-100' value="Navidad">Navidad</SelectItem>
+                                                    <SelectItem className='hover:bg-gray-100' value="San Valentín">San Valentín</SelectItem>
+                                                    <SelectItem className='hover:bg-gray-100' value="Bodas, Comuniones y Bautizos">Bodas, Comuniones y Bautizos</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                    }
+                                </section>
+
+                                <section className="rounded-xl border bg-white p-4">
+                                    <h3 className="text-lg font-semibold mb-4">Fotos y estado</h3>
+
+                                    {/* Fotos */}
+                                    <div className="grid grid-cols-4 items-start gap-4 mb-5">
+                                        <Label htmlFor="images" className="text-right pt-1">
+                                            Fotos
+                                        </Label>
+                                        {uploadingImage ? (
+                                            <p className="col-span-3 text-gray-600">
+                                                Subiendo...
+                                            </p>
+                                        ) : (
+                                            <div className="col-span-3">
+                                                <div className="flex flex-wrap gap-2 mb-3">
+                                                    {product.fotos.map((image, index) => (
+                                                        <div key={index} className="relative">
+                                                            <Image
+                                                                src={image || "/placeholder.svg"}
+                                                                alt={`Product ${index + 1}`}
+                                                                className="w-16 h-16 object-cover rounded"
+                                                                width={64}
+                                                                height={64}
+                                                                sizes="64px"
+                                                            />
+                                                            <button
+                                                                onClick={() => removeImage(index)}
+                                                                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
+                                                            >
+                                                                <X className="w-4 h-4" />
+                                                            </button>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                                <label htmlFor="image-upload" className="cursor-pointer">
+                                                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                                                        <PlusCircle className="w-5 h-5" />
+                                                        <span>Agregar foto</span>
+                                                    </div>
+                                                    <input
+                                                        id="image-upload"
+                                                        type="file"
+                                                        accept="image/*"
+                                                        multiple
+                                                        onChange={handleImageUpload}
+                                                        className="hidden"
+                                                    />
+                                                </label>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Visible */}
+                                    <div className="grid grid-cols-4 items-center gap-4 mb-4">
+                                        <Label htmlFor="active" className="text-right">
+                                            Visible
+                                        </Label>
+                                        <Switch
+                                            id="activo"
+                                            checked={product.activo}
+                                            onCheckedChange={(checked) => handleSwitchChange("activo", checked)}
+                                        />
+                                    </div>
+
+                                    {/* En venta */}
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="onSale" className="text-right">
+                                            En venta
+                                        </Label>
+                                        <Switch
+                                            id="en_venta"
+                                            checked={product.en_venta}
+                                            onCheckedChange={(checked) => handleSwitchChange("en_venta", checked)}
+                                        />
+                                    </div>
+                                </section>
                             </div>
 
                             {/* Variaciones */}
-                            <div className="grid gap-4 mt-4">
-
-                                <div className="flex justify-between items-center">
+                            <section className="rounded-xl border bg-white p-4">
+                                <div className="flex justify-between items-center mb-4">
                                     <h3 className="text-lg font-semibold">Variaciones</h3>
                                     <Button onClick={() => setAddingVariation(true)} size="sm">
                                         Agregar Variación
@@ -433,7 +438,7 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
                                 </div>
 
                                 {addingVariation && (
-                                    <div className="grid gap-2 p-4 border border-blue-500 rounded-md bg-gray-100">
+                                    <div className="grid gap-2 p-4 border border-blue-500 rounded-md bg-blue-50 mb-4">
                                         <div className="grid grid-cols-4 items-center gap-4">
                                             <Label htmlFor={`variation-name-new`} className="text-right">
                                                 Tamaño
@@ -493,65 +498,69 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
                                     </div>
                                 )}
 
-                                {product.variaciones.map((variation) => (
-                                    <div key={variation.id} className="grid gap-2 p-4 border rounded-md">
-                                        <div className="grid grid-cols-4 items-center gap-4">
-                                            <Label htmlFor={`variation-name-${variation.id}`} className="text-right">
-                                                Tamaño
-                                            </Label>
-                                            <Input
-                                                id={`variation-name-${variation.id}`}
-                                                value={variation.tamanio}
-                                                onChange={(e) => updateVariation(variation.id, "tamanio", e.target.value)}
-                                                className="col-span-3"
-                                            />
+                                <div className="grid gap-3">
+                                    {product.variaciones.map((variation) => (
+                                        <div key={variation.id} className="grid gap-2 p-4 border rounded-md bg-gray-50">
+                                            <div className="grid grid-cols-4 items-center gap-4">
+                                                <Label htmlFor={`variation-name-${variation.id}`} className="text-right">
+                                                    Tamaño
+                                                </Label>
+                                                <Input
+                                                    id={`variation-name-${variation.id}`}
+                                                    value={variation.tamanio}
+                                                    onChange={(e) => updateVariation(variation.id, "tamanio", e.target.value)}
+                                                    className="col-span-3"
+                                                />
+                                            </div>
+                                            <div className="grid grid-cols-4 items-center gap-4">
+                                                <Label htmlFor={`variation-description-${variation.id}`} className="text-right">
+                                                    Personas
+                                                </Label>
+                                                <Input
+                                                    id={`variation-description-${variation.id}`}
+                                                    value={variation.personas}
+                                                    onChange={(e) => updateVariation(variation.id, "personas", e.target.value)}
+                                                    className="col-span-3"
+                                                />
+                                            </div>
+                                            <div className="grid grid-cols-4 items-center gap-4">
+                                                <Label htmlFor={`variation-price-${variation.id}`} className="text-right">
+                                                    Precio
+                                                </Label>
+                                                <Input
+                                                    id={`variation-price-${variation.id}`}
+                                                    type="number"
+                                                    value={variation.precio}
+                                                    onChange={(e) => updateVariation(variation.id, "precio", Number.parseFloat(e.target.value))}
+                                                    className="col-span-3"
+                                                />
+                                            </div>
+                                            <Button
+                                                onClick={() => removeVariation(variation.id)}
+                                                variant="destructive"
+                                                size="sm"
+                                                className="mt-2 w-full"
+                                            >
+                                                Borrar
+                                            </Button>
                                         </div>
-                                        <div className="grid grid-cols-4 items-center gap-4">
-                                            <Label htmlFor={`variation-description-${variation.id}`} className="text-right">
-                                                Personas
-                                            </Label>
-                                            <Input
-                                                id={`variation-description-${variation.id}`}
-                                                value={variation.personas}
-                                                onChange={(e) => updateVariation(variation.id, "personas", e.target.value)}
-                                                className="col-span-3"
-                                            />
-                                        </div>
-                                        <div className="grid grid-cols-4 items-center gap-4">
-                                            <Label htmlFor={`variation-price-${variation.id}`} className="text-right">
-                                                Precio
-                                            </Label>
-                                            <Input
-                                                id={`variation-price-${variation.id}`}
-                                                type="number"
-                                                value={variation.precio}
-                                                onChange={(e) => updateVariation(variation.id, "precio", Number.parseFloat(e.target.value))}
-                                                className="col-span-3"
-                                            />
-                                        </div>
-                                        <Button
-                                            onClick={() => removeVariation(variation.id)}
-                                            variant="destructive"
-                                            size="sm"
-                                            className="mt-2 w-full"
-                                        >
-                                            Borrar
-                                        </Button>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
 
                                 {product.variaciones.length === 0 && (
-                                    <div className="p-4 border rounded-md text-center">
+                                    <div className="p-4 border rounded-md text-center bg-gray-50 mt-3">
                                         No hay variaciones, debe agregar al menos una.
                                     </div>
                                 )}
-                            </div>
+                            </section>
                         </div>
-                    </ScrollArea>
+                    </div>
 
-                    <Button onClick={handleUpdateProduct} disabled={updating}>
-                        {updating ? 'Guardando...' : 'Guardar'}
-                    </Button>
+                    <div className="shrink-0 border-t bg-white px-6 py-4">
+                        <Button onClick={handleUpdateProduct} disabled={updating}>
+                            {updating ? 'Guardando...' : 'Guardar'}
+                        </Button>
+                    </div>
 
                 </DialogContent>
             </Dialog>
