@@ -583,6 +583,11 @@ export default function Carrito() {
                                                                         new Date(2026, 0, 2),   // January 2
                                                                         new Date(2026, 0, 3),   // January 3
                                                                         new Date(2026, 0, 4),   // January 4
+                                                                        new Date(2026, 3, 2),   // April 2
+                                                                        new Date(2026, 3, 3),   // April 3
+                                                                        new Date(2026, 3, 4),   // April 4
+                                                                        new Date(2026, 3, 5),   // April 5
+
                                                                     ];
 
                                                                     const isBlocked = blockedDates.some(
