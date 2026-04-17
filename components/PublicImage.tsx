@@ -53,11 +53,21 @@ export default function PublicImage({
     onLoad,
     onError,
     alt,
+    unoptimized,
     ...props
 }: PublicImageProps) {
     const isFill = Boolean(props.fill);
     const [isLoaded, setIsLoaded] = useState(false);
     const [hasError, setHasError] = useState(false);
+
+    const isRemoteStringSrc =
+        typeof props.src === "string" &&
+        (props.src.startsWith("http://") || props.src.startsWith("https://"));
+
+    // When Vercel Image Optimization returns 402 (quota / billing), `/_next/image`
+    // never serves the asset. Loading the `src` URL directly avoids that path.
+    const unoptimizedResolved =
+        unoptimized !== undefined ? unoptimized : isRemoteStringSrc;
 
     useEffect(() => {
         setIsLoaded(false);
@@ -92,6 +102,7 @@ export default function PublicImage({
             ) : (
                 <Image
                     {...props}
+                    unoptimized={unoptimizedResolved}
                     alt={alt}
                     className={cn(
                         className,
