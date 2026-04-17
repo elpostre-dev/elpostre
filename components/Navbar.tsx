@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import clsx from "clsx";
 import { Badge } from "@/components/ui/badge"
 import { formatCurrency } from '@/lib/utils';
@@ -10,6 +10,23 @@ import { useEffect } from "react";
 import PublicImage from './PublicImage';
 
 import { useCart } from '@/lib/CartContext';
+
+function normalizePathname(p: string) {
+    if (p.length > 1 && p.endsWith("/")) return p.slice(0, -1);
+    return p || "/";
+}
+
+/** Full page transitions change `pathname`; hash-only jumps on the same path do not. */
+function shouldShowRouteLoader(href: string, currentPathname: string) {
+    if (typeof window === "undefined") return false;
+    try {
+        const dest = normalizePathname(new URL(href, window.location.href).pathname || "/");
+        const cur = normalizePathname(currentPathname || "/");
+        return dest !== cur;
+    } catch {
+        return true;
+    }
+}
 
 const links = [
     {
@@ -25,7 +42,6 @@ const links = [
 export default function NavBar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isNavigating, setIsNavigating] = useState(false);
-    const router = useRouter();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -36,12 +52,6 @@ export default function NavBar() {
     useEffect(() => {
         setIsNavigating(false);
     }, [pathname]);
-
-    const navigateWithLoader = (href: string) => {
-        setIsNavigating(true);
-        router.push(href);
-        setIsMenuOpen(false);
-    };
 
     const { getTotal } = useCart();
     const total = getTotal();
@@ -56,7 +66,9 @@ export default function NavBar() {
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <Link
                     href="/"
-                    onClick={() => setIsNavigating(true)}
+                    onClick={() => {
+                        if (shouldShowRouteLoader("/", pathname)) setIsNavigating(true);
+                    }}
                     className="flex items-center space-x-3 rtl:space-x-reverse"
                 >
                     <PublicImage plain src="/logos/logo_dorado.png" height={60} width={120} alt="icon" className='p-1' wrapperClassName="rounded" />
@@ -65,7 +77,9 @@ export default function NavBar() {
                     {/* carrito */}
                     <Link
                         href="/carrito"
-                        onClick={() => setIsNavigating(true)}
+                        onClick={() => {
+                            if (shouldShowRouteLoader("/carrito", pathname)) setIsNavigating(true);
+                        }}
                         className="inline-flex items-center p-2 h-10 mr-3 justify-center text-sm text-gray-700 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
                     >
                         <span className="sr-only">Carrito</span>
@@ -100,7 +114,9 @@ export default function NavBar() {
                                 <Link
                                     href={link.href}
                                     onClick={() => {
-                                        setIsNavigating(true);
+                                        if (shouldShowRouteLoader(link.href, pathname)) {
+                                            setIsNavigating(true);
+                                        }
                                         setIsMenuOpen(false);
                                     }}
                                     className={clsx(
@@ -120,7 +136,9 @@ export default function NavBar() {
                         <li className='hidden md:block'>
                             <Link
                                 href="/carrito"
-                                onClick={() => setIsNavigating(true)}
+                                onClick={() => {
+                                    if (shouldShowRouteLoader("/carrito", pathname)) setIsNavigating(true);
+                                }}
                                 className='flex items-center justify-center py-1 px-3 hover:bg-transparent hover:border-mainRojo-100 border border-gray-700 rounded text-md text-gray-700 hover:text-mainRojo-100 shadow hover:shadow-lg'
                             >
                                 <span className="relative inline-flex items-center">
