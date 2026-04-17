@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import PublicImage from "./PublicImage";
 
 export default function Footer() {
 
@@ -8,7 +8,7 @@ export default function Footer() {
             <div className="mx-auto max-w-screen-xl text-center">
 
                 <a className="flex justify-center items-center text-2xl font-semibold text-gray-900">
-                    <Image src="/logos/logo_dorado.png" height={80} width={160} alt="icon"></Image>
+                    <PublicImage plain src="/logos/logo_dorado.png" height={80} width={160} alt="icon" />
                 </a>
 
 
@@ -92,7 +92,8 @@ export default function Footer() {
                         href="https://www.rappi.com.mx/restaurantes/1306704483-el-postre"
                         target="blank"
                     >
-                        <Image
+                        <PublicImage
+                            plain
                             src="/logos/bigote.png"  // Update the path to where your PNG is stored
                             alt="Rappi"  // Descriptive alternative text for accessibility
                             width={25}

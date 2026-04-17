@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from "next/link";
 import Image from "next/image";
-import { formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -37,8 +37,6 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { useRouter } from "next/navigation";
-import { set } from 'date-fns';
 
 interface ProductVariation {
     id: number;
@@ -59,6 +57,75 @@ interface Product {
     activo: boolean;
     en_venta: boolean;
     variaciones: ProductVariation[]; // Include variations
+}
+
+function AdminThumbnail({
+    src,
+    alt,
+    size,
+    className = "",
+}: {
+    src: string;
+    alt: string;
+    size: number;
+    className?: string;
+}) {
+    const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading");
+    const [retryCount, setRetryCount] = useState(0);
+
+    const source = src || "/placeholder.svg";
+    const imageSrc = retryCount > 0
+        ? `${source}${source.includes("?") ? "&" : "?"}retry=${retryCount}`
+        : source;
+
+    return (
+        <div
+            className={cn(
+                "relative shrink-0 overflow-hidden bg-gray-100",
+                className
+            )}
+            style={{ width: size, height: size }}
+        >
+            {status !== "loaded" && status !== "error" && (
+                <div className="absolute inset-0 animate-pulse bg-gray-200" />
+            )}
+
+            {status === "error" ? (
+                <button
+                    type="button"
+                    className="absolute inset-0 flex items-center justify-center px-1 text-center text-[10px] leading-tight text-red-600 underline"
+                    onClick={() => {
+                        setStatus("loading");
+                        setRetryCount((prev) => prev + 1);
+                    }}
+                >
+                    Reintentar
+                </button>
+            ) : (
+                // Admin thumbnails bypass Next image transformations so this view remains reliable
+                // even when Vercel free-tier transformation quota is exhausted.
+                <img
+                    key={imageSrc}
+                    src={imageSrc}
+                    alt={alt}
+                    loading="lazy"
+                    decoding="async"
+                    className={cn(
+                        "absolute inset-0 m-auto block max-h-full max-w-full object-contain p-0.5",
+                        status === "loaded" ? "opacity-100" : "opacity-0",
+                        "transition-opacity duration-200"
+                    )}
+                    onLoad={() => setStatus("loaded")}
+                    onError={() => {
+                        setStatus("error");
+                        if (process.env.NODE_ENV !== "production") {
+                            console.warn("Admin thumbnail failed:", source);
+                        }
+                    }}
+                />
+            )}
+        </div>
+    );
 }
 
 export default function ProductosAdminItem({ p }: { p: Product }) {
@@ -215,13 +282,11 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
             {/* name and image */}
             <TableCell>
                 <Link href={`/productos/${p.id}`} className="text-blue-600 hover:underline flex items-center" target="_blank">
-                    <Image
+                    <AdminThumbnail
                         src={p.fotos[0] || "/placeholder.svg"}
                         alt={p.nombre}
-                        className="mr-3 h-12 w-12 rounded object-cover object-center"
-                        width={48}
-                        height={48}
-                        sizes="48px"
+                        size={48}
+                        className="mr-3 rounded"
                     />
                     {p.nombre}
                 </Link>
@@ -367,13 +432,11 @@ export default function ProductosAdminItem({ p }: { p: Product }) {
                                                 <div className="flex flex-wrap gap-2 mb-3">
                                                     {product.fotos.map((image, index) => (
                                                         <div key={index} className="relative">
-                                                            <Image
+                                                            <AdminThumbnail
                                                                 src={image || "/placeholder.svg"}
                                                                 alt={`Product ${index + 1}`}
-                                                                className="w-16 h-16 object-cover rounded"
-                                                                width={64}
-                                                                height={64}
-                                                                sizes="64px"
+                                                                size={64}
+                                                                className="rounded"
                                                             />
                                                             <button
                                                                 onClick={() => removeImage(index)}

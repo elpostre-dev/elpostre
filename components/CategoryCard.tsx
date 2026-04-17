@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import PublicImage from "./PublicImage";
 
 export default function CategoryCard({
     name, href, imageUrl,
@@ -11,7 +11,7 @@ export default function CategoryCard({
     return (
         <Link href={href} className="relative group flex flex-col items-center w-full hover:cursor-pointer bg-mainRojo-100">
             <div className="relative w-full" style={{ aspectRatio: '1/1' }}>
-                <Image
+                <PublicImage
                     className="object-center object-cover h-full w-full group-hover:opacity-50 transition duration-500"
                     src={imageUrl}
                     alt="categoria"

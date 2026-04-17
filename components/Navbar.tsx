@@ -1,13 +1,13 @@
 'use client'
 
-import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import NavLink from './NavLink';
+import { usePathname, useRouter } from 'next/navigation';
 import clsx from "clsx";
 import { Badge } from "@/components/ui/badge"
 import { formatCurrency } from '@/lib/utils';
+import { useEffect } from "react";
+import PublicImage from './PublicImage';
 
 import { useCart } from '@/lib/CartContext';
 
@@ -24,6 +24,8 @@ const links = [
 
 export default function NavBar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isNavigating, setIsNavigating] = useState(false);
+    const router = useRouter();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -31,20 +33,39 @@ export default function NavBar() {
 
     const pathname = usePathname();
 
-    const { getCartQuantity, getTotal } = useCart();
-    const cant = getCartQuantity();
+    useEffect(() => {
+        setIsNavigating(false);
+    }, [pathname]);
+
+    const navigateWithLoader = (href: string) => {
+        setIsNavigating(true);
+        router.push(href);
+        setIsMenuOpen(false);
+    };
+
+    const { getTotal } = useCart();
     const total = getTotal();
 
     return (
         <nav className="sticky top-0 bg-white z-20 shadow-lg">
+            {isNavigating && (
+                <div className="absolute left-0 top-0 h-1 w-full overflow-hidden bg-gray-200">
+                    <div className="h-full w-1/3 animate-[pulse_1s_ease-in-out_infinite] bg-mainRojo-100" />
+                </div>
+            )}
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <Image src="/logos/logo_dorado.png" height={60} width={120} alt="icon" className='p-1'></Image>
+                <Link
+                    href="/"
+                    onClick={() => setIsNavigating(true)}
+                    className="flex items-center space-x-3 rtl:space-x-reverse"
+                >
+                    <PublicImage plain src="/logos/logo_dorado.png" height={60} width={120} alt="icon" className='p-1' wrapperClassName="rounded" />
                 </Link>
                 <div>
                     {/* carrito */}
                     <Link
                         href="/carrito"
+                        onClick={() => setIsNavigating(true)}
                         className="inline-flex items-center p-2 h-10 mr-3 justify-center text-sm text-gray-700 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
                     >
                         <span className="sr-only">Carrito</span>
@@ -78,9 +99,12 @@ export default function NavBar() {
                             <li key={link.href}>
                                 <Link
                                     href={link.href}
-                                    onClick={() => setIsMenuOpen(false)}
+                                    onClick={() => {
+                                        setIsNavigating(true);
+                                        setIsMenuOpen(false);
+                                    }}
                                     className={clsx(
-                                        'block py-2 px-3 rounded text-lg md:rounded-none hover:text-mainRojo-100 md:p-0 border-b-2 border-transparent md:hover:border-b-2 link-underline-md relative',
+                                        'block w-full text-left py-2 px-3 rounded text-lg md:rounded-none hover:text-mainRojo-100 md:p-0 border-b-2 border-transparent md:hover:border-b-2 link-underline-md relative',
                                         {
                                             'text-mainRojo-100 bg-mainAzul-100 md:bg-transparent md:text-mainRojo-100': pathname == link.href,
                                             'text-gray-700 hover:bg-gray-100 md:hover:bg-transparent': pathname != link.href,
@@ -95,7 +119,8 @@ export default function NavBar() {
                         {/* carrito */}
                         <li className='hidden md:block'>
                             <Link
-                                href={'/carrito'}
+                                href="/carrito"
+                                onClick={() => setIsNavigating(true)}
                                 className='flex items-center justify-center py-1 px-3 hover:bg-transparent hover:border-mainRojo-100 border border-gray-700 rounded text-md text-gray-700 hover:text-mainRojo-100 shadow hover:shadow-lg'
                             >
                                 <span className="relative inline-flex items-center">

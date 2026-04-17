@@ -26,17 +26,39 @@ interface Product {
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-export async function GET() {
+export async function GET(req: NextRequest) {
     const unauthorized = await requireAdminSession();
     if (unauthorized) return unauthorized;
 
     try {
-        const result = await sql`
-            SELECT p.id, p.nombre, p.descripcion, p.categoria_id, p.categoria_nombre, p.fotos, p.temporada, p.activo, p.en_venta,
-                   pv.id AS variacion_id, pv.producto_id, pv.tamanio, pv.precio, pv.personas
-            FROM productos p
-            LEFT JOIN variaciones pv ON p.id = pv.producto_id;
-        `;
+        const { searchParams } = new URL(req.url);
+        const categoryIdParam = searchParams.get('categoryId');
+
+        let categoryId: number | undefined;
+        if (categoryIdParam !== null && categoryIdParam !== '') {
+            const parsed = Number.parseInt(categoryIdParam, 10);
+            if (!Number.isFinite(parsed) || parsed <= 0) {
+                return NextResponse.json({ error: 'Invalid categoryId' }, { status: 400 });
+            }
+            categoryId = parsed;
+        }
+
+        const result = categoryId !== undefined
+            ? await sql`
+                SELECT p.id, p.nombre, p.descripcion, p.categoria_id, p.categoria_nombre, p.fotos, p.temporada, p.activo, p.en_venta,
+                       pv.id AS variacion_id, pv.producto_id, pv.tamanio, pv.precio, pv.personas
+                FROM productos p
+                LEFT JOIN variaciones pv ON p.id = pv.producto_id
+                WHERE p.categoria_id = ${categoryId}
+                ORDER BY p.id ASC;
+            `
+            : await sql`
+                SELECT p.id, p.nombre, p.descripcion, p.categoria_id, p.categoria_nombre, p.fotos, p.temporada, p.activo, p.en_venta,
+                       pv.id AS variacion_id, pv.producto_id, pv.tamanio, pv.precio, pv.personas
+                FROM productos p
+                LEFT JOIN variaciones pv ON p.id = pv.producto_id
+                ORDER BY p.categoria_id ASC, p.id ASC;
+            `;
 
         const products: Product[] = [];
         const rows = result.rows;

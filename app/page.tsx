@@ -9,7 +9,7 @@ import bgImage from "../public/home.jpg";
 import CategoryCard from "@/components/CategoryCard";
 
 import Link from "next/link";
-import Image from "next/image";
+import PublicImage from "@/components/PublicImage";
 
 import { useState, useEffect } from "react";
 
@@ -167,13 +167,15 @@ export default function Home() {
           <div className="text-gray-500 text-xl">
             <div className="w-full flex justify-center py-4">
               <div className="w-1/2 sm:w-1/2 md:w-1/2">
-                <Image
+                <PublicImage
+                  plain
                   src="/logos/logo_dorado.png"
                   alt="logo"
                   width={720}  // Tamaño original del logo
                   height={360}
-                  layout="responsive"
+                  sizes="(min-width: 1024px) 360px, 50vw"
                   className="mb-3"
+                  wrapperClassName="mb-3 rounded"
                 />
               </div>
             </div>
@@ -182,18 +184,20 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4 my-8">
-            <Image
+            <PublicImage
               className="w-full rounded-lg"
               src="/sucursal2.jpg"
               alt="sucursal"
+              wrapperClassName="w-full rounded-lg"
               width={704}
               height={1024}
               sizes="50vw"
             />
-            <Image
+            <PublicImage
               className="mt-4 w-full lg:mt-10 rounded-lg"
               src="/galletas.png"
               alt="galletas"
+              wrapperClassName="mt-4 w-full lg:mt-10 rounded-lg"
               width={704}
               height={1024}
               sizes="50vw"
@@ -218,12 +222,13 @@ export default function Home() {
               Contamos con una amplia variedad de tamaños de pasteles, desde individuales hasta pasteles para grandes eventos.
             </p>
           </div>
-          <Image
+          <PublicImage
             src="/tamanios_pasteles.jpg"
             alt="Hero Image"
             width={1113}
             height={846}
             className="w-full max-w-3xl rounded-xl"
+            wrapperClassName="w-full max-w-3xl rounded-xl"
             sizes="(min-width: 1024px) 768px, 100vw"
           />
         </div>
@@ -251,10 +256,11 @@ export default function Home() {
                 {bestsellers.map((producto) => (
                   <Link href={`/productos/${producto.id}`} className="group relative" key={producto.id}>
                     <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-50 h-60 lg:h-80">
-                      <Image
+                      <PublicImage
                         src={producto.fotos[0] || "/placeholder.svg"}
                         alt={producto.nombre}
                         className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                        wrapperClassName="h-full w-full rounded-md"
                         width={600}
                         height={600}
                         sizes="(min-width: 1024px) 25vw, 50vw"

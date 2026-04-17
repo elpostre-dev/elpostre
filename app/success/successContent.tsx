@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { useCart } from "@/lib/CartContext";
 import { formatCurrency } from '@/lib/utils';
 import Link from 'next/link';
-import Image from "next/image";
+import PublicImage from "@/components/PublicImage";
 
 import { Button } from "@/components/ui/button"
 import {
@@ -352,10 +352,11 @@ const SuccessContent = () => {
                                         <tr key={product.item_id}>
                                             <td className="py-6 pr-8">
                                                 <div className="flex items-center">
-                                                    <Image
+                                                    <PublicImage
                                                         src={productsData[product.product_name]?.fotos[0] || "/placeholder.svg"}
                                                         alt={product.product_name}
                                                         className="mr-6 h-16 w-16 rounded object-cover object-center"
+                                                        wrapperClassName="mr-6 h-16 w-16 rounded"
                                                         width={64}
                                                         height={64}
                                                         sizes="64px"

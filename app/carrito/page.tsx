@@ -4,7 +4,7 @@ import NavBar from "../../components/Navbar";
 import { useCart } from "@/lib/CartContext";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import Image from "next/image";
+import PublicImage from "@/components/PublicImage";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -298,10 +298,11 @@ export default function Carrito() {
                             <div className="flex flex-1 items-center justify-center">
                                 <div className="mx-auto max-w-xl px-4 text-center">
                                     <div className="flex justify-center items-center">
-                                        <Image
+                                        <PublicImage
                                             className="w-32 h-32 mb-8 rounded-full object-cover"
                                             src="/logos/logo_rojo.jpg"
                                             alt="image empty states"
+                                            wrapperClassName="w-32 h-32 mb-8 rounded-full"
                                             width={128}
                                             height={128}
                                             sizes="128px"
