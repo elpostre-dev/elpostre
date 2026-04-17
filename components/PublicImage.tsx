@@ -13,6 +13,15 @@ type PublicImageProps = ImageProps & {
     plain?: boolean;
 };
 
+/** Same-origin files from `/public` (e.g. `/logos/foo.png`). Not remote URLs. */
+function isPublicStaticPath(src: ImageProps["src"]): boolean {
+    return (
+        typeof src === "string" &&
+        src.startsWith("/") &&
+        !src.startsWith("//")
+    );
+}
+
 function Spinner({ className }: { className?: string }) {
     return (
         <div
@@ -57,22 +66,29 @@ export default function PublicImage({
     ...props
 }: PublicImageProps) {
     const isFill = Boolean(props.fill);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [hasError, setHasError] = useState(false);
-
+    const staticPublic = isPublicStaticPath(props.src);
     const isRemoteStringSrc =
         typeof props.src === "string" &&
         (props.src.startsWith("http://") || props.src.startsWith("https://"));
 
-    // When Vercel Image Optimization returns 402 (quota / billing), `/_next/image`
-    // never serves the asset. Loading the `src` URL directly avoids that path.
+    // Public files: skip `/_next/image` (same as remote bypass) and do not wait on
+    // `onLoad` for a spinner — `next/image` often omits `onLoad` for cached /public assets,
+    // which used to leave the overlay up forever.
     const unoptimizedResolved =
-        unoptimized !== undefined ? unoptimized : isRemoteStringSrc;
+        unoptimized !== undefined
+            ? unoptimized
+            : isRemoteStringSrc || staticPublic;
+
+    const [isLoaded, setIsLoaded] = useState(staticPublic);
+    const [hasError, setHasError] = useState(false);
 
     useEffect(() => {
-        setIsLoaded(false);
+        const sp = isPublicStaticPath(props.src);
         setHasError(false);
+        setIsLoaded(sp);
     }, [props.src]);
+
+    const showLoadingOverlay = !staticPublic && !isLoaded && !hasError;
 
     return (
         <div
@@ -84,7 +100,7 @@ export default function PublicImage({
                 wrapperClassName
             )}
         >
-            {!isLoaded && !hasError && (
+            {showLoadingOverlay && (
                 <div
                     className={cn(
                         "absolute inset-0 z-[1] flex items-center justify-center",
