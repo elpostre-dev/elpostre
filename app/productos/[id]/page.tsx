@@ -2,10 +2,17 @@
 import { Metadata } from 'next';
 import SingleProductContent from './SingleProductContent';
 
+/** Always read fresh product row (e.g. after admin photo updates). Default fetch() is cached in RSC. */
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 async function fetchProduct(id: string) {
     console.log("Fetching product with id:", id);
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getProductWithId?productId=${id}`);
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_HOST}/api/getProductWithId?productId=${id}`,
+            { cache: 'no-store' }
+        );
         console.log("Response:", res);
         if (!res.ok) return null;
         return await res.json();

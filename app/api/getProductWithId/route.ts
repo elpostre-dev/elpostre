@@ -78,7 +78,11 @@ export async function GET(req: NextRequest) {
             }
         });
 
-        return NextResponse.json(product);
+        return NextResponse.json(product, {
+            headers: {
+                'Cache-Control': 'private, no-store, max-age=0',
+            },
+        });
     } catch (error) {
         console.error('Error fetching product with ID:', error);
         return NextResponse.json({ error: 'Failed to fetch product' }, { status: 500 });
